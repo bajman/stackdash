@@ -1,6 +1,6 @@
 # stackdash
 
-StackDash is a simple python script designed to automate the installation of Docker Engine, deploy Docker "stacks" or clusters of Docker containers through Docker Swarm, create static web pages to host dashboards using Homer for each stack you deploy. Version 1.0 will support deployment six stacks: 
+StackDash is a simple python script designed to automate the installation of Docker Engine, deploy Docker "stacks" or clusters of Docker containers through Docker Swarm, and create static web pages to host dashboards using Homer for each stack you deploy. Version 1.0 will support deployment six stacks: 
 
 (1) Reverse Proxy Stack:
     - Traefik 2
