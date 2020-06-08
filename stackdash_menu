@@ -126,16 +126,16 @@ Enter Stack No. [enter Q to quit; M to go main-menu]: """)
 
     if choice == "1" or choice == "1.":
         traefik()
-    if choice == "1" or choice == "1.":
+    if choice == "2.1" or choice == "2.1.0":
         portainer()
-    if choice == "1" or choice == "1.":
+    if choice == "2.2" or choice == "2.2.0":
         watchtower()
-    if choice == "1" or choice == "1.":
+    if choice == "2.3" or choice == "2.3.0":
         guac()
-    if choice == "1" or choice == "1.":
+    if choice == "2.4" or choice == "2.4.0":
+        docker_full()
+    if choice == "2.5" or choice == "2.5.0":
         docker_dash()
-    if choice == "1" or choice == "1.":
-        plex()
     if choice == "M" or choice == "m":
         jackett()
     elif choice == "Q" or choice =="q":
