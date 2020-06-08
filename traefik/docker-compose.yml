@@ -129,7 +129,6 @@ services:
       - "traefik.http.middlewares.traefik-headers.headers.referrerpolicy=same-origin"
       - "traefik.http.middlewares.traefik-headers.headers.featurepolicy=camera 'none'; geolocation 'none'; microphone 'none'; payment 'none'; usb 'none'; vr 'none';"
       - "traefik.http.middlewares.traefik-headers.headers.customresponseheaders.X-Robots-Tag=none,noarchive,nosnippet,notranslate,noimageindex,"
-      - "traefik.http.routers.traefik-rtr.middlewares=chain-basic-auth@file" 
       - "traefik.http.middlewares.nextcloud-caldav.redirectregex.permanent=true"
       - "traefik.http.middlewares.nextcloud-caldav.redirectregex.regex=https://(.*)/.well-known/(card|cal)dav"
       - "traefik.http.middlewares.nextcloud-caldav.redirectregex.replacement=https://$${1}/remote.php/dav/"
