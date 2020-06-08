@@ -21,7 +21,7 @@ StackDash is a simple python script designed to automate the installation of Doc
     - Mayan EDMS
     - Snipe-IT
     - wallabag
-    - photoprpism 
+    - photoprism 
     - BookStack
 
 (5) Server Monitoring
