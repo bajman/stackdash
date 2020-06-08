@@ -126,8 +126,18 @@ Enter Stack No. [enter Q to quit; M to go main-menu]: """)
 
     if choice == "1" or choice == "1.":
         traefik()
+    if choice == "1" or choice == "1.":
+        portainer()
+    if choice == "1" or choice == "1.":
+        watchtower()
+    if choice == "1" or choice == "1.":
+        guac()
+    if choice == "1" or choice == "1.":
+        docker_dash()
+    if choice == "1" or choice == "1.":
+        plex()
     if choice == "M" or choice == "m":
-        main()
+        jackett()
     elif choice == "Q" or choice =="q":
         sys.exit
     else:
@@ -153,6 +163,20 @@ def traefik():
     traefik_install = subprocess.run("docker-compose -f /traefik/docker-compose.yml up -d", capture_output=True, shell=True)
     print ("*** Installed Traefik 2. *** \n")
     time.sleep(2)
+    
+def portainer():
+    env = open("/portainer/.env", "w")
+    print("Add Environment Variables")
+    stringlist = []
 
+    for i in range(1):
+        stringlist.append((input("Enter DOMAINNAME=<your domain name> " + str(i+1))) + "\n")
+
+    env.writelines(stringlist)
+
+    portainer_install = subprocess.run("docker-compose -f /portainer/docker-compose.yml up -d", capture_output=True, shell=True)
+    print ("*** Installed Portainer. *** \n")
+    time.sleep(2)
+    
 main()
 
