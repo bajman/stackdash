@@ -134,6 +134,25 @@ Enter Stack No. [enter Q to quit; M to go main-menu]: """)
         print("You must only select either 1, 2, or 3.")
         print("Please try again")
 
+def traefik():
+    env = open("/traefik/.env", "w")
+    print("Add Environment Variables")
+    stringlist = []
+
+    for i in range(1):
+        stringlist.append((input("Enter DOMAINNAME=<your domain name> " + str(i+1))) + "\n")
+
+    for i in range(1):
+        stringlist.append((input("Enter CLOUDFLARE_EMAIL=<your Cloudflare email address> " + str(i+2))) + "\n")
+
+    for i in range(1):
+        stringlist.append((input("Enter CLOUDFLARE_API_KEY=<your Cloudflare API Key> " + str(i+3))) + "\n")
+
+    env.writelines(stringlist)
+
+    traefik_install = subprocess.run("docker-compose -f /traefik/docker-compose.yml up -d", capture_output=True, shell=True)
+    print ("*** Installed Traefik 2. *** \n")
+    time.sleep(2)
 
 main()
 
