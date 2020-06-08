@@ -145,7 +145,7 @@ Enter Stack No. [enter Q to quit; M to go main-menu]: """)
         print("Please try again")
 
 def traefik():
-    env = open("/traefik/.env", "w")
+    env = open("./traefik/.env", "w")
     print("Add Environment Variables")
     stringlist = []
 
@@ -160,7 +160,7 @@ def traefik():
 
     env.writelines(stringlist)
 
-    traefik_install = subprocess.run("docker-compose -f /traefik/docker-compose.yml up -d", capture_output=True, shell=True)
+    traefik_install = subprocess.run("docker-compose -f ./traefik/docker-compose.yml up -d", capture_output=True, shell=True)
     print ("*** Installed Traefik 2. *** \n")
     time.sleep(2)
     
