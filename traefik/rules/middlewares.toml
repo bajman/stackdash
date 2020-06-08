@@ -1,0 +1,38 @@
+[http.middlewares]
+  [http.middlewares.middlewares-basic-auth]
+    [http.middlewares.middlewares-basic-auth.basicAuth]
+
+[http.middlewares.middlewares-rate-limit]
+  [http.middlewares.middlewares-rate-limit.rateLimit]
+    average = 100
+    burst = 50
+
+[http.middlewares.middlewares-secure-headers]
+  [http.middlewares.middlewares-secure-headers.headers]
+     accessControlAllowMethods= ["GET", "OPTIONS", "PUT"]
+     accessControlMaxAge = 100
+     hostsProxyHeaders = ["X-Forwarded-Host"]
+     sslRedirect = true
+     stsSeconds = 63072000
+     stsIncludeSubdomains = true
+     stsPreload = true
+     forceSTSHeader = true
+#      frameDeny = true #overwritten by customFrameOptionsValue
+     customFrameOptionsValue = "allow-from https:yaleleber.com" #CSP takes care of this but may be needed for organizr. 
+     contentTypeNosniff = true 
+     browserXssFilter = true 
+#      sslForceHost = true # add sslHost to all of the services
+#      sslHost = "yaleleber.com"
+     referrerPolicy = "same-origin" 
+#      Setting contentSecurityPolicy is more secure but it can break things. Proper auth will reduce the risk.
+#      the below line also breaks some apps due to 'none' - sonarr, radarr, etc.
+#      contentSecurityPolicy = "frame-ancestors '*.yaleleber.com:*';object-src 'none';script-src 'none';"
+     featurePolicy = "camera 'none'; geolocation 'none'; microphone 'none'; payment 'none'; usb 'none'; vr 'none';" 
+   [http.middlewares.middlewares-secure-headers.headers.customResponseHeaders]
+        X-Robots-Tag = "none,noarchive,nosnippet,notranslate,noimageindex,"
+        server = ""
+
+[http.middlewares.nextcloud-redirectregex.redirectRegex]
+    permanent = true
+    regex = "https://(.*)/.well-known/(card|cal)dav"
+    replacement = "https://${1}/remote.php/dav/"
