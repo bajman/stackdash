@@ -1,0 +1,27 @@
+version: "2"
+services:
+  guacamole:
+    image: oznu/guacamole
+    container_name: guacamole
+    volumes:
+      - guacamole-postgres:/config
+    networks:
+      - t2_proxy
+    labels:     
+    ##version2
+      - "traefik.enable=true"
+     ## HTTP Routers
+      - "traefik.http.routers.vcd-rtr.entrypoints=https"
+      - "traefik.http.routers.vcd-rtr.rule=Host(`guac.$DOMAINNAME`)"
+      - "traefik.http.routers.vcd-rtr.tls=true"
+      ## HTTP Services
+      - "traefik.http.routers.vcd-rtr.service=vcd-svc"
+      - "traefik.http.services.vcd-svc.loadbalancer.server.port=8080"
+    restart: unless-stopped
+networks:
+  t2_proxy:
+    external: true
+    
+volumes:
+  guacamole-postgres:
+    driver: local
