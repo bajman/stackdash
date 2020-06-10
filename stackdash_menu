@@ -87,7 +87,6 @@ def stacks_main():
 |                   |    2.2    | Watchtower          |                      | Keeps your containerized app images automatically up-to-date                        |
 |                   |    2.3    | Apache Guacamole    | guac.domain.com      | Clientless remote gateway to VNC, RDP and SSH servers                               |
 |                   |    2.4    | Full Stack          |                      | Deploy the complete Container Management Stack                                      |
-|                   |    2.5    | Dashboard           | docker.domain.com    | Deploy a web page dashboard for this stack using Homer                              |
 |:----------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 |       Media       |           |                     |                      |                                                                                     |
 |                   |    3.1    | Plex                | plex.domain.com      | Client-server media play system                                                     |
@@ -95,7 +94,6 @@ def stacks_main():
 |                   |    3.3    | Radarr              | radarr.domain.com    | Monitors and searchs Jackett index for movies                                       |
 |                   |    3.4    | qBittorrent         | qbit.domain.com      | Open-source alternative to uTorrent                                                 |
 |                   |    3.5    | Full Stack          |                      | Deploy the complete Media Stack                                                     |
-|                   |    3.6    | Dashboard           | media.domain.com     | Deploy a web page dashboard for this stack using Homer                              |
 |:----------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 |        Data       |           |                     |                      |                                                                                     |
 |                   |    4.1    | Nextcloud           | nextcloud.domain.com | A suite of client-software for creating and using file hosting services             |
@@ -105,7 +103,6 @@ def stacks_main():
 |                   |    4.5    | photoprism          | photos.domain.com    | Go-powered app for browsing, organizing and sharing your photos                     |
 |                   |    4.6    | BookStack           | bookstack.domain.com | A platform for storing and organizing information and documentation                 |
 |                   |    4.7    | Full Stack          |                      | Deploy the complete Data Stack                                                      |
-|                   |    4.8    | Dashboard           | data.domain.com      | Deploy a web page dashboard for this stack using Homer                              |
 |:----------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | Server Monitoring |           |                     |                      |                                                                                     |
 |                   |     5     | Monitoring Stack    |                      | Scrapes your Docker & server infrastructure to display on Grafana dashboards        |
@@ -121,9 +118,9 @@ def stacks_main():
 |                   |    6.4    | GitLab              | gitlab.domain.com    | DevOps lifecycle tool, git repo, wiki, issue tracking, and CI/CD                    |
 |                   |    6.5    | VS Code Server      | vs.domain.com        | Run VS Code on any machine anywhere and access it in the browser                    |
 |                   |    6.6    | Full Stack          |                      | Deploy the complete Hosting & DevOps stack                                          |
-|                   |    6.8    | Dashboard           | devops.domain.com    | Deploy a web page dashboard for this stack using Homer                              |
 |:----------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 Enter Stack No. [enter Q to quit; M to go main-menu]: """)
+
     if choice == "1" or choice == "1.":
         traefik()
     if choice == "2.1" or choice == "2.1.0":
@@ -134,8 +131,6 @@ Enter Stack No. [enter Q to quit; M to go main-menu]: """)
         apache_guacamole()
     if choice == "2.4" or choice == "2.4.0":
         docker_full()    
-    if choice == "2.5" or choice == "2.5.0"
-        docker_mgmnt_dash()
     if choice == "M" or choice == "m":
         main()
     elif choice == "Q" or choice =="q":
