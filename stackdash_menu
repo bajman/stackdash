@@ -124,7 +124,6 @@ def stacks_main():
 |                   |    6.8    | Dashboard           | devops.domain.com    | Deploy a web page dashboard for this stack using Homer                              |
 |:----------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 Enter Stack No. [enter Q to quit; M to go main-menu]: """)
-
     if choice == "1" or choice == "1.":
         traefik()
     if choice == "2.1" or choice == "2.1.0":
@@ -132,9 +131,11 @@ Enter Stack No. [enter Q to quit; M to go main-menu]: """)
     if choice == "2.2" or choice == "2.2.0":
         watchtower()
     if choice == "2.3" or choice == "2.3.0":
-        guac()
+        apache_guacamole()
     if choice == "2.4" or choice == "2.4.0":
         docker_full()    
+    if choice == "2.5" or choice == "2.5.0"
+        docker_mgmnt_dash()
     if choice == "M" or choice == "m":
         main()
     elif choice == "Q" or choice =="q":
@@ -144,16 +145,9 @@ def traefik():
     traefik_env = open("./traefik/.env", "w")
     print("Add Environment Variables")
     stringlist = []
-
-    for i in range(1):
-        stringlist.append((input("Enter DOMAINNAME=<your domain name> " + str(i+1))) + "\n")
-
-    for i in range(1):
-        stringlist.append((input("Enter CLOUDFLARE_EMAIL=<your Cloudflare email address> " + str(i+2))) + "\n")
-
-    for i in range(1):
-        stringlist.append((input("Enter CLOUDFLARE_API_KEY=<your Cloudflare API Key> " + str(i+3))) + "\n")
-
+    stringlist.append((input("Enter DOMAINNAME=<your domain name> " )))
+    stringlist.append((input("Enter CLOUDFLARE_EMAIL=<your Cloudflare email address> " )))
+    stringlist.append((input("Enter CLOUDFLARE_API_KEY=<your Cloudflare API Key> " )))
     env.writelines(stringlist)
 
     traefik_install = subprocess.run("docker-compose -f ./traefik/docker-compose.yml up -d", shell=True)
@@ -164,14 +158,39 @@ def portainer():
     portainer_env = open("./portainer/.env", "w")
     print("Add Environment Variables")
     stringlist = []
-
-    for i in range(1):
-        stringlist.append((input("Enter DOMAINNAME=<your domain name> " + str(i+1))) + "\n")
-
+    stringlist.append((input("Enter DOMAINNAME=<your domain name> " )))
     env.writelines(stringlist)
 
     portainer_install = subprocess.run("docker-compose -f ./portainer/docker-compose.yml up -d", capture_output=True, shell=True)
     print ("*** Installed Portainer. *** \n")
+    time.sleep(2)
+
+def watchtower():
+    watchtower_install = subprocess.run("docker-compose -f ./watchtower/docker-compose.yml up -d", capture_output=True, shell=True)
+    print ("*** Installed Watchtower. *** \n")
+    time.sleep(2)
+
+def apache_guacamole():
+    guacamole_env = open("./apache_guacamole/.env", "w")
+    print ("Add Environment Variables")
+    stringlist = [] 
+    stringlist.append((input("Enter DOMAINNAME=<your domain name> ")))
+    env.writelines(stringlist)
+    
+    guacamole_install = subprocess.run("docker-compose -f ./apache_guacamole/docker-compose.yml up -d", capture_output=True, shell=True)
+    print ("*** Installed Apache Guacamole. ***")
+    time.sleep(2)
+
+def docker_full():
+    docker_full_env = open("./docker_mgmnt/.env", "w")
+    stringlist = []
+    stringlist.append((input("Enter DOMAINNAME=<your domain name> " )))
+    stringlist.append((input("Enter CLOUDFLARE_EMAIL=<your Cloudflare email address> " )))
+    stringlist.append((input("Enter CLOUDFLARE_API_KEY=<your Cloudflare API Key> " )))
+    env.writelines(stringlist)
+
+    docker_full_install = subprocess.run("docker-compose -f ./docker_mgmnt/docker-compose.yml up -d", capture_output=True, shell=True)
+    print ("*** Installed Docker Management Stack ***")
     time.sleep(2)
 
 main()
