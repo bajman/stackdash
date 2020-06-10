@@ -69,6 +69,7 @@ def docker_install():
     print ("*** Docker installation completed! *** \n")
     main()
 
+
 def stacks_main():
     print("\n\n\n\n\n\n\n StackDash Deployments \n")
     #time.sleep(1)
@@ -133,19 +134,14 @@ Enter Stack No. [enter Q to quit; M to go main-menu]: """)
     if choice == "2.3" or choice == "2.3.0":
         guac()
     if choice == "2.4" or choice == "2.4.0":
-        docker_full()
-    if choice == "2.5" or choice == "2.5.0":
-        docker_dash()
+        docker_full()    
     if choice == "M" or choice == "m":
-        jackett()
+        main()
     elif choice == "Q" or choice =="q":
         sys.exit
-    else:
-        print("You must only select either 1, 2, or 3.")
-        print("Please try again")
 
 def traefik():
-    env = open("./traefik/.env", "w")
+    traefik_env = open("./traefik/.env", "w")
     print("Add Environment Variables")
     stringlist = []
 
@@ -160,12 +156,12 @@ def traefik():
 
     env.writelines(stringlist)
 
-    traefik_install = subprocess.run("docker-compose -f ./traefik/docker-compose.yml up -d", capture_output=True, shell=True)
+    traefik_install = subprocess.run("docker-compose -f ./traefik/docker-compose.yml up -d", shell=True)
     print ("*** Installed Traefik 2. *** \n")
     time.sleep(2)
-    
+
 def portainer():
-    env = open("/portainer/.env", "w")
+    portainer_env = open("./portainer/.env", "w")
     print("Add Environment Variables")
     stringlist = []
 
@@ -174,9 +170,8 @@ def portainer():
 
     env.writelines(stringlist)
 
-    portainer_install = subprocess.run("docker-compose -f /portainer/docker-compose.yml up -d", capture_output=True, shell=True)
+    portainer_install = subprocess.run("docker-compose -f ./portainer/docker-compose.yml up -d", capture_output=True, shell=True)
     print ("*** Installed Portainer. *** \n")
     time.sleep(2)
-    
-main()
 
+main()
