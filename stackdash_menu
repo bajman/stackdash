@@ -156,23 +156,17 @@ def devops_stack():
             Before deploying, make sure you have the correct DNS configuration for your domain, including: 
             
                     (1) an A name record pointing to your WAN IP address; and 
-            
                     (2) CNAME records for each of the following subdomains used in this stack:
             
                             - remote.example.com (Apache Guacamole)
-                        
                             - gitlab.example.com (GitLab)
-                        
                             - metrics.example.com (Netdata)
-                        
                             - portainer.example.com (Portainer)
-                        
                             - traefik.example.com (Traefik)
-                        
                             - code.example.com (code-server)            
-            
-         
-            This stack uses Traefik to route containers to several subdomains (e.g., portainer.example.com). 
+                     
+      
+      This stack uses Traefik to route containers to several subdomains (e.g., portainer.example.com). 
             
             
                 Type "yes" if already have Traefik running and don't need to deploy it with the DevOps Stack;
