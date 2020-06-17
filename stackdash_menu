@@ -34,7 +34,7 @@ def main():
     Please enter your choice:  """)
     if choice == "1" or choice =="1.":
         docker_install()
-        print("*** Installing Docker Engine **** ")
+        print("*** Install Docker Engine **** ")
     elif choice == "2":
         stacks_main()
         print("*** Deploy Stacks **** ")
@@ -46,7 +46,7 @@ def main():
     else:
         print("You must only select either 1, 2, 3, or 4.")
         print("Please try again")
-    
+        
 def docker_install():
     remove_old_docker = subprocess.run("sudo apt-get remove docker docker-engine docker.io containerd runc", capture_output=True, shell=True)
     print("\n\n\n\n\n\n\n\n*** Removed older versions of Docker. *** \n")
@@ -79,68 +79,54 @@ def docker_install():
     print ("*** Docker installation completed! *** \n")
     main()
 
-
 def stacks_main():
-    print("\n\n\n\n\n\n\n StackDash Deployments \n")
+    print("\n Stack Deploy Menu \n")
     #time.sleep(1)
     print()
 
-    choice = input("""
-|:----------------------------------------------------------------------------------------------------------------------------------------------------------------:| 
-|   Stack Category  | Stack No. |      Container      |     CNAME Records    |                                     Description                                     |
-|:-----------------:|:---------:|:-------------------:|:--------------------:|:-----------------------------------------------------------------------------------:|
-|   Reverse Proxy   |     1     | Reverse Proxy Stack | trafefik.domain.com  | Traefik (pronounced traffic) is a modern HTTP reverse proxy and load balancer       |
-|                   |           | -Traefik            |                      |                                                                                     |
-|:----------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| Docker Management |           |                     |                      |                                                                                     |
-|                   |    2.1    | Portainer           | portainer.domain.com | Management UI for Docker containers, images, volumes and networks                   |
-|                   |    2.2    | Watchtower          |                      | Keeps your containerized app images automatically up-to-date                        |
-|                   |    2.3    | Apache Guacamole    | guac.domain.com      | Clientless remote gateway to VNC, RDP and SSH servers                               |
-|                   |    2.4    | Full Stack          |                      | Deploy the complete Container Management Stack                                      |
-|:----------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|       Media       |           |                     |                      |                                                                                     |
-|                   |    3.1    | Plex                | plex.domain.com      | Client-server media play system                                                     |
-|                   |    3.2    | Jackett             | jacket.domain.com    | A proxy server to make http queries to index torrent sites                          |
-|                   |    3.3    | Radarr              | radarr.domain.com    | Monitors and searchs Jackett index for movies                                       |
-|                   |    3.4    | qBittorrent         | qbit.domain.com      | Open-source alternative to uTorrent                                                 |
-|                   |    3.5    | Full Stack          |                      | Deploy the complete Media Stack                                                     |
-|:----------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|        Data       |           |                     |                      |                                                                                     |
-|                   |    4.1    | Nextcloud           | nextcloud.domain.com | A suite of client-software for creating and using file hosting services             |
-|                   |    4.2    | Mayan EDMS          | mayan.domain.com     | A management system to categorize and store documents                               |
-|                   |    4.3    | Snipe-IT            | it-assets.domain.com | Tracks hardware, software licenses and accessories for IT asset/operations managers |
-|                   |    4.4    | wallabag            | walla.domain.com     | PHP application for saving and classifying webpages                                 |
-|                   |    4.5    | photoprism          | photos.domain.com    | Go-powered app for browsing, organizing and sharing your photos                     |
-|                   |    4.6    | BookStack           | bookstack.domain.com | A platform for storing and organizing information and documentation                 |
-|                   |    4.7    | Full Stack          |                      | Deploy the complete Data Stack                                                      |
-|:----------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| Server Monitoring |           |                     |                      |                                                                                     |
-|                   |     5     | Monitoring Stack    |                      | Scrapes your Docker & server infrastructure to display on Grafana dashboards        |
-|                   |           | -Prometheus         | prom.domain.com      |                                                                                     |
-|                   |           | -Grafana            | metrics.domain.com   |                                                                                     |
-|                   |           | -Node-Exporter      |                      |                                                                                     |
-|                   |           | -cadvisor           |                      |                                                                                     |
-|:----------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|  Hosting & DevOps |           |                     |                      |                                                                                     |
-|                   |    6.1    | Ghost               | blog.domain.com      | Headless Node.js platform for blogging and content management                       |
-|                   |    6.2    | WordPress           | wp.domain.com        | PHP online publishing platform                                                      |
-|                   |    6.3    | DokuWiki            | dw.domain.com        | PHP wiki application                                                                |
-|                   |    6.4    | GitLab              | gitlab.domain.com    | DevOps lifecycle tool, git repo, wiki, issue tracking, and CI/CD                    |
-|                   |    6.5    | VS Code Server      | vs.domain.com        | Run VS Code on any machine anywhere and access it in the browser                    |
-|                   |    6.6    | Full Stack          |                      | Deploy the complete Hosting & DevOps stack                                          |
-|:----------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-Enter Stack No. [enter Q to quit; M to go main-menu]: """)
+    choice = input("""                           
+    
+                                            1.   DevOps Stack
+                                                    
+                                                    Apache Guacamole        (clientless remote desktop)
+                                                    GitLab                  (private repo, CI/CD pipeline)
+                                                    Netdata                 (realtime server metrics)
+                                                    Portainer               (GUI Docker manager)
+                                                    Traefik                 (Reverse proxy & routing service)
+                                                    Watchtower              (Keeps Docker images up-to-date)
+                                                    Code-Server             (VS Code source code editor)
+                        
+                                            2.   Data Stack
+                                            
+                                                    Duplicati               (Server and cloud backup service)
+                                                    Bitwarden               (Selfhosted password manager)
+                                                    Bookstack               (Wiki)
+                                                    Calibre                 (eBooks library management)
+                                                    Grocy                   (Grocery and household management)
+                                                    Nextcloud               (cloud storage account)
 
-    if choice == "1" or choice == "1.":
-        traefik()
-    if choice == "2.1" or choice == "2.1.0":
-        portainer()
-    if choice == "2.2" or choice == "2.2.0":
-        watchtower()
-    if choice == "2.3" or choice == "2.3.0":
-        apache_guacamole()
-    if choice == "2.4" or choice == "2.4.0":
-        docker_full()    
+                                            3.   Media Stack
+                                            
+                                                    Airsonic                (music & podcast streaming service)
+                                                    Fresh RSS               (RSS news reader)
+                                                    Jackett                 (Torrent indexer)
+                                                    Piwigo                  (Photo management)
+                                                    Radarr                  (Movie torrent search)
+                                                    Tautulli                (Media monitor)
+                                                    QBittorrent             (Torrent client)
+
+                                            4.   Main Menu
+                                            
+                                            5.   Quit
+                       
+        Enter Stack No. : """)
+
+    if choice == "1":
+        devops_stack()
+    if choice == "2":
+        data_stack()
+    if choice == "3":
+        media_stack()
     if choice == "M" or choice == "m":
         main()
     elif choice == "Q" or choice =="q":
