@@ -95,6 +95,7 @@ def stacks_main():
                                                     Traefik                 (Reverse proxy & routing service)
                                                     Watchtower              (Keeps Docker images up-to-date)
                                                     Code-Server             (VS Code source code editor)
+                                                    
                         
                                             2.   Data Stack
                                             
@@ -104,6 +105,7 @@ def stacks_main():
                                                     Calibre                 (eBooks library management)
                                                     Grocy                   (Grocery and household management)
                                                     Nextcloud               (cloud storage account)
+                                                    
 
                                             3.   Media Stack
                                             
@@ -114,8 +116,10 @@ def stacks_main():
                                                     Radarr                  (Movie torrent search)
                                                     Tautulli                (Media monitor)
                                                     QBittorrent             (Torrent client)
+                                                    
 
                                             4.   Main Menu
+                                            
                                             
                                             5.   Quit
                        
@@ -150,7 +154,16 @@ def devops_stack():
     print("\n DevOps Stack: Reverse Proxy by Traefik 2 \n")
     #time.sleep(1)
     choice = input("""                           
-            
+      
+            This stack uses Traefik to route containers to several subdomains (e.g., portainer.example.com). 
+              
+                Type "yes" if already have Traefik running and don't need to deploy it with the DevOps Stack;
+                
+                Type "no" if you have not yet deploy Traefik and wish to deploy it with the DevOps Stack
+                       
+      Enter "yes" or "no":  """)
+    
+    print("""\n\n\n             
             NOTE:
             
             Before deploying, make sure you have the correct DNS configuration for your domain, including: 
@@ -163,19 +176,9 @@ def devops_stack():
                             - metrics.example.com (Netdata)
                             - portainer.example.com (Portainer)
                             - traefik.example.com (Traefik)
-                            - code.example.com (code-server)            
-                     
-      
-      This stack uses Traefik to route containers to several subdomains (e.g., portainer.example.com). 
-            
-            
-                Type "yes" if already have Traefik running and don't need to deploy it with the DevOps Stack;
-                
-                
-                Type "no" if you have not yet deploy Traefik and wish to deploy it with the DevOps Stack;
-                       
-      Enter "yes" or "no":  """)
-
+                            - code.example.com (code-server)     
+    """)
+    time.sleep(2)
 
         
 def traefik():
