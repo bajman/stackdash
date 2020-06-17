@@ -123,15 +123,20 @@ def stacks_main():
 
     if choice == "1":
         devops_stack()
+        print ("*** Deploying DevOps Stack *** \n")
     if choice == "2":
         data_stack()
+        print ("*** Deploying Data Stack *** \n")
     if choice == "3":
         media_stack()
+        print ("*** Deploying Media Stack *** \n")
     if choice == "M" or choice == "m":
         main()
     elif choice == "Q" or choice =="q":
         sys.exit
 
+def devops_stack()
+        
 def traefik():
     traefik_env = open("./traefik/.env", "w")
     print("Add Environment Variables")
