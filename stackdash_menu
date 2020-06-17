@@ -155,11 +155,12 @@ def devops_stack():
     #time.sleep(1)
     choice = input("""                           
       
-            This stack uses Traefik to route containers to several subdomains (e.g., portainer.example.com). 
+            This stack uses Traefik to route containers to several subdomains (e.g., portainer.example.com). Do you
+            want to include Traefik with DevOps Stack?
               
-                Type "yes" if you already have Traefik running and don't need to deploy it with the DevOps Stack;
-                
-                Type "no" if you don't have Traefik running and wish to deploy it with the DevOps Stack
+                Type "yes" if you don't have Traefik running and wish to deploy it with the DevOps Stack, or 
+                                               
+                Type "no" if you already have Traefik running and don't need to deploy it with  DevOps Stack
                        
       Enter "yes" or "no" [enter "m" to return to main menu; enter "q" to quit]:  """)
         
@@ -178,7 +179,7 @@ def devops_stack():
                             - traefik.example.com (Traefik)
                             - code.example.com (code-server)
                             
-            See documentation for guidance. 
+            See documentation for additional guidance. 
     """)       
     time.sleep(2)
     
@@ -192,6 +193,43 @@ def devops_stack():
         main()
     elif choice == "Q" or choice =="q":
         sys.exit
+
+def devops_stand():
+        
+def devops_traefik():
+    make_proxy = subprocess.run("sudo docker network create proxy", capture_output=True, shell=True)
+    print("\n\n\n\n\n\n\n\n*** Created Docker network: proxy. *** \n")
+    time.sleep(2)
+
+    mkdir_traefik = subprocess.run("sudo mkdir /opt/stack_dash/devops/traefik", capture_output=True, shell=True)
+    print ("*** Created Traefik folder in /opt/stack_dash directory. *** \n")
+    
+    traefik_dir_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/devops/traefik", capture_output=True, shell=True)
+    print ("*** Corrected Traefik folder permissions. ***\n")
+    
+    mkdir_gitlab = subprocess.run("sudo mkdir /opt/stack_dash/devops/gitlab", capture_output=True, shell=True)
+    print ("*** Created GitLab folder in /opt/stack_dash directory. *** \n")
+    
+    gitlab_dir_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/devops/gitlab", capture_output=True, shell=True)
+    print ("*** Corrected GitLab folder permissions. ***\n")
+    
+    mkdir_coder = subprocess.run("sudo mkdir /opt/stack_dash/devops/coder", capture_output=True, shell=True)
+    print ("*** Created coder folder in /opt/stack_dash directory. *** \n")
+    
+    coder_dir_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/devops/coder", capture_output=True, shell=True)
+    print ("*** Corrected coder folder permissions. ***\n")
+
+    mkdir_portainer = subprocess.run("sudo mkdir /opt/stack_dash/devops/portainer", capture_output=True, shell=True)
+    print ("*** Created Portainer folder in /opt/stack_dash directory. *** \n")
+    
+    portainer_dir_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/devops/portainer", capture_output=True, shell=True)
+    print ("*** Corrected Portainer folder permissions. ***\n")
+    
+    mkdir_apache_guacamole = subprocess.run("sudo mkdir /opt/stack_dash/devops/apache_guacamole", capture_output=True, shell=True)
+    print ("*** Created Apache Guacamole folder in /opt/stack_dash directory. *** \n")
+    
+    guacamole_dir_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/devops/apache_guacamole", capture_output=True, shell=True)
+    print ("*** Corrected Portainer folder permissions. ***\n")
         
 def traefik():
     traefik_env = open("./traefik/.env", "w")
