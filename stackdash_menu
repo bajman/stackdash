@@ -157,18 +157,18 @@ def devops_stack():
       
             This stack uses Traefik to route containers to several subdomains (e.g., portainer.example.com). 
               
-                Type "yes" if already have Traefik running and don't need to deploy it with the DevOps Stack;
+                Type "yes" if you already have Traefik running and don't need to deploy it with the DevOps Stack;
                 
-                Type "no" if you have not yet deploy Traefik and wish to deploy it with the DevOps Stack
+                Type "no" if you don't have Traefik running and wish to deploy it with the DevOps Stack
                        
-      Enter "yes" or "no":  """)
-    
-    print("""\n\n\n             
+      Enter "yes" or "no" [enter "m" to return to main menu; enter "q" to quit]:  """)
+        
+        print("""\n\n\n             
             NOTE:
             
-            Before deploying, make sure you have the correct DNS configuration for your domain, including: 
+            Before deploying, make sure you have the correct DNS configuration for your domain including: 
             
-                    (1) an A name record pointing to your WAN IP address; and 
+                    (1) A name record pointing to your WAN IP address; and 
                     (2) CNAME records for each of the following subdomains used in this stack:
             
                             - remote.example.com (Apache Guacamole)
@@ -176,10 +176,22 @@ def devops_stack():
                             - metrics.example.com (Netdata)
                             - portainer.example.com (Portainer)
                             - traefik.example.com (Traefik)
-                            - code.example.com (code-server)     
-    """)
+                            - code.example.com (code-server)
+                            
+            See documentation for guidance. 
+    """)       
     time.sleep(2)
-
+    
+    if choice == "yes" or choice == "Yes":
+        devops_stand()
+        print ("*** Deploying DevOps Standard Stack *** \n")
+    if choice == "no" or choice == "No":
+        devops_traefik()
+        print ("*** Deploying DevOps Stack with Traefik *** \n")
+    if choice == "M" or choice == "m":
+        main()
+    elif choice == "Q" or choice =="q":
+        sys.exit
         
 def traefik():
     traefik_env = open("./traefik/.env", "w")
