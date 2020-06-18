@@ -164,7 +164,7 @@ def devops_stack():
                        
       Enter "yes" or "no" [enter "m" to return to main menu; enter "q" to quit]:  """)
         
-      print("""\n\n\n             
+     print("""\n\n\n             
             NOTE:
             
             Before deploying, make sure you have the correct DNS configuration for your domain including: 
