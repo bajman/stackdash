@@ -193,8 +193,6 @@ def devops_stack():
     elif choice == "Q" or choice =="q":
         sys.exit
 
-def devops_stand():
-        
 def devops_traefik():
     make_proxy = subprocess.run("sudo docker network create proxy", capture_output=True, shell=True)
     print("\n\n\n\n\n\n\n\n*** Created Docker network: proxy. *** \n")
