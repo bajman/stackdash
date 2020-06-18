@@ -7,6 +7,6 @@ StackDash is a simple python script designed to automate the installation of Doc
 
 # screenshots
 ![stackdash-ss1](https://i.imgur.com/xsQCRnM.png)
-![stackdash-ss2](https://i.imgur.com/OMJX2Fm.png)
+![stackdash-ss2](https://i.imgur.com/Z5vjFs0.png)
 ![stackdash-ss3](https://i.imgur.com/3ZY2p2q.png)
 
