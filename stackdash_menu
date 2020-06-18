@@ -154,32 +154,13 @@ def devops_stack():
     #time.sleep(1)
     choice = input(""" 
     
-            NOTE:
-            
-            Before deploying, make sure you have the correct DNS configuration for your domain including: 
-            
-                    (1) A name record pointing to your WAN IP address; and 
-                    (2) CNAME records for each of the following subdomains used in this stack:
-            
-                            - remote.example.com (Apache Guacamole)
-                            - gitlab.example.com (GitLab)
-                            - metrics.example.com (Netdata)
-                            - portainer.example.com (Portainer)
-                            - traefik.example.com (Traefik)
-                            - code.example.com (code-server)
-                            
-            See documentation for additional guidance. 
-      
-----------------------------------------------------------------------------------------------------------------------------
-
-            This stack uses Traefik to route containers to several subdomains (e.g., portainer.example.com). Do you
-            want to include Traefik with DevOps Stack?
+             Do you want to include Traefik with your DevOps deployment?
               
-                Type "yes" if you don't have Traefik running and wish to deploy it with the DevOps Stack, or 
+                    Type "yes" if you don't have Traefik and wish to deploy it with the DevOps Stack, or 
                                                
-                Type "no" if you already have Traefik running and don't need to deploy it with  DevOps Stack
-                       
-      Enter "yes" or "no" [enter "m" to return to main menu; enter "q" to quit]:  """)
+                    Type "no" if you already have Traefik running and don't need to deploy it with DevOps Stack
+                                 
+            Enter "yes" or "no" [enter "m" to return to main menu; enter "q" to quit]:  """)
             
     if choice == "yes" or choice == "Yes":
         devops_traefik()
@@ -226,7 +207,20 @@ def devops_traefik():
     
     guacamole_dir_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/devops/apache_guacamole", capture_output=True, shell=True)
     print ("*** Corrected Portainer folder permissions. ***\n")
-        
+    
+#env. variable inputs
+    traefik_env = open("./stacks/devops/traefik/.env", "a")
+    print("Enter the environmental variables required by this stack. Type out a complete entry for each variable requsted. (e.g, CF_API_KEY=1234 or DOMAINNAME=example.com, not 
+         1234 or example.com")
+    devops_traefik_env = []
+    devops_traefik_env.append((input("CF_API_EMAIL=mail@example.com  "  )))
+    devops_traefik_env.append((input("CF_API_KEY=1234  "  )))
+    devops_traefik_env.append((input("DOMAINNAME=example.com  "  )))
+    devops_traefik_env.append((input("CLIENT_ID=912941924  "  )))
+    devops_traefik_env.append((input("CLIENT_SECRET=12315415  "  )))
+    devops_traefik_env.append((input("DOMAINNAME=example.com" )))
+    devops_traefik_env.append((input("WHITELIST= " )))
+          
 def traefik():
     traefik_env = open("./traefik/.env", "w")
     print("Add Environment Variables")
