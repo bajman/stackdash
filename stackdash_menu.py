@@ -213,14 +213,14 @@ def devops_traefik():
     
 #env. variable inputs
     traefik_env = open("./stacks/devops/traefik/.env", "a")
-    print("Enter the environmental variables required by this stack. Type out a complete entry for each variable requsted. CF_API_KEY=1234 or DOMAINNAME=example.com not 1234 or example.com")
+    print("\n\n\n Enter the environmental variables required by this stack. Type out a complete entry for each variable requsted. CF_API_KEY=1234 or DOMAINNAME=example.com not 1234 or example.com \n\n\n")
     devops_traefik_env = []
     devops_traefik_env.append((input("CF_API_EMAIL=mail@example.com  "  )))
     devops_traefik_env.append((input("CF_API_KEY=1234  "  )))
     devops_traefik_env.append((input("DOMAINNAME=example.com  "  )))
     devops_traefik_env.append((input("CLIENT_ID=912941924  "  )))
     devops_traefik_env.append((input("CLIENT_SECRET=12315415  "  )))
-    devops_traefik_env.append((input("DOMAINNAME=example.com" )))
+    devops_traefik_env.append((input("SECRET= " )))
     devops_traefik_env.append((input("WHITELIST= " )))
     time.sleep(2)
 
