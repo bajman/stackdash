@@ -184,6 +184,9 @@ def devops_traefik():
     traefik_dir_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/devops/traefik", capture_output=True, shell=True)
     print ("*** Corrected Traefik folder permissions. ***\n")
     
+    traefik_data_copy = subprocess.run("cp -ar ./stackdash/stacks/devops/traefik/data /opt/stack_dash/devops/traefik", capture_output=True, shell=True)
+    print ("*** Copied Traefik data and middleware rules to /opt/stack_dash/devops/traefik. ***\n")
+    
     mkdir_gitlab = subprocess.run("sudo mkdir /opt/stack_dash/devops/gitlab", capture_output=True, shell=True)
     print ("*** Created GitLab folder in /opt/stack_dash directory. *** \n")
     
@@ -220,6 +223,13 @@ def devops_traefik():
     devops_traefik_env.append((input("CLIENT_SECRET=12315415  "  )))
     devops_traefik_env.append((input("DOMAINNAME=example.com" )))
     devops_traefik_env.append((input("WHITELIST= " )))
+    time.sleep(2)
+
+# Docker Compose
+          
+    devops_traefik_compose = subprocess.run("docker-compose -f ./stackdash/stacks/devops/traefik/docker-compose.yml up -d", capture_output=True, shell=True)
+    print ("*** Deployed DevOps with Traefik! ***\n")
+    
           
 def traefik():
     traefik_env = open("./traefik/.env", "w")
