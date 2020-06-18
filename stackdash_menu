@@ -3,7 +3,6 @@ import sys #this allows you to use the sys.exit command to quit/logout of the ap
 import subprocess
 import time
 import sys
-import consolemenu
 
 
 def main():
@@ -183,10 +182,10 @@ def devops_stack():
       Enter "yes" or "no" [enter "m" to return to main menu; enter "q" to quit]:  """)
             
     if choice == "yes" or choice == "Yes":
-        devops_stand()
+        devops_traefik()
         print ("*** Deploying DevOps Standard Stack *** \n")
     if choice == "no" or choice == "No":
-        devops_traefik()
+        devops_stand()
         print ("*** Deploying DevOps Stack with Traefik *** \n")
     if choice == "M" or choice == "m":
         main()
