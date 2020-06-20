@@ -1,5 +1,5 @@
 #!/usr/bin/env python3.8
-import sys #this allows you to use the sys.exit command to quit/logout of the application
+import sys
 import subprocess
 import time
 
