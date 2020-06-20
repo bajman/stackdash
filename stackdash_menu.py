@@ -60,9 +60,6 @@ def docker_install():
     docker_repo = subprocess.run("sudo add-apt-repository 'deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable' ", capture_output=True, shell=True)
     print ("*** Set up Docker's stable repository. *** \n")
     
-    update_1 = subprocess.run("sudo apt-get update", capture_output=True, shell=True, check=True)
-    print ("*** Re-downloaded package information from all configured resources. *** \n")
-    
     install = subprocess.run("sudo apt-get install docker-ce docker-ce-cli containerd.io", capture_output=True, shell=True, check=True)
     print ("*** Installed the latest version of Docker Engine. *** \n")
     
