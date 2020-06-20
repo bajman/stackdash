@@ -62,7 +62,7 @@ def docker_install():
     print ("*** Added Docker's offical GPG key. *** \n")
     time.sleep(2)
 
-    docker_repo = subprocess.run("sudo add-apt-repository 'deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable' \n", capture_output=True, shell=True)
+    docker_repo = subprocess.run("sudo add-apt-repository 'deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable' ", capture_output=True, shell=True)
     print ("*** Set up Docker's stable repository. *** \n")
     time.sleep(2)
 
