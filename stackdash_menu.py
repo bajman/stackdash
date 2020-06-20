@@ -56,8 +56,8 @@ def docker_install():
 
     gpg_key = subprocess.run("curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -", capture_output=True, shell=True, check=True)
     print ("*** Added Docker's offical GPG key. *** \n")
-    
-    docker_repo = subprocess.run("sudo add-apt-repository 'deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable' \n", capture_output=True, shell=True, check=True)
+
+    docker_repo = subprocess.run("sudo add-apt-repository 'deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable' ", capture_output=True, shell=True)
     print ("*** Set up Docker's stable repository. *** \n")
     
     update_1 = subprocess.run("sudo apt-get update", capture_output=True, shell=True, check=True)
