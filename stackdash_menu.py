@@ -181,7 +181,7 @@ def devops_traefik():
     traefik_dir_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/devops/traefik", capture_output=True, shell=True)
     print ("*** Corrected Traefik folder permissions. ***\n")
     
-    traefik_data_copy = shutil.copy('./stacks/devops/traefik/*', '/opt/stack_dash/devops/traefik')
+    traefik_data_copy = shutil.copy('./stacks/devops/traefik/', '/opt/stack_dash/devops/traefik')
     print ("*** Copied Traefik data and middleware rules to /opt/stack_dash/devops/traefik. ***\n")
     
     mkdir_gitlab = subprocess.run("sudo mkdir /opt/stack_dash/devops/gitlab", capture_output=True, shell=True)
