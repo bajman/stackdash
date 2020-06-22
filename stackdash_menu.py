@@ -3,6 +3,7 @@ import sys #this allows you to use the sys.exit command to quit/logout of the ap
 import subprocess
 import time
 import sys
+import shutil
 
 
 def main():
@@ -180,7 +181,7 @@ def devops_traefik():
     traefik_dir_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/devops/traefik", capture_output=True, shell=True)
     print ("*** Corrected Traefik folder permissions. ***\n")
     
-    traefik_data_copy = subprocess.run("cp -ar ./stackdash/stacks/devops/traefik/data /opt/stack_dash/devops/traefik", capture_output=True, shell=True)
+    traefik_data_copy = shutil.copy('./stacks/devops/traefik/*', '/opt/stack_dash/devops/traefik')
     print ("*** Copied Traefik data and middleware rules to /opt/stack_dash/devops/traefik. ***\n")
     
     mkdir_gitlab = subprocess.run("sudo mkdir /opt/stack_dash/devops/gitlab", capture_output=True, shell=True)
