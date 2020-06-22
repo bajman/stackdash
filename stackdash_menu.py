@@ -181,8 +181,23 @@ def devops_traefik():
     traefik_dir_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/devops/traefik", capture_output=True, shell=True)
     print ("*** Corrected Traefik folder permissions. ***\n")
     
-    traefik_data_copy = shutil.copy('./stacks/devops/traefik/', '/opt/stack_dash/devops/traefik')
-    print ("*** Copied Traefik data and middleware rules to /opt/stack_dash/devops/traefik. ***\n")
+    mkdir_traefik_rules = subprocess.run("sudo mkdir /opt/stack_dash/devops/traefik/rules", capture_output=True, shell=True)
+    print ("*** Created Traefik Rules folder in /opt/stack_dash directory. *** \n")
+    
+    traefik_rules_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/devops/traefik/rules", capture_output=True, shell=True)
+    print ("*** Corrected Traefik Rules folder permissions. ***\n")
+    
+    traefik_env_copy = shutil.copy('./stacks/devops/traefik/.env', '/opt/stack_dash/devops/traefik')
+    print ("*** Copied Traefik .env fie to /opt/stack_dash/devops/traefik. ***\n")
+    
+    traefik_compose_copy = shutil.copy('./stacks/devops/traefik/docker-compose.yml', '/opt/stack_dash/devops/traefik')
+    print ("*** Copied Traefik Docker Compose file to /opt/stack_dash/devops/traefik. ***\n")
+    
+    traefik_rules1_copy = shutil.copy('./stacks/devops/traefik/rules/middleware-chains.toml', '/opt/stack_dash/devops/traefik/rules')
+    print ("*** Copied Traefik middleware-chain.toml to /opt/stack_dash/devops/traefik/rules. ***\n")
+    
+    traefik_rules2_copy = shutil.copy('./stacks/devops/traefik/middlewares.toml', '/opt/stack_dash/devops/traefik/rules')
+    print ("*** Copied Traefik data and middlewares.toml to /opt/stack_dash/devops/traefik/rules. ***\n")
     
     mkdir_gitlab = subprocess.run("sudo mkdir /opt/stack_dash/devops/gitlab", capture_output=True, shell=True)
     print ("*** Created GitLab folder in /opt/stack_dash directory. *** \n")
