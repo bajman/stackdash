@@ -1155,7 +1155,100 @@ def tautulli_compose():
     tautulli_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/tautulli/docker-compose.yml up -d', shell=True)
     print ("*** tautulli is deployed! ***")
                                                                      
+# Traefik
+                                                                       
+def traefik_env_write():
+    traefik_env_file = open("./containers/traefik/.env", "w+")
+    traefik_env_file_data = traefik_env_file.read()
+    
+    puid = traefik_env_file.write('PUID=1000\n')
+    pgid = traefik_env_file.write('PGID=1000\n')
+    userdir = traefik_env_file.write('USERDIR=/opt/stackdash\n')
+    
+    print ("\nPlease enter the subdomain you would like to use for Traefik [e.g., traefik-example.com]\n")
+    user_domainname = traefik_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+
+    print ("\nPlease enter the path you like to use to store Traefik's appdata\n")
+    user_domainname = traefik_env_file.write("TRAEFIK_DATA=" + input('Traefik's appdata path: ') + "\n")
+
+    print ("\nPlease enter your Cloudflare Email Address, [Email address associated with your Cloudflare account, see https://dash.cloudflare.com, e.g., mail@example.com]\n")
+    user_domainname = traefik_env_file.write("TRAEFIK_CLOUDFLARE_EMAIL=" + input('Your Cloudflare email address: ') + "\n")
+
+    print ("\nPlease enter your Cloudflare Global API Key, see dash.cloudflare.com: My Profile >  API Tokens > API Keys, e.g., bLa1boPhZL0VCerk35XWmbPCaCyWjDaCVx4cM]: Tokens > API Keys, e.g., bLa1boPhZL0VCerk35XWmbPCaCyWjDaCVx4cM]\n")
+    user_domainname = traefik_env_file.write("TRAEFIK_CLOUDFLARE_API_KEY=" + input('Your Cloudflare API Key: ') + "\n")
+
+    traefik_env_file.write(traefik_env_file_data)
+    traefik_env_file.close()
+
+    traefik_env_migration()
+
+def traefik_env_migration():   
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/traefik', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+        
+    stack_dash_dir_copy = shutil.copytree('./containers/traefik/', '/opt/stackdash/docker-appdata/traefik', dirs_exist_ok=True)
+    print ("*** Copied ./containers/traefik/ from Git Clone to /opt/stackdash/docker-appdata/traefik ***\n")
+      
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/traefik", shell=True)
+    print ("*** Corrected Traefik's directory permissions. ***\n")
+
+    def traefik_compose()
+
+def traefik_compose():
+    traefik_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/traefik/docker-compose.yml up -d', shell=True)
+    print ("*** Traefik is deployed! ***")
                                                                      
+
+# Google OAUTH
                                                                      
+                                                                     def oauthenv_write():
+    oauthenv_file = open("./containers/traefik/.env", "w+")
+    oauthenv_file_data = oauthenv_file.read()
+    
+    puid = oauthenv_file.write('PUID=1000\n')
+    pgid = oauthenv_file.write('PGID=1000\n')
+    userdir = oauthenv_file.write('USERDIR=/opt/stackdash\n')
+    
+    print ("\nPlease enter the subdomain you would like to use for Google OAuth 2.0 [e.g., oauth-example.com]\n")
+    user_domainname = oauthenv_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+
+    print ("\n[Google OAuth 2.0: 1/4]\nPlease enter your Google APIs Client-ID [e.g., MaCcXoD05h7EmkGXqN07G6TJjcTKJYMmpp8tXsdIsILYSp1IqrX.apps.googleusercontent.com]\n")
+    user_client_id = devops_env_file.write("OAUTH_CLIENT_ID=" + input('Your Google API Client ID: ') + "\n")
+
+    print ("\n[Google OAuth 2.0: 2/4]\nPlease enter your Google APIs Client-Secret [E.g., XB6RDMRDrcGAwi3hwdPIPKSr]\n")
+    user_client_secret = devops_env_file.write("OAUTH_CLIENT_SECRET=" + input('Your Google API Client Secret: ') + "\n")
+
+    print ("\n[Google OAuth 2.0: 3/4]\nPlease enter your Google APIs Secret [E.g., rKyKKgVl9IlzxUfg1CJmjZwj5zk5LMzo]\n")
+    user_secret = devops_env_file.write("OAUTH_SECRET=" + input('Your Google API Secret: ') + "\n")
+    
+    print ("\n[Google OAuth 2.0: 4/4]\nPlease enter the Gmail address you used to sign-up with Google APIs, aka: the Whitelist Email Address [e.g., example@gmail.com]\n")
+    user_whitelist = devops_env_file.write("OAUTH_WHITELIST=" + input('Your Google API Gmail Address: ') + "\n")
+
+    oauthenv_file.write(oauthenv_file_data)
+    oauthenv_file.close()
+
+    oauthenv_migration()
+
+def oauthenv_migration():   
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/traefik', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+        
+    stack_dash_dir_copy = shutil.copytree('./containers/traefik/', '/opt/stackdash/docker-appdata/traefik', dirs_exist_ok=True)
+    print ("*** Copied ./containers/traefik/ from Git Clone to /opt/stackdash/docker-appdata/traefik ***\n")
+      
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/traefik", shell=True)
+    print ("*** Corrected Traefik's directory permissions. ***\n")
+
+    def oauthcompose()
+
+def oauthcompose():
+    oauthcompose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/traefik/docker-compose.yml up -d', shell=True)
+    print ("*** Traefik is deployed! ***")
                                                                      
 main()
