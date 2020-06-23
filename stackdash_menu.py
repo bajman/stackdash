@@ -221,6 +221,7 @@ def devops_env():
 
 #writing base variables
     devops_env_file = open("/opt/stack_dash/stacks/devops/traefik/.env", "w+")
+    
     puid = devops_env_file.write('PUID=1000\n')
     pgid = devops_env_file.write('PGID=1000\n')
     userdir = devops_env_file.write('USERDIR=/opt/stack_dash\n')
@@ -231,6 +232,7 @@ def devops_env():
     client_secret = devops_env_file.write('CLIENT_SECRET=C_SECRET\n')
     secret = devops_env_file.write('SECRET=YOUR_SECRET\n')
     whitelist = devops_env_file.write('WHITELIST=YOUR_WHITELIST\n')
+    
     devops_env_file.close()
 
 #collecting personalized variables
@@ -258,13 +260,10 @@ def devops_env():
     
 #replacing base variables with personal variables
 
-    dev_env_replace = "/opt/stack_dash/stacks/devops/traefik/.env"
-    with open(dev_env_replace, "r+") as f:
-        c_mail_replace = f.read()
-        c_mail_replace = re.sub('C_MAIL', user_c_email)
-        f.seek(0)
-        f.write(c_mail_replace)
-        f.truncate()
-        
-      
+    devops_env_replace = open("/opt/stack_dash/stacks/devops/traefik/.env", "rt")
+    devops_env_replace_data = devops_env_replace.read()
+    devops_env_replace_data =  devops_env_replace_data.replace('C_MAIL', user_c_email)
+    devops_env_replace.write(devops_env_replace_data)
+    devops_env_replace_data.close()
+
 main()
