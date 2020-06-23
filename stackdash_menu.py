@@ -5,6 +5,7 @@ import time
 import sys
 import shutil
 import os
+import string
 
 
 def main():
@@ -259,9 +260,9 @@ def devops_traefik():
 #    traefik_env_copy = shutil.copytree('./stacks/devops/traefik/', '/opt/stack_dash/devops/traefik/', dirs_exist_ok=True)
 #    print ("*** Copied Traefik tree to /opt/stack_dash/devops/traefik. ***\n")   
     
-    print ("\n[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]: ")
-    cmail_var = str(input('Cloudflare Email'))
-    subprocess.call(['sudo CF_API_EMAIL=', _cmail_var])
+    print ("[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]: ")
+    cmailvar = raw_input('Cloudflare Email: ')
+    echo = subprocess.Popen(["echo", cmailvar], stdout=subprocess.PIPE) 
     print ("\n Environmental variable added")
 
         
