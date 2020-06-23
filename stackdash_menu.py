@@ -85,7 +85,7 @@ releases of StackDash. For a full list of planned DNS providers see: https://doc
         print("Please try again")
 
 def containers_list():
-    print(""""\n\n                                           List of Supported Containers (v0.13)
+    print(""""\n\n                                               List of Supported Containers (v0.13)
                                                    =============================================================
     
 Airsonic  (Music & Podcast Management)
