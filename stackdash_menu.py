@@ -209,61 +209,12 @@ Enter "yes" or "no" [or "m" to return to main menu; enter "q" to quit]:  """)
         sys.exit
 
 def devops_traefik():
-    make_proxy = subprocess.run("sudo docker network create proxy", shell=True)
-    print("\n\n\n\n\n\n\n\n*** Created Docker network: proxy. *** \n")
-
-    mkdir_traefik = subprocess.run("sudo mkdir /opt/stack_dash/devops/traefik", shell=True)
-    print ("*** Created Traefik folder in /opt/stack_dash directory. *** \n")
-    
-    traefik_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/traefik", shell=True)
-    print ("*** Corrected Traefik folder permissions. ***\n")
-    
-    mkdir_traefik_rules = subprocess.run("sudo mkdir /opt/stack_dash/devops/traefik/rules", shell=True)
-    print ("*** Created Traefik Rules folder in /opt/stack_dash directory. *** \n")
-    
-    traefik_rules_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/traefik/rules", shell=True)
-    print ("*** Corrected Traefik Rules folder permissions. ***\n")
-    
-    traefik_rules1_copy = shutil.copy('./stacks/devops/traefik/data/rules/middleware-chains.toml', '/opt/stack_dash/devops/traefik/rules')
-    print ("*** Copied Traefik middleware-chain.toml to /opt/stack_dash/devops/traefik/rules. ***\n")
-    
-    traefik_rules2_copy = shutil.copy('./stacks/devops/traefik/data/rules/middlewares.toml', '/opt/stack_dash/devops/traefik/rules')
-    print ("*** Copied Traefik data and middlewares.toml to /opt/stack_dash/devops/traefik/rules. ***\n")
-    
-    mkdir_gitlab = subprocess.run("sudo mkdir /opt/stack_dash/devops/gitlab", shell=True)
-    print ("*** Created GitLab folder in /opt/stack_dash directory. *** \n")
-    
-    gitlab_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/gitlab", shell=True)
-    print ("*** Corrected GitLab folder permissions. ***\n")
-    
-    mkdir_coder = subprocess.run("sudo mkdir /opt/stack_dash/devops/coder", shell=True)
-    print ("*** Created coder folder in /opt/stack_dash directory. *** \n")
-    
-    coder_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/coder", shell=True)
-    print ("*** Corrected coder folder permissions. ***\n")
-
-    mkdir_portainer = subprocess.run("sudo mkdir /opt/stack_dash/devops/portainer", shell=True)
-    print ("*** Created Portainer folder in /opt/stack_dash directory. *** \n")
-    
-    portainer_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/portainer", shell=True)
-    print ("*** Corrected Portainer folder permissions. ***\n")
-    
-    mkdir_apache_guacamole = subprocess.run("sudo mkdir /opt/stack_dash/devops/apache_guacamole", shell=True)
-    print ("*** Created Apache Guacamole folder in /opt/stack_dash directory. *** \n")
-    
-    guacamole_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/apache_guacamole", shell=True)
-    print ("*** Corrected Portainer folder permissions. ***\n")
-    
     f1 = open('./stacks/devops/traefik/.env', 'a+')
-    for line in f1:
-        f1.write(line.replace('$C_EMAIL', 'input("[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  "'))
-        print ("*** Wrote your Cloudflare Email Address to the .env file. ***\n")
+    f1.write(line.replace('$C_EMAIL', 'input("[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  "'))
+    print ("*** Wrote your Cloudflare Email Address to the .env file. ***\n")
     f1.close()
     
     traefik_env_copy = shutil.copy('./stacks/devops/traefik/.env', '/opt/stack_dash/devops/traefik')
     print ("*** Copied Traefik .env fie to /opt/stack_dash/devops/traefik. ***\n")
-
-    devops_traefik_compose = subprocess.check_call("docker-compose -f /opt/stack_dash/devops/traefik/docker-compose.yml up -d", shell=True)
-    print ("*** Deployed DevOps with Traefik! ***\n")
 
 main()
