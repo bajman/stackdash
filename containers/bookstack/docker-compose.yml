@@ -1,0 +1,58 @@
+version: '3.7'
+
+services:
+
+########################### NETWORKS
+networks:
+  proxy:
+    external:
+      name: proxy
+
+# Bookstack
+
+
+  mysql_bookstack:
+    image: mysql:5.7.30
+    environment:
+      - MYSQL_ROOT_PASSWORD=$BOOKSTACK_MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE=bookstack
+      - MYSQL_USER=bookstack
+      - MYSQL_PASSWORD=$BOOKSTACK_MYSQL_USER_PASSWORD
+      - PGID=1000
+      - PUID=1000
+    volumes:
+      - $BOOKSTACK_DATA/mysql-data:/var/lib/mysql
+    networks:
+      - proxy
+
+  bookstack:
+    image: solidnerd/bookstack:0.29.3
+    depends_on:
+      - mysql
+    environment:
+      - DB_HOST=mysql_bookstack
+      - DB_DATABASE=bookstack
+      - DB_USERNAME=bookstack
+      - DB_PASSWORD=$BOOKSTACK_MYSQL_USER_PASSWORD
+      - PGID=1000
+      - PUID=1000
+    volumes:
+      - $BOOKSTACK_DATA/uploads:/var/www/bookstack/public/uploads
+      - $BOOKSTACK_DATA/storage-uploads:/var/www/bookstack/storage/uploads
+    ports:
+      - "8841:8080"
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.bookstack-rtr.entrypoints=https"
+      - "traefik.http.routers.bookstack-rtr.rule=Host(`wiki.$DOMAINNAME`)"
+      - "traefik.http.routers.bookstack-rtr.tls=true"
+      ## Middlewares
+#      - "traefik.http.routers.backups-rtr.middlewares=chain-authelia@file,add-backups" 
+#      - "traefik.http.middlewares.add-backups.addPrefix.prefix=/backups"
+      ## HTTP Services
+      - "traefik.http.routers.bookstack-rtr.service=bookstack-svc"
+      - "traefik.http.services.bookstack-svc.loadbalancer.server.port=8080" 
+      - "traefik.http.routers.bookstack-rtr.middlewares=chain-oauth@file"
