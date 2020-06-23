@@ -256,7 +256,7 @@ def devops_traefik():
     traefik_env_copy = shutil.copytree('./stacks/devops/traefik/', '/opt/stack_dash/devops/traefik/', dirs_exist_ok=True)
     print ("*** Copied Traefik tree to /opt/stack_dash/devops/traefik. ***\n")
 
-    C_EMAIL = input("[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]: "))
+    C_EMAIL = input("[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]: ")
     C_EMAIL_ENV = subprocess.run("sudo export CF_API_EMAIL='C_EMAIL'", shell=True)
     print ("*** Added Cloudflare email address to environment variables ***")
 
