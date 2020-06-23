@@ -260,32 +260,11 @@ def stacks_main():
         Enter Stack No. : """)
 
     if choice == "1":
-        devops_env()
+        devops_env_write1()
     if choice == "2":
         data_stack()
     if choice == "3":
         media_stack()
-    if choice == "M" or choice == "m":
-        main()
-    elif choice == "Q" or choice =="q":
-        sys.exit
-
-def devops_env():
-    
-    choice = input("""
-    
-Do you want to include Traefik with your DevOps deployment?
-              
-   Type "YES" if you want to deploy the DevOps Stack with Traefik 2
-                                               
-   Type "NO" if you already have a proxy running and don't need to deploy the DevOps Stack with Traefik 2 
-                                 
-[Or enter "m" to return to the main menu or enter "q" to quit]: """)
-            
-    if choice == "yes" or choice == "Yes":
-        devops_env_write1()
-    if choice == "no" or choice == "No":
-        devops_stand()
     if choice == "M" or choice == "m":
         main()
     elif choice == "Q" or choice =="q":
