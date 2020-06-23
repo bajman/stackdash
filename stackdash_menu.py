@@ -260,7 +260,7 @@ def devops_traefik():
 #    print ("*** Copied Traefik tree to /opt/stack_dash/devops/traefik. ***\n")   
     
     print ("\n[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]: ")
-    cmail_var = str(raw_input('Cloudflare Email'))
+    cmail_var = str(input('Cloudflare Email'))
     subprocess.call(['sudo CF_API_EMAIL=', _cmail_var])
     print ("\n Environmental variable added")
 
