@@ -209,16 +209,16 @@ Enter "yes" or "no" [or "m" to return to main menu; enter "q" to quit]:  """)
         sys.exit
 
 def devops_traefik():
-    devops_env = open("./stacks/devops/traefik/.env", "w")
+    devops_env = open("./stacks/devops/traefik/.env", "a+")
     c_email = devops_env.write((input("[Cloudflare – 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  "  )))
    
     new_lines = []
-    with open('devops_env', 'w') as f:
+    with open('devops_env', 'a+') as f:
         for line in f:
             if 'CF_API_EMAIL=' in line:
                 new_lines.append(line.replace('C_EMAIL', 'c_email'))
 
-    with open('devops_env', 'w') as f:
+    with open('devops_env', 'a+') as f:
         f.write(new_lines)
 
     devops_env.close()
