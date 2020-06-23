@@ -204,9 +204,6 @@ Do you want to include Traefik with your DevOps deployment?
 def devops_env_write1():
 
 #collecting personalized variables
-    
-    print ("[Cloudflare: 1/3] Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]")
-    user_c_email = input("Your Cloudflare Email: \n")
 
     print ("[Cloudflare: 2/3] Please enter your Cloudflare Global API Key, [See dash.cloudflare.com: My Profile >  API Tokens > API Keys, e.g., bLa1boPhZL0VCerk35XWmbPCaCyWjDaCVx4cM]: Tokens > API Keys, e.g., bLa1boPhZL0VCerk35XWmbPCaCyWjDaCVx4cM]")
     user_c_api = input("Your Cloudflare Global API Key: \n")
@@ -239,7 +236,7 @@ def devops_env_write2():
     userdir = devops_env_file.write('USERDIR=/opt/stack_dash\n')
     
     print ("[Cloudflare: 1/3] Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]")
-    c_email = devops_env_file.write("CF_API_EMAIL=", input('Your Cloudflare Email: \n'))
+    c_email = devops_env_file.write("CF_API_EMAIL=" + input('Your Cloudflare Email: \n'))
     
     
     c_api = devops_env_file.write('CF_API_KEY=", user_c_api\n')
