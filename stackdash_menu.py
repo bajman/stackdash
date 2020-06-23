@@ -181,16 +181,16 @@ def devops_stack():
     make_proxy = subprocess.run("sudo docker network create proxy", shell=True)
     print("\n\n\n\n\n\n\n\n*** Created Docker network: proxy. *** \n")
     
-    mkdir_stack_dash = subprocess.check_call('sudo mkdir /opt/stack_dash/', shell=True)
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stack_dash/', shell=True)
     print ("*** Created /opt/stack_dash/ directory ***\n")
     
-    mkdir_stack_stacks = subprocess.check_call('sudo mkdir /opt/stack_dash/stacks', shell=True)
+    mkdir_stack_stacks = subprocess.run('sudo mkdir /opt/stack_dash/stacks', shell=True)
     print ("*** Created /opt/stack_dash/stacks directory ***\n")
     
     stack_dash_dir_copy = shutil.copytree('./stacks/', '/opt/stack_dash/stacks', dirs_exist_ok=True)
     print ("*** Copied Traefik Directory tree to /opt/stack_dash/ ***\n")
     
-    stack_dash_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/", shell=True)
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/", shell=True)
     print ("*** Corrected Portainer folder permissions. ***\n")
                
     choice = input("""
