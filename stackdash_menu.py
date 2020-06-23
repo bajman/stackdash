@@ -576,4 +576,85 @@ def calibre_compose():
     calibre_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/calibre/docker-compose.yml up -d', shell=True)
     print ("*** Calibre-Wen is deployed! ***")
     
+ #VS-Code Server
+
+def code-server_env_write():
+    code-server_env_file = open("./containers/code-server/.env", "w+")
+    code-server_env_file_data = code-server_env_file.read()
+    
+    puid = code-server_env_file.write('PUID=1000\n')
+    pgid = code-server_env_file.write('PGID=1000\n')
+    userdir = code-server_env_file.write('USERDIR=/opt/stackdash\n')
+    
+    print ("\nPlease enter the subdomain you would like to use for VS Code-Server [e.g., code-example.com]\n")
+    user_domainname = code-server_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+
+    print ("\nPlease enter the directory you would like to use for VS Code-Server's appdata\n")
+    user_client_id = code-server_env_file.write("CODE_SERVER_DATA=" + input('Path for appdata: ') + "\n")
+
+    code-server_env_file.write(code-server_env_file_data)
+    code-server_env_file.close()
+
+    code-server_env_migration()
+
+def code-server_env_migration():   
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/code-server', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+        
+    stack_dash_dir_copy = shutil.copytree('./containers/code-server/', '/opt/stackdash/docker-appdata/code-server', dirs_exist_ok=True)
+    print ("*** Copied ./containers/code-server/ from Git Clone to /opt/stackdash/docker-appdata/code-server ***\n")
+      
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/code-server", shell=True)
+    print ("*** Corrected VS Code-Server's directory permissions. ***\n")
+
+    def code-server_compose()
+
+def code-server_compose():
+    code-server_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/code-server/docker-compose.yml up -d', shell=True)
+    print ("*** VS Code-Server is deployed! ***")
+    
+ #Fresh RSS
+
+def fresh-rss_env_write():
+    fresh-rss_env_file = open("./containers/fresh-rss/.env", "w+")
+    fresh-rss_env_file_data = fresh-rss_env_file.read()
+    
+    puid = fresh-rss_env_file.write('PUID=1000\n')
+    pgid = fresh-rss_env_file.write('PGID=1000\n')
+    userdir = fresh-rss_env_file.write('USERDIR=/opt/stackdash\n')
+    
+    print ("\nPlease enter the subdomain you would like to use for Fresh RSS [e.g., rss-example.com]\n")
+    user_domainname = fresh-rss_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+
+    print ("\nPlease enter the directory you would like to use for Fresh RSS's appdata\n")
+    user_client_id = fresh-rss_env_file.write("FRESH_RSS_DATA=" + input('Path for appdata: ') + "\n")
+
+    fresh-rss_env_file.write(fresh-rss_env_file_data)
+    fresh-rss_env_file.close()
+
+    fresh-rss_env_migration()
+
+def fresh-rss_env_migration():   
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/fresh-rss', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+        
+    stack_dash_dir_copy = shutil.copytree('./containers/fresh-rss/', '/opt/stackdash/docker-appdata/fresh-rss', dirs_exist_ok=True)
+    print ("*** Copied ./containers/fresh-rss/ from Git Clone to /opt/stackdash/docker-appdata/fresh-rss ***\n")
+      
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/fresh-rss", shell=True)
+    print ("*** Corrected Fresh RSS's directory permissions. ***\n")
+
+    def fresh-rss_compose()
+
+def fresh-rss_compose():
+    fresh-rss_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/fresh-rss/docker-compose.yml up -d', shell=True)
+    print ("*** Fresh RSS is deployed! ***")
+
+    
 main()
