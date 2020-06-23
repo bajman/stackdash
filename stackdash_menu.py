@@ -26,12 +26,10 @@ StackDash is a python3 script, designed to automate Docker installation, contain
       (supported versions: 20.04 LTS, 19.10, 18.04 LTS, and 16.04 LTS) \n
 
 -- Docker Containers/Stack Deployment Wizard
-      Deploys stacks and individual Docker web app containers
-      [Type [w] for a complete list of containers that can be depoyed with StackDash] \n
+      Deploys stacks and individual Docker web app containers \n
 
 -- Preconfigured Subdomains
       Dedicated container subdomains (e.g., portainer.example.com or bookstack.example.com) \n 
-      [Type [s] for a  list of subdomains that must be added as CNAME records to your DNS service (see Documenation for additional information)] \n
 
 -- Automated Dashboard Deployment
       Deploys web dashboard/homepage for quick access to your Docker & server assets \n
