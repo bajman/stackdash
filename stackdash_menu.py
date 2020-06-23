@@ -221,11 +221,11 @@ def devops_env():
     print ("[Cloudflare: 1/3] - Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]")
     cmailvar = input('Cloudflare Email: ')
     
-    devops_env = open("/opt/stack_dash/stacks/devops/traefik/.env", "rt")
+    devops_env = open("/opt/stack_dash/stacks/devops/traefik/.env", "w+")
     devops_env_data = devops_env.read()
     devops_env_data = devops_env_data.replace('C_EMAIL', cmailvar)     
     devops_env.close()
-    devops_env = open("/opt/stack_dash/stacks/devops/traefik/.env", "wt")
+    devops_env = open("/opt/stack_dash/stacks/devops/traefik/.env", "w+")
     devops_env.write(devops_env_data)
     devops_env.close()
     
