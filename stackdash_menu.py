@@ -203,7 +203,7 @@ Do you want to include Traefik with your DevOps deployment?
 def devops_env_write1():
 
 #writing base variables
-    devops_env_file = open("./stackdash/stacks/devops/devops.env", "w+")
+    devops_env_file = open("./stackdash/stacks/devops/traefik/devops.env", "w+")
     devops_env_file_data = devops_env_file.read()
     
     puid = devops_env_file.write('PUID=1000\n')
@@ -252,7 +252,7 @@ def devops_user_write2():
 def devops_env_replace():
 #replacing base variables with personal variables
 
-    devops_env_file = open("./stackdash/stacks/devops/devops.env", "w+")
+    devops_env_file = open("./stackdash/stacks/devops/traefik/devops.env", "w+")
     devops_env_file_data = devops_env_file.read()
     
     devops_env_file_data =  devops_env_file_data.replace('C_MAIL', user_c_email)
