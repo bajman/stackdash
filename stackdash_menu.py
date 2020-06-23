@@ -258,8 +258,11 @@ def devops_traefik():
 #    print ("*** Corrected Traefik folder permissions. ***\n")
 #    traefik_env_copy = shutil.copytree('./stacks/devops/traefik/', '/opt/stack_dash/devops/traefik/', dirs_exist_ok=True)
 #    print ("*** Copied Traefik tree to /opt/stack_dash/devops/traefik. ***\n")   
-    c_mail_var = input("[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:\n") 
-    os.environ['CF_API_EMAIL'] = 'c_mail_var'
-    print ("*** Created Portainer folder in /opt/stack_dash directory. *** \n")
+    
+    print ("\n[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]: ")
+    cmail_var = str(raw_input('Cloudflare Email'))
+    subprocess.call(['sudo CF_API_EMAIL=', _cmail_var])
+    print ("\n Environmental variable added")
+
         
 main()
