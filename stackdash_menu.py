@@ -20,27 +20,13 @@ def main():
                 ╚════██║   ██║   ██╔══██║██║     ██╔═██╗     ██║  ██║██╔══██║╚════██║██╔══██║
                 ███████║   ██║   ██║  ██║╚██████╗██║  ██╗    ██████╔╝██║  ██║███████║██║  ██║
                 ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ \n\n\n
-StackDash is a python3 script, designed to automate Docker installation on Ubunutu and deploy container stacks 
-with subdomain hosting. StackDash feautes a docker-engine install script, a docker containers/stack 
-deployment wizard, and preconfigured external access using HTTPS/TLS/OAuth 2.0.  \n\n\n
+StackDash is a python3 script designed to automate Docker installation on Ubuntu and deploy container stacks 
+with subdomain hosting. StackDash features: a Docker-Engine install script and Docker web-app containers/stack 
+deployment wizards. All StackDash containers/stacks are preconfigured for external, subdomain access, using 
+HTTPS/TLS via LetsEncrypt and OAuth 2.0 via the Google Cloud Platform. See the Documentation for installation 
+instructions. \n\n\n
 
-                                          StackDack Network                                     
-                                                                                                
-                                       +----------------------------------------------------+   
-                                       |                                                    |   
-      +------------+     OAuth 2.0     | +-----------------+   HTTPS/TLS  +---------------+ |   
-      |            |    Google API     | |                | | LetsEncrypt |               | |   
-      |            +-------------------> |    TRAEFIK 2   +--------------->     SERVER    | |   
-      |  INTERNET  <-------------------| |     (Proxy)    <--------------+     (Docker)   | |   
-      |            | Exposed Port Nos: | |                | Proxy Routing |               | |   
-      |            |       80;443      | |                | Rules-Traefik |               | |   
-      +------------+                   | +-----------------+              +---------------+ |   
-                                       |                                                    |   
-                                       +----------------------------------------------------+   
-                                                         INTERNAL NETWORK         
-\n
-Type [s] for a complete list of web app subdomain aliases used by StackDash. 
-\n\n\n
+
            ==============================================================================
              __   ___  __        __          __   __       ___              ___  __   __  
             |  \ |__  |__) |    /  \ \ /    /  ` /  \ |\ |  |   /\  | |\ | |__  |__) /__` 
@@ -80,6 +66,24 @@ Please enter your choice:                       """)
         print("Please try again")
 
 print (""" 
+                                          StackDack Network                                     
+                                                                                                
+                                       +----------------------------------------------------+   
+                                       |                                                    |   
+      +------------+     OAuth 2.0     | +-----------------+   HTTPS/TLS  +---------------+ |   
+      |            |    Google API     | |                | | LetsEncrypt |               | |   
+      |            +-------------------> |    TRAEFIK 2   +--------------->     SERVER    | |   
+      |  INTERNET  <-------------------| |     (Proxy)    <--------------+     (Docker)   | |   
+      |            | Exposed Port Nos: | |                | Proxy Routing |               | |   
+      |            |       80;443      | |                | Rules-Traefik |               | |   
+      +------------+                   | +-----------------+              +---------------+ |   
+                                       |                                                    |   
+                                       +----------------------------------------------------+   
+                                                         INTERNAL NETWORK         
+\n
+Type [s] for a complete list of web app subdomain aliases used by StackDash. 
+\n\n\n
+
 ============================================================================================================================================================
 NOTE: CLOUDFARE DNS ONLY
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
