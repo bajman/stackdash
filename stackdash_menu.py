@@ -779,4 +779,41 @@ def jackett_compose():
     jackett_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/jackett/docker-compose.yml up -d', shell=True)
     print ("*** Jackett is deployed! ***")
     
+#Netdata
+
+def netdata_env_write():
+    netdata_env_file = open("./containers/netdata/.env", "w+")
+    netdata_env_file_data = netdata_env_file.read()
+    
+    puid = netdata_env_file.write('PUID=1000\n')
+    pgid = netdata_env_file.write('PGID=1000\n')
+    userdir = netdata_env_file.write('USERDIR=/opt/stackdash\n')
+    
+    print ("\nPlease enter the subdomain you would like to use for Netdata [e.g., metrics-example.com]\n")
+    user_domainname = netdata_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+
+    netdata_env_file.write(netdata_env_file_data)
+    netdata_env_file.close()
+
+    netdata_env_migration()
+
+def netdata_env_migration():   
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/netdata', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+        
+    stack_dash_dir_copy = shutil.copytree('./containers/netdata/', '/opt/stackdash/docker-appdata/netdata', dirs_exist_ok=True)
+    print ("*** Copied ./containers/netdata/ from Git Clone to /opt/stackdash/docker-appdata/netdata ***\n")
+      
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/netdata", shell=True)
+    print ("*** Corrected Netdata's directory permissions. ***\n")
+
+    def netdata_compose()
+
+def netdata_compose():
+    netdata_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/netdata/docker-compose.yml up -d', shell=True)
+    print ("*** Netdata is deployed! ***")
+    
 main()
