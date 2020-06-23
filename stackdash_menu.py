@@ -231,7 +231,7 @@ def devops_env():
     client_secret = devops_env_file.write('CLIENT_SECRET=C_SECRET\n')
     secret = devops_env_file.write('SECRET=YOUR_SECRET\n')
     whitelist = devops_env_file.write('WHITELIST=YOUR_WHITELIST\n')
-    devops_env.close()
+    devops_env_file.close()
 
 #collecting personalized variables
     
