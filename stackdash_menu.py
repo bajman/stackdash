@@ -1016,5 +1016,104 @@ def portainer_env_migration():
 def portainer_compose():
     portainer_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/portainer/docker-compose.yml up -d', shell=True)
     print ("*** Portainer is deployed! ***")
+
+#Qbittorrent
+
+def qbit_env_write():
+    qbit_env_file = open("./containers/qbit/.env", "w+")
+    qbit_env_file_data = qbit_env_file.read()
     
+    puid = qbit_env_file.write('PUID=1000\n')
+    pgid = qbit_env_file.write('PGID=1000\n')
+    userdir = qbit_env_file.write('USERDIR=/opt/stackdash\n')
+    
+    print ("\nPlease enter the subdomain you would like to use for QBittorrent [e.g., qbit-example.com]\n")
+    user_domainname = qbit_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+
+    print ("\nPlease enter the path you like to use to store QBittorrent's appdata\n")
+    user_domainname = qbit_env_file.write("QBIT_DATA=" + input('Path to QBittorrent appdata: ') + "\n")
+
+    print ("\nPlease enter the path you like to use to for QBittorrent's main download directory\n")
+    user_domainname = qbit_env_file.write("QBIT_DOWNLOADS=" + input('Path to QBittorrent's Download Path: ') + "\n")
+
+    print ("\nPlease enter the path you would like QBittorrent to use for movie collection\n")
+    user_domainname = qbit_env_file.write("QBIT_MOVIES=" + input('QBittorrent's Movie Path: ') + "\n")
+
+    print ("\nPlease enter the path you would like QBittorrent to use for TV-show collection\n")
+    user_domainname = qbit_env_file.write("QBIT_TV=" + input('QBittorrent's TV Path: ') + "\n")
+
+    print ("\nPlease enter the path you would like QBittorrent to use for eBook collection\n")
+    user_domainname = qbit_env_file.write("QBIT_BOOKS=" + input('QBittorrent's eBook Path: ') + "\n")
+
+    qbit_env_file.write(qbit_env_file_data)
+    qbit_env_file.close()
+
+    qbit_env_migration()
+
+def qbit_env_migration():   
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/qbit', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+        
+    stack_dash_dir_copy = shutil.copytree('./containers/qbit/', '/opt/stackdash/docker-appdata/qbit', dirs_exist_ok=True)
+    print ("*** Copied ./containers/qbit/ from Git Clone to /opt/stackdash/docker-appdata/qbit ***\n")
+      
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/qbit", shell=True)
+    print ("*** Corrected qbit's directory permissions. ***\n")
+
+    def qbit_compose()
+
+def qbit_compose():
+    qbit_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/qbit/docker-compose.yml up -d', shell=True)
+    print ("*** qbit is deployed! ***")
+                                                                                                                              
+# Radarr
+                                                                
+def radarr_env_write():
+    radarr_env_file = open("./containers/radarr/.env", "w+")
+    radarr_env_file_data = radarr_env_file.read()
+    
+    puid = radarr_env_file.write('PUID=1000\n')
+    pgid = radarr_env_file.write('PGID=1000\n')
+    userdir = radarr_env_file.write('USERDIR=/opt/stackdash\n')
+    
+    print ("\nPlease enter the subdomain you would like to use for Radarr [e.g., radarr-example.com]\n")
+    user_domainname = radarr_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+
+    print ("\nPlease enter the path you like to use to store Radarr's appdata\n")
+    user_domainname = radarr_env_file.write("RADARR_DATA=" + input('Path to Radarr's appdata: ') + "\n")
+
+    print ("\nPlease enter the path you like to use to for Radarr's main download directory\n")
+    user_domainname = radarr_env_file.write("RADARR_DOWNLOADS=" + input('Radarr's Download Path: ') + "\n")
+
+    print ("\nPlease enter the path you would like Radarr to use for movie collection\n")
+    user_domainname = radarr_env_file.write("RADARR_MOVIES=" + input('Radarr's Movie Path: ') + "\n")
+
+    radarr_env_file.write(radarr_env_file_data)
+    radarr_env_file.close()
+
+    radarr_env_migration()
+
+def radarr_env_migration():   
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/radarr', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+        
+    stack_dash_dir_copy = shutil.copytree('./containers/radarr/', '/opt/stackdash/docker-appdata/radarr', dirs_exist_ok=True)
+    print ("*** Copied ./containers/radarr/ from Git Clone to /opt/stackdash/docker-appdata/radarr ***\n")
+      
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/radarr", shell=True)
+    print ("*** Corrected radarr's directory permissions. ***\n")
+
+    def radarr_compose()
+
+def radarr_compose():
+    radarr_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/radarr/docker-compose.yml up -d', shell=True)
+    print ("*** radarr is deployed! ***")
+                                                                
+                                                                
 main()
