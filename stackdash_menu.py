@@ -209,18 +209,20 @@ Enter "yes" or "no" [or "m" to return to main menu; enter "q" to quit]:  """)
         sys.exit
 
 def devops_traefik():
-    #read input file
-    fin = open("./stacks/devops/traefik/.env", "wr")
-    #read file contents to string
-    data = fin.read()
-    #add user input
-    c_email = fin.write((input("[Cloudflare: 1/3]\nPlease enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  ")))
-    #replace all occurrences of the required string
-    data = data.replace('$C_EMAIL', 'c_email')
-    #close the input file
-    fin.write(data)
-    #close the file
-    fin.close()
+    devops_env = open("./stacks/devops/traefik/.env", "r")
+    c_email.write((input("[Cloudflare – 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  "  )))
+   
+    new_lines = []
+    with open('devops_env,' 'r') as f:
+        for line in f:
+            if 'CF_API_EMAIL=' in line:
+                new_lines.append(line.replace('C_EMAIL', 'c_email'))
+
+    with open('devops_env', 'w') as f:
+        f.write(new_lines)
+
+    devops_env.close()
+    
     traefik_env_copy = shutil.copy('./stacks/devops/traefik/.env', '/opt/stack_dash/devops/traefik')
     print ("*** Copied Traefik .env fie to /opt/stack_dash/devops/traefik. ***\n")
 
