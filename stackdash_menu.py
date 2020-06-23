@@ -64,21 +64,21 @@ Type [s] for a complete list of web app subdomain aliases used by StackDash.
 ype [t] to deploy the Data, DevOps, or Media StackDash Stacks. 
 \n\n
                                 ==============================
-Please enter your choice:                       """)
-if choice == "1" or choice =="1.":
-    docker_install()
-    print("*** Install Docker Engine **** ")
-elif choice == "2":
-    stacks_main()
-    print("*** Deploy Stacks **** ")
-elif choice == "3":
-    containers_main()
-    print("*** Deploy Containers **** ")
-elif choice == "4":
-    sys.exit
-else:
-    print("You must only select either 1, 2, 3, or 4.")
-    print("Please try again")
+    Please enter your choice:  """)
+    if choice == "1" or choice =="1.":
+        docker_install()
+        print("*** Install Docker Engine **** ")
+    elif choice == "2":
+        stacks_main()
+        print("*** Deploy Stacks **** ")
+    elif choice == "3":
+        containers_main()
+        print("*** Deploy Containers **** ")
+    elif choice == "4":
+        sys.exit
+    else:
+        print("You must only select either 1, 2, 3, or 4.")
+        print("Please try again")
 
 print (""" 
 ============================================================================================================================================================
