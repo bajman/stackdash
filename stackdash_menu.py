@@ -23,7 +23,7 @@ access, using HTTPS/TLS via LetsEncrypt and OAuth 2.0 via the Google Cloud Platf
 This version of StackDash is configured to support only Cloudflare DNS-managed domains. Additional domain/hosting providers will be made available in future 
 releases of StackDash. For a full list of planned DNS providers see: https://docs.traefik.io/https/acme/#providers.\n
 \n
-
+                                                        Type [i] to install Docker-Engine CE via HTTPS. \n
                                            ==============================================================================
                                              __   ___  __        __          __   __       ___              ___  __   __  
                                             |  \ |__  |__) |    /  \ \ /    /  ` /  \ |\ |  |   /\  | |\ | |__  |__) /__` 
@@ -34,7 +34,6 @@ releases of StackDash. For a full list of planned DNS providers see: https://doc
                                                 Type [c] to deploy individual StackDash Containers.
                                                 Type [w] for a complete list of web apps you can deploy with StackDash. 
                                         \n
-                              
                                                     ============================================================
                                                      __   ___  __        __          __  ___       __        __  
                                                     |  \ |__  |__) |    /  \ \ /    /__`  |   /\  /  ` |__/ /__` 
