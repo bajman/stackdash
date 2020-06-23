@@ -259,7 +259,7 @@ def devops_traefik():
     
     devops_env = '/opt/stack_dash/devops/traefik/.env'
     
-    user_c_email = devops_env.write((input("[Cloudflare – 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  "  )))
+    user_c_email = raw_input("[Cloudflare – 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  ")
     
     new_lines = []
     with open(devops_env, 'w') as f:
