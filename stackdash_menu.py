@@ -69,12 +69,12 @@ releases of StackDash. For a full list of planned DNS providers see: https://doc
     if choice == "i" or choice == "I":
         docker_install()
         print("*** Install Docker Engine **** ")
+    if choice == "w" or choice "W":
+        containers_list()
+        print("*** Container List **** ")
     elif choice == "c" or choice "C":
         container_deploy()
         print("*** Deploy Containers **** ")
-    elif choice == "w" or choice "W":
-        containers_list()
-        print("*** Container List **** ")
     elif choice == "3":
         containers_main()
         print("*** Deploy Containers **** ")
