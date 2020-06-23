@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+
+########################### NETWORKS
+networks:
+  proxy:
+    external:
+      name: proxy
+
+#  Portainer
+
+  portainer:
+    container_name: portainer
+    image: portainer/portainer:latest
+    restart: unless-stopped
+    command: -H unix:///var/run/docker.sock
+    networks:
+      - proxy
+    security_opt:
+      - no-new-privileges:true
+#    ports:
+#      - "$PORTAINER_PORT:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - $PORTAINER_DATA:/data
+    environment:
+      - TZ=America/New_York
+    labels:
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.portainer-rtr.entrypoints=https"
+      - "traefik.http.routers.portainer-rtr.rule=Host(`portainer.$DOMAINNAME`)"
+      - "traefik.http.routers.portainer-rtr.tls=true"
+      ## Middlewares
+#      - "traefik.http.routers.portainer-rtr.middlewares=chain-no-auth@file" # No Authentication
+#      - "traefik.http.routers.portainer-rtr.middlewares=chain-basic-auth@file" # Basic Authentication
+#      - "traefik.http.routers.portainer-rtr.middlewares=chain-oauth@file" # Google OAuth 2.0
+      ## HTTP Services
+      - "traefik.http.routers.portainer-rtr.service=portainer-svc"
+      - "traefik.http.services.portainer-svc.loadbalancer.server.port=9000"
+      - "traefik.http.routers.portainer-rtr.middlewares=chain-oauth@file"
