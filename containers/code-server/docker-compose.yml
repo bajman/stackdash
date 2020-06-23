@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+
+########################### NETWORKS
+networks:
+  proxy:
+    external:
+      name: proxy
+
+# VS Code Server
+
+  code-server:
+    image: codercom/code-server:latest
+    container_name:  code-server
+    environment:
+      - PUID=1000
+      - PGID=1000
+    command:  --auth none
+    labels:
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.code-server-rtr.entrypoints=https"
+      - "traefik.http.routers.code-server-rtr.rule=Host(`code.$DOMAINNAME`)" 
+      - "traefik.http.routers.code-server-rtr.tls=true"
+      - "traefik.http.routers.code-server-rtr.middlewares=chain-oauth@file"
+      ## Middlewares
+#      - "traefik.http.routers.code-server-rtr.middlewares=chain-oauth@file" 
+      ## HTTP Services
+      - "traefik.http.routers.code-server-rtr.service=code-server-svc"
+      - "traefik.http.services.code-server-svc.loadbalancer.server.port=8080"
+    networks:
+      - proxy
+    volumes:
+      - $CODE_SERVER_DATA/config.yaml:/config/code-server/config.yaml
+      - $CODE_SERVER_DATA//project:/project
+    restart: unless-stopped
