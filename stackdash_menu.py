@@ -19,9 +19,9 @@ def main():
                 ╚════██║   ██║   ██╔══██║██║     ██╔═██╗     ██║  ██║██╔══██║╚════██║██╔══██║
                 ███████║   ██║   ██║  ██║╚██████╗██║  ██╗    ██████╔╝██║  ██║███████║██║  ██║
                 ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ \n\n\n
-StackDash is a python3 script, designed to automate Docker installation, container deployment, and subdomain hosting. 
-Features include: a docker-engine install script, docker containers/stack deployment wizard, preconfigured subdomains with
-HTTPS/TLS/OAuth 2.0 external access.  \n\n\n
+StackDash is a python3 script, designed to automate Docker installation on Ubunutu and deploy container stacks 
+with subdomain hosting. StackDash feautes include a docker-engine install script, docker containers/stack 
+deployment wizard, and preconfigured container subdomain external access using HTTPS/TLS/OAuth 2.0.  \n\n\n
   +----------------------------------------------------------------------------------------------+
   |                                        StackDack Network                                     |
   |                                                                                              |
@@ -62,7 +62,7 @@ Type [u] for a complete list of stacks you can deploy with StackDash.
 Type [s] for a complete list of web app subdomain aliases used by StackDash. 
 ype [t] to deploy the Data, DevOps, or Media StackDash Stacks. 
 \n\n
-                                ==============================
+                                ============================== \n
     Please enter your choice:  """)
     if choice == "1" or choice =="1.":
         docker_install()
