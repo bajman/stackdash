@@ -977,5 +977,44 @@ def plex_compose():
     plex_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/plex/docker-compose.yml up -d', shell=True)
     print ("*** Plex is deployed! ***")
     
+#Portainer
+
+def portainer_env_write():
+    portainer_env_file = open("./containers/portainer/.env", "w+")
+    portainer_env_file_data = portainer_env_file.read()
+    
+    puid = portainer_env_file.write('PUID=1000\n')
+    pgid = portainer_env_file.write('PGID=1000\n')
+    userdir = portainer_env_file.write('USERDIR=/opt/stackdash\n')
+    
+    print ("\nPlease enter the subdomain you would like to use for Portainer [e.g., portainer-example.com]\n")
+    user_domainname = portainer_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+
+    print ("\nPlease enter the path you like to use to store Portainer's appdata\n")
+    user_domainname = portainer_env_file.write("PORTAINER_DATA=" + input('Path to Portainer Appdata: ') + "\n")
+
+    portainer_env_file.write(portainer_env_file_data)
+    portainer_env_file.close()
+
+    portainer_env_migration()
+
+def portainer_env_migration():   
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/portainer', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+        
+    stack_dash_dir_copy = shutil.copytree('./containers/portainer/', '/opt/stackdash/docker-appdata/portainer', dirs_exist_ok=True)
+    print ("*** Copied ./containers/portainer/ from Git Clone to /opt/stackdash/docker-appdata/portainer ***\n")
+      
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/portainer", shell=True)
+    print ("*** Corrected Portainer's directory permissions. ***\n")
+
+    def portainer_compose()
+
+def portainer_compose():
+    portainer_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/portainer/docker-compose.yml up -d', shell=True)
+    print ("*** Portainer is deployed! ***")
     
 main()
