@@ -21,8 +21,8 @@ def main():
                 ███████║   ██║   ██║  ██║╚██████╗██║  ██╗    ██████╔╝██║  ██║███████║██║  ██║
                 ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ \n\n\n
 StackDash is a python3 script, designed to automate Docker installation on Ubunutu and deploy container stacks 
-with subdomain hosting. StackDash feautes include a docker-engine install script, docker containers/stack 
-deployment wizard, and preconfigured container subdomain external access using HTTPS/TLS/OAuth 2.0.  \n\n\n
+with subdomain hosting. StackDash feautes a docker-engine install script, a docker containers/stack 
+deployment wizard, and preconfigured external access using HTTPS/TLS/OAuth 2.0.  \n\n\n
   +----------------------------------------------------------------------------------------------+
   |                                        StackDack Network                                     |
   |                                                                                              |
