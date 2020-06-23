@@ -181,7 +181,7 @@ Do you want to include Traefik with your DevOps deployment?
                                                
    Type "NO" if you already have a proxy running and don't need to deploy the DevOps Stack with Traefik 2 
                                  
-[Or enter "m" to return to the main menu or enter "q" to quit]: \n\n\n""")
+[Or enter "m" to return to the main menu or enter "q" to quit]: """ + "\n\n\n")
             
     if choice == "yes" or choice == "Yes":
         devops_env_write1()
