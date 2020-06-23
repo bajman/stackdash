@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+
+########################### NETWORKS
+networks:
+  proxy:
+    external:
+      name: proxy
+
+# Radarr
+
+  radarr:
+    image: linuxserver/radarr
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+      - UMASK_SET=022 #optional
+    volumes:
+      - $RADARR_DATA/config:/config
+      - $RADARR_MOVIES:/movies
+      - $RADARR_DOWNLOADS:/downloads
+    ports:
+      - 7878:7878
+    restart: unless-stopped    
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.radarr-rtr.entrypoints=https"
+      - "traefik.http.routers.radarr-rtr.rule=Host(`radarr.$DOMAINNAME`)"
+      - "traefik.http.routers.radarr-rtr.tls=true"
+      ## Middlewares
+#      - "traefik.http.routers.backups-rtr.middlewares=chain-authelia@file,add-backups" 
+#      - "traefik.http.middlewares.add-backups.addPrefix.prefix=/backups"
+      ## HTTP Services
+      - "traefik.http.routers.radarr-rtr.service=radarr-svc"
+      - "traefik.http.services.radarr-svc.loadbalancer.server.port=7878"
+      - "traefik.http.routers.radarr-rtr.middlewares=chain-oauth@file"
