@@ -7,74 +7,97 @@ import shutil
 
 
 def main():
-    print("\n\n\n\n StackDash v.1.0 \n")
+    print("\n\n\n\n StackDash v0.12 \n")
     #time.sleep(1)
     print(" ")
 
-    choice = input("""                           Main Menu
+    choice = input("""                           
 
 ███████╗████████╗ █████╗  ██████╗██╗  ██╗    ██████╗  █████╗ ███████╗██╗  ██╗
 ██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝    ██╔══██╗██╔══██╗██╔════╝██║  ██║
 ███████╗   ██║   ███████║██║     █████╔╝     ██║  ██║███████║███████╗███████║
 ╚════██║   ██║   ██╔══██║██║     ██╔═██╗     ██║  ██║██╔══██║╚════██║██╔══██║
 ███████║   ██║   ██║  ██║╚██████╗██║  ██╗    ██████╔╝██║  ██║███████║██║  ██║
-╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
-
-\n
-v.0.1
-\n
-Welcome to StackDash! \n\n\n StackDash is a python script to automate the following: \n
-
-	- Removal of old versions of Dockers and the installation of the lastest version of Docker Engine on Ubunutu (supported versions: 20.04 LTS, 19.10, 18.04 LTS, and 16.04 LTS); \n\n
-
-
-	- Deployment of clusters(stacks)/individual Docker web app containers. Type [w] for a complete list of containers that can be depoyed with StackDash. \n\n
-
-
-	- Configuration of container subdomains (e.g., portainer.example.com or bookstack.example.com). Type [s] for a list of subdomains that must be added as CNAME records to your DNS service (see Documenation for additional information); \n\n
-
-
-  	- Deployment of web page dashboard(s) for easy access to your stacks/containers; and \n\n
-
-
-	- Uses Traefik 2 as reverse proxy & loadbalencer to route web apps to the approriate subdomains. StackDash containers 
-	  deployed with Traefik 2: \n
-
-		a. Use ports 80/443, only; \n
-
-		b. Support HTTPS/TLS through ACME V2 and LetsEncrypt wildcard certifiactes; and \n
-
-		c. Are authenticated using OAuth 2.0 through Google. \n\n\n
+╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ \n
+StackDash is a python3 script, designed to automate Docker installation, container deployment, and subdomain hosting. \n
+==============================================================================================================================================================
+ ___  ___      ___       __   ___  __  
+|__  |__   /\   |  |  | |__) |__  /__` 
+|    |___ /~~\  |  \__/ |  \ |___ .__/ 
 
 ==============================================================================================================================================================
-															
-███████╗████████╗ █████╗  ██████╗██╗  ██╗██████╗  █████╗ ███████╗██╗  ██╗     ██████╗ ██████╗ ███╗   ██╗████████╗ █████╗ ██╗███╗   ██╗███████╗██████╗ ███████╗
-██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝██╔══██╗██╔══██╗██╔════╝██║  ██║    ██╔════╝██╔═══██╗████╗  ██║╚══██╔══╝██╔══██╗██║████╗  ██║██╔════╝██╔══██╗██╔════╝
-███████╗   ██║   ███████║██║     █████╔╝ ██║  ██║███████║███████╗███████║    ██║     ██║   ██║██╔██╗ ██║   ██║   ███████║██║██╔██╗ ██║█████╗  ██████╔╝███████╗
-╚════██║   ██║   ██╔══██║██║     ██╔═██╗ ██║  ██║██╔══██║╚════██║██╔══██║    ██║     ██║   ██║██║╚██╗██║   ██║   ██╔══██║██║██║╚██╗██║██╔══╝  ██╔══██╗╚════██║
-███████║   ██║   ██║  ██║╚██████╗██║  ██╗██████╔╝██║  ██║███████║██║  ██║    ╚██████╗╚██████╔╝██║ ╚████║   ██║   ██║  ██║██║██║ ╚████║███████╗██║  ██║███████║
-╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝     ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚══════╝          
+
+-- Docker Install Script
+	  Removes old versions of Dockers and the installs of the lastest version of Docker Engine on Ubunutu over HTTPS
+      (supported versions: 20.04 LTS, 19.10, 18.04 LTS, and 16.04 LTS) \n
+
+-- Docker Containers/Stack Deployment Wizard
+	  Deploys stacks and individual Docker web app containers
+      [Type [w] for a complete list of containers that can be depoyed with StackDash] \n
+
+-- Preconfigured Subdomains
+	  Dedicated container subdomains (e.g., portainer.example.com or bookstack.example.com) \n 
+      [Type [s] for a  list of subdomains that must be added as CNAME records to your DNS service (see Documenation for additional information)] \n
+
+-- Automated Dashboard Deployment
+      Deploys web dashboard/homepage for quick access to your Docker & server assets \n
+
+-- HTTPS/TLS/OAuth 2 Supported
+	  Traefik 2 routes external subdomain requests to the appropriate, internal server/container address.\n 
+
+==============================================================================================================================================================
+      ___ ___       __   __           __          __   __             
+|\ | |__   |  |  | /  \ |__) |__/    |  \ |  /\  / _` |__)  /\   |\/| 
+| \| |___  |  |/\| \__/ |  \ |  \    |__/ | /~~\ \__> |  \ /~~\  |  | 
+                                                                      
+==============================================================================================================================================================
+
+  +----------------------------------------------------------------------------------------------+
+  |                                                                                              |
+  |                                                                                              |
+  |                                     +----------------------------------------------------+   |
+  |                                     |                                                    |   |
+  |    +------------+     OAuth 2.0     | +-----------------+   HTTPS/TLS  +---------------+ |   |
+  |    |            |    Google API     | |                | | LetsEncrypt |               | |   |
+  |    |            +-------------------> |    TRAEFIK 2   +--------------->     SERVER    | |   |
+  |    |  INTERNET  <-------------------| |     (Proxy)    <--------------+     (Docker)   | |   |
+  |    |            | Exposed Port Nos: | |                | Proxy Routing |               | |   |
+  |    |            |       80;443      | |                | Rules-Traefik |               | |   |
+  |    +------------+                   | +-----------------+              +---------------+ |   |
+  |                                     |                                                    |   |
+  |                                     +----------------------------------------------------+   |
+  |                                                       INTERNAL NETWORK                       |
+  |                                                                                              |
+  +----------------------------------------------------------------------------------------------+
+
+==============================================================================================================================================================
+ __   ___  __        __          __   __       ___              ___  __   __  
+|  \ |__  |__) |    /  \ \ /    /  ` /  \ |\ |  |   /\  | |\ | |__  |__) /__` 
+|__/ |___ |    |___ \__/  |     \__, \__/ | \|  |  /~~\ | | \| |___ |  \ .__/ 
+                                                                                                                                                          
 ==============================================================================================================================================================
                                                                                                                       
-Type [w] for a complete list of web apps you can deploy with StackDash. \n
-Type [c] to deploy individual containers. \n\n\n
+Type [w] for a complete list of web apps you can deploy with StackDash. 
+Type [c] to deploy individual containers. 
 
 ==============================================================================================================================================================
-															
-███████╗████████╗ █████╗  ██████╗██╗  ██╗██████╗  █████╗ ███████╗██╗  ██╗    ███████╗████████╗ █████╗  ██████╗██╗  ██╗███████╗
-██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝██╔══██╗██╔══██╗██╔════╝██║  ██║    ██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝██╔════╝
-███████╗   ██║   ███████║██║     █████╔╝ ██║  ██║███████║███████╗███████║    ███████╗   ██║   ███████║██║     █████╔╝ ███████╗
-╚════██║   ██║   ██╔══██║██║     ██╔═██╗ ██║  ██║██╔══██║╚════██║██╔══██║    ╚════██║   ██║   ██╔══██║██║     ██╔═██╗ ╚════██║
-███████║   ██║   ██║  ██║╚██████╗██║  ██╗██████╔╝██║  ██║███████║██║  ██║    ███████║   ██║   ██║  ██║╚██████╗██║  ██╗███████║
-╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝    ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝
+ __   ___  __        __          __  ___       __        __  
+|  \ |__  |__) |    /  \ \ /    /__`  |   /\  /  ` |__/ /__` 
+|__/ |___ |    |___ \__/  |     .__/  |  /~~\ \__, |  \ .__/ 
+                                                                                                                        
 ==============================================================================================================================================================
 
-
-Type [u] for a complete list of stacks you can deploy with StackDash. \n
-Type [s] for a complete list of web app subdomain aliases used by StackDash. \n
+Type [u] for a complete list of stacks you can deploy with StackDash.
+Type [s] for a complete list of web app subdomain aliases used by StackDash. 
 Type [t] to deploy the Data, DevOps, or Media StackDash Stacks. \n\n\n
 
-NOTE:
+==============================================================================================================================================================
+      __  ___  ___ 
+|\ | /  \  |  |__  
+| \| \__/  |  |___                  
+                                                                                      
+==============================================================================================================================================================
+
 ---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬--- 
 \n StackDash v. 0.1 is configured to support HTTPS & TLS only for domains managed by Cloudflare. Additional domain/hosting providers will be made available in future releases of StackDash. For a full list of planned DNS providers see: https://docs.traefik.io/https/acme/#providers. \n
 ---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬--- 
