@@ -226,13 +226,13 @@ def devops_stack():
     #time.sleep(1)
     choice = input(""" 
     
-             Do you want to include Traefik with your DevOps deployment?
+Do you want to include Traefik with your DevOps deployment?
               
-                    Type "yes" if you don't have Traefik and wish to deploy it with the DevOps Stack, or 
+   Type "yes" if you don't have Traefik and wish to deploy it with the DevOps Stack, or 
                                                
-                    Type "no" if you already have Traefik running and don't need to deploy it with DevOps Stack
+   Type "no" if you already have Traefik running and don't need to deploy it with DevOps Stack
                                  
-            Enter "yes" or "no" [enter "m" to return to main menu; enter "q" to quit]:  """)
+Enter "yes" or "no" [or "m" to return to main menu; enter "q" to quit]:  """)
             
     if choice == "yes" or choice == "Yes":
         devops_traefik()
@@ -261,9 +261,6 @@ def devops_traefik():
     
     traefik_rules_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/devops/traefik/rules", capture_output=True, shell=True)
     print ("*** Corrected Traefik Rules folder permissions. ***\n")
-    
-    traefik_env_copy = shutil.copy('./stacks/devops/traefik/.env', '/opt/stack_dash/devops/traefik')
-    print ("*** Copied Traefik .env fie to /opt/stack_dash/devops/traefik. ***\n")
     
     traefik_compose_copy = shutil.copy('./stacks/devops/traefik/docker-compose.yml', '/opt/stack_dash/devops/traefik')
     print ("*** Copied Traefik Docker Compose file to /opt/stack_dash/devops/traefik. ***\n")
@@ -298,17 +295,15 @@ def devops_traefik():
     guacamole_dir_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/devops/apache_guacamole", capture_output=True, shell=True)
     print ("*** Corrected Portainer folder permissions. ***\n")
     
-#env. variable inputs
-devops_env = open("/opt/stack_dash/devops/traefik/.env" "a")
-devops_env.write((input("CF_API_EMAIL=mail@example.com  "  )))
-devops_env.write((input("CF_API_KEY=1234  "  )))
-devops_env.write((input("DOMAINNAME=example.com  "  )))
-devops_env.write((input("CLIENT_ID=912941924  "  )))
-devops_env.write((input("CLIENT_SECRET=12315415  "  )))
-devops_env.write((input("SECRET= " )))
-devops_env.write((input("WHITELIST= " )))
+f = open('./stackdash/stacks/devops/traefik/.env', 'a+')
+filedata = f.read()
+c_email = filedata.replace('$C_EMAIL", input("[Cloudflare – 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]: "))
+f.write(c_mail)
+f.close() 
 
-# Docker Compose
+traefik_env_copy = shutil.copy('./stacks/devops/traefik/.env', '/opt/stack_dash/devops/traefik')
+print ("*** Copied Traefik .env fie to /opt/stack_dash/devops/traefik. ***\n")
+
 devops_traefik_compose = subprocess.run("docker-compose -f /opt/stack_dash/devops/traefik/docker-compose.yml up -d", capture_output=True, shell=True)
 print ("*** Deployed DevOps with Traefik! ***\n")
 
