@@ -187,7 +187,7 @@ def devops_stack():
     
     print("\n DevOps Stack: Reverse Proxy by Traefik 2 \n")
     #time.sleep(1)
-    choice = input(""" 
+    choice = input("""
     
 Do you want to include Traefik with your DevOps deployment?
               
@@ -208,8 +208,56 @@ Enter "yes" or "no" [or "m" to return to main menu; enter "q" to quit]:  """)
     elif choice == "Q" or choice =="q":
         sys.exit
 
+def devops_dir():
+    make_proxy = subprocess.run("sudo docker network create proxy", shell=True)
+    print("\n\n\n\n\n\n\n\n*** Created Docker network: proxy. *** \n")
+
+    mkdir_traefik = subprocess.run("sudo mkdir /opt/stack_dash/devops/traefik", shell=True)
+    print ("*** Created Traefik folder in /opt/stack_dash directory. *** \n")
+    
+    traefik_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/traefik", shell=True)
+    print ("*** Corrected Traefik folder permissions. ***\n")
+    
+    mkdir_traefik_rules = subprocess.run("sudo mkdir /opt/stack_dash/devops/traefik/rules", shell=True)
+    print ("*** Created Traefik Rules folder in /opt/stack_dash directory. *** \n")
+    
+    traefik_rules_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/traefik/rules", shell=True)
+    print ("*** Corrected Traefik Rules folder permissions. ***\n")
+    
+    traefik_rules1_copy = shutil.copy('./stacks/devops/traefik/data/rules/middleware-chains.toml', '/opt/stack_dash/devops/traefik/rules')
+    print ("*** Copied Traefik middleware-chain.toml to /opt/stack_dash/devops/traefik/rules. ***\n")
+    
+    traefik_rules2_copy = shutil.copy('./stacks/devops/traefik/data/rules/middlewares.toml', '/opt/stack_dash/devops/traefik/rules')
+    print ("*** Copied Traefik data and middlewares.toml to /opt/stack_dash/devops/traefik/rules. ***\n")
+    
+    mkdir_gitlab = subprocess.run("sudo mkdir /opt/stack_dash/devops/gitlab", shell=True)
+    print ("*** Created GitLab folder in /opt/stack_dash directory. *** \n")
+    
+    gitlab_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/gitlab", shell=True)
+    print ("*** Corrected GitLab folder permissions. ***\n")
+    
+    mkdir_coder = subprocess.run("sudo mkdir /opt/stack_dash/devops/coder", shell=True)
+    print ("*** Created coder folder in /opt/stack_dash directory. *** \n")
+    
+    coder_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/coder", shell=True)
+    print ("*** Corrected coder folder permissions. ***\n")
+
+    mkdir_portainer = subprocess.run("sudo mkdir /opt/stack_dash/devops/portainer", shell=True)
+    print ("*** Created Portainer folder in /opt/stack_dash directory. *** \n")
+    
+    portainer_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/portainer", shell=True)
+    print ("*** Corrected Portainer folder permissions. ***\n")
+    
+    mkdir_apache_guacamole = subprocess.run("sudo mkdir /opt/stack_dash/devops/apache_guacamole", shell=True)
+    print ("*** Created Apache Guacamole folder in /opt/stack_dash directory. *** \n")
+    
+    guacamole_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/apache_guacamole", shell=True)
+    print ("*** Corrected Portainer folder permissions. ***\n")
+    
 def devops_traefik():
-    devops_env = open("./stacks/devops/traefik/.env", "a+")
+    traefik_env_copy = shutil.copy('./stacks/devops/traefik/.env', '/opt/stack_dash/devops/traefik')
+    print ("*** Copied Traefik .env fie to /opt/stack_dash/devops/traefik. ***\n")
+    devops_env = open("/opt/stack_dash/devops/traefik/.env", "a+")
     c_email = devops_env.write((input("[Cloudflare – 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  "  )))
    
     new_lines = []
@@ -222,8 +270,6 @@ def devops_traefik():
         f.write('\n'.join(new_lines))
 
     devops_env.close()
-    
-    traefik_env_copy = shutil.copy('./stacks/devops/traefik/.env', '/opt/stack_dash/devops/traefik')
-    print ("*** Copied Traefik .env fie to /opt/stack_dash/devops/traefik. ***\n")
+   
 
 main()
