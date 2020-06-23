@@ -208,7 +208,7 @@ Enter "yes" or "no" [or "m" to return to main menu; enter "q" to quit]:  """)
     elif choice == "Q" or choice =="q":
         sys.exit
 
-def devops_env()
+def devops_env():
     devops_env = open('./stacks/devops/traefik/.env', 'w+')
     env_data = devops_env.read()
     print ("[Cloudflare: 1/3] - Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]")
