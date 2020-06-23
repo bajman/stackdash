@@ -224,17 +224,15 @@ def devops_traefik():
     print ("*** Corrected Portainer folder permissions. ***\n")
     
 #env. variable inputs
-    devops_traefik_env = open("/opt/stack_dash/devops/traefik/.env", "a")
-    print("\n\n\nEnter the environmental variables required by this stack. Type out a complete entry for each variable requsted. For example, type CF_API_KEY=1234 or DOMAINNAME=example.com, not 1234 or example.com \n\n\n")
-    devops_traefik_env = []
-    devops_traefik_env.append((input("CF_API_EMAIL=mail@example.com  "  )))
-    devops_traefik_env.append((input("CF_API_KEY=1234  "  )))
-    devops_traefik_env.append((input("DOMAINNAME=example.com  "  )))
-    devops_traefik_env.append((input("CLIENT_ID=912941924  "  )))
-    devops_traefik_env.append((input("CLIENT_SECRET=12315415  "  )))
-    devops_traefik_env.append((input("SECRET= " )))
-    devops_traefik_env.append((input("WHITELIST= " )))
-    devops_traefik_env.close()
+devops_env = open("/opt/stack_dash/devops/traefik/.env" "a")
+    devops_env.write((input("CF_API_EMAIL=mail@example.com  "  )))
+    devops_env.write((input("CF_API_KEY=1234  "  )))
+    devops_env.write((input("DOMAINNAME=example.com  "  )))
+    devops_env.write((input("CLIENT_ID=912941924  "  )))
+    devops_env.write((input("CLIENT_SECRET=12315415  "  )))
+    devops_env.write((input("SECRET= " )))
+    devops_env.write((input("WHITELIST= " )))
+
 
 # Docker Compose
           
