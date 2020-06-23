@@ -212,8 +212,8 @@ def devops_traefik():
     devops_env = open('./stacks/devops/traefik/.env', 'a+')
     with open('./stacks/devops/traefik/.env', 'r') as file :
         filedata = file.read()
-    cmail_input.write((input("[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  " 
-    cemail = filedata.replace('$C_EMAIL', 'c_mail_input')
+    c_mail_input.write((input("[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  " 
+    filedata = filedata.replace('$C_EMAIL', 'c_mail_input')
     with open('./stacks/devops/traefik/.env', 'a+') as file:
         file.write(c_email)           
     file.close() 
