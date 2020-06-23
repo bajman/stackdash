@@ -295,11 +295,10 @@ def devops_traefik():
     guacamole_dir_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/devops/apache_guacamole", capture_output=True, shell=True)
     print ("*** Corrected Portainer folder permissions. ***\n")
     
-f = open('./stackdash/stacks/devops/traefik/.env', 'a+')
-filedata = f.read()
-c_email = filedata.replace("$C_EMAIL", input("[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  ")
-f.write(c_mail)
-f.close() 
+f1 = open('./stackdash/stacks/devops/traefik/.env', 'a+')
+for line in f1:
+    f1.write(line.replace('$C_EMAIL', 'input("[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  "'))
+f1.close()
 
 traefik_env_copy = shutil.copy('./stacks/devops/traefik/.env', '/opt/stack_dash/devops/traefik')
 print ("*** Copied Traefik .env fie to /opt/stack_dash/devops/traefik. ***\n")
