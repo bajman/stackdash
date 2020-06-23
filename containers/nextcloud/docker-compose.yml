@@ -1,0 +1,68 @@
+version: '3.7'
+
+services:
+
+########################### NETWORKS
+networks:
+  proxy:
+    external:
+      name: proxy
+
+# Nextcloud
+
+  mysql_nextcloud:
+    image: linuxserver/mariadb
+    container_name: nextcloud_db
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - MYSQL_ROOT_PASSWORD=$NEXTCLOUD_MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE=nextcloud_db
+      - MYSQL_USER=nextcloud
+      - MYSQL_PASSWORD=$NEXTCLOUD_MYSQL_USER_PASSWORD
+    volumes:
+      - $NEXTCLOUD_DATA/db:/var/lib/mysql
+    networks:
+      - proxy
+
+  nextcloud:
+    image: linuxserver/nextcloud
+    container_name: nextcloud
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+      - DB_HOST=mysql_nextcloud
+      - DB_DATABASE=nextcloud_db
+      - DB_USERNAME=nextcloud
+      - DB_PASSWORD=$NEXTCLOUD_MYSQL_USER_PASSWORD
+    volumes:
+      - $NEXTCLOUD_DATA/config:/config
+      - $NEXTCLOUD_DOCUMENTS:/documents
+      - $NEXTCLOUD_DOWNLOADS:/downloads
+      - $NEXTCLOUD_PHOTOS:/photos
+#    ports:
+#      - 80:80
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      ## HTTP Routers
+      - "traefik.tcp.routers.nextcloud-tcp.entrypoints=https"
+      - "traefik.tcp.routers.nextcloud-tcp.rule=HostSNI(`nextcloud.$DOMAINNAME`)"
+      - "traefik.tcp.routers.nextcloud-tcp.tls=true"
+#      - "traefik.tcp.routers.nextcloud-tcp.tls.certresolver=dns-cloudflare"
+      - "traefik.tcp.routers.nextcloud-tcp.tls.passthrough=true"
+      ## TCP Services
+      - "traefik.tcp.routers.nextcloud-tcp.service=nextcloud-tcp-svc"
+      - "traefik.tcp.services.nextcloud-tcp-svc.loadbalancer.server.port=443"
+      - "traefik.http.routers.cloud.middlewares=cloud_headers,cloud_redirectregex"
+      - "traefik.http.middlewares.cloud_headers.headers.customFrameOptionsValue=SAMEORIGIN"
+      - "traefik.http.middlewares.cloud_headers.headers.framedeny=true"
+      - "traefik.http.middlewares.cloud_headers.headers.stsIncludeSubdomains=true"
+      - "traefik.http.middlewares.cloud_headers.headers.stsPreload=true"
+      - "traefik.http.middlewares.cloud_headers.headers.stsSeconds=15552001"
+      - "traefik.http.middlewares.cloud_redirectregex.redirectregex.regex=/.well-known/(card|cal)dav"
+      - "traefik.http.middlewares.cloud_redirectregex.redirectregex.replacement=/remote.php/dav/"
