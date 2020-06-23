@@ -318,5 +318,134 @@ def devops_env_migration():
       
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/", shell=True)
     print ("*** Corrected stackdash directory permissions. ***\n")
+   
+###CONTAINERS
+#duplicati
+def duplicati_env_write():
+    duplicati_env_file = open("./containers/duplicati/.env", "w+")
+    duplicati_env_file_data = duplicati_env_file.read()
+    
+    puid = duplicati_env_file.write('PUID=1000\n')
+    pgid = duplicati_env_file.write('PGID=1000\n')
+    userdir = duplicati_env_file.write('USERDIR=/opt/stackdash\n')
+    
+    print ("\nPlease enter the subdomain you would like to use for Duplicati [e.g., duplicati-example.com]\n")
+    user_domainname = duplicati_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+
+    print ("\nPlease enter the directory you would like to use for Duplicati's appdata\n")
+    user_client_id = duplicati_env_file.write("DUPLICATI_DATA=" + input('Path for appdata: ') + "\n")
+
+    duplicati_env_file.write(duplicati_env_file_data)
+    duplicati_env_file.close()
+
+    duplicati_env_migration()
+
+def duplicati_env_migration():   
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/duplicati', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+        
+    stack_dash_dir_copy = shutil.copytree('./containers/duplicati/', '/opt/stackdash/docker-appdata/duplicati', dirs_exist_ok=True)
+    print ("*** Copied ./containers/duplicati/ from Git Clone to /opt/stackdash/docker-appdata/duplicati ***\n")
+      
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/duplicati", shell=True)
+    print ("*** Corrected Duplicati directory permissions. ***\n")
+    
+   def duplicati_compose()
+
+def duplicati_compose():
+    duplicati_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/duplicati/docker-compose.yml up -d', shell=True)
+    print ("*** Duplicati is deployed! ***")
+    
+#airsonic
+
+def airsonic_env_write():
+    airsonic_env_file = open("./containers/airsonic/.env", "w+")
+    airsonic_env_file_data = airsonic_env_file.read()
+    
+    puid = airsonic_env_file.write('PUID=1000\n')
+    pgid = airsonic_env_file.write('PGID=1000\n')
+    userdir = airsonic_env_file.write('USERDIR=/opt/stackdash\n')
+    
+    print ("\nPlease enter the subdomain you would like to use for Airsonic [e.g., music-example.com]\n")
+    user_domainname = airsonic_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+
+    print ("\nPlease enter the directory you would like to use for Airsonic's appdata\n")
+    user_client_id = airsonic_env_file.write("AIRSONIC_DATA=" + input('Path for appdata: ') + "\n")
+
+    airsonic_env_file.write(airsonic_env_file_data)
+    airsonic_env_file.close()
+
+    airsonic_env_migration()
+
+def airsonic_env_migration():   
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/airsonic', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+        
+    stack_dash_dir_copy = shutil.copytree('./containers/airsonic/', '/opt/stackdash/docker-appdata/airsonic', dirs_exist_ok=True)
+    print ("*** Copied ./containers/airsonic/ from Git Clone to /opt/stackdash/docker-appdata/airsonic ***\n")
+      
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/airsonic", shell=True)
+    print ("*** Corrected airsonic directory permissions. ***\n")
+
+    def airsonic_compose()
+
+def airsonic_compose():
+    airsonic_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/airsonic/docker-compose.yml up -d', shell=True)
+    print ("*** Airsonic is deployed! ***")
+
+#apache guacamole
+
+def guacamole_env_write():
+    guacamole_env_file = open("./containers/guacamole/.env", "w+")
+    guacamole_env_file_data = guacamole_env_file.read()
+    
+    puid = guacamole_env_file.write('PUID=1000\n')
+    pgid = guacamole_env_file.write('PGID=1000\n')
+    userdir = guacamole_env_file.write('USERDIR=/opt/stack_dash\n')
+    
+    print ("\nPlease enter the subdomain you would like to use for Apache Guacamole [e.g., remote-example.com]\n")
+    user_domainname = guacamole_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+
+    print ("\nPlease enter the directory you would like to use for Apache Guacamole's appdata\n")
+    user_client_id = guacamole_env_file.write("GUACAMOLE_DATA=" + input('Path for appdata: ') + "\n")
+
+    print ("\nPlease enter a username for Apache Guacamole's MYSQL database\n")
+    user_client_id = guacamole_env_file.write("GUACAMOLE_MYSQL_USERNAME=" + input('MYSQL Username: ') + "\n")
+
+    print ("\nPlease enter a strong password for Apache Guacamole's MYSQL user\n")
+    user_client_id = guacamole_env_file.write("GUACAMOLE_MYSQL_USER_PASSWORD=" + input('MYSQL User Password: ') + "\n")
+
+    print ("\nPlease enter a strong password for Apache Guacamole's MYSQL root user\n")
+    user_client_id = guacamole_env_file.write("GUACAMOLE_MYSQL_ROOT_PASSWORD=" + input('MYSQL Root Password: ') + "\n")
+
+    guacamole_env_file.write(guacamole_env_file_data)
+    guacamole_env_file.close()
+
+    guacamole_env_migration()
+
+def guacamole_env_migration():   
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/guacamole', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+        
+    stack_dash_dir_copy = shutil.copytree('./containers/guacamole/', '/opt/stackdash/docker-appdata/guacamole', dirs_exist_ok=True)
+    print ("*** Copied ./containers/guacamole/ from Git Clone to /opt/stackdash/docker-appdata/guacamole ***\n")
+      
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/guacamole", shell=True)
+    print ("*** Corrected guacamole directory permissions. ***\n")
+
+    def guacamole_compose()
+
+def guacamole_compose():
+    guacamole_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/guacamole/docker-compose.yml up -d', shell=True)
+    print ("*** guacamole is deployed! ***")
 
 main()
