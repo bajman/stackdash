@@ -1,0 +1,59 @@
+version: '3.7'
+
+services:
+
+########################### NETWORKS
+networks:
+  proxy:
+    external:
+      name: proxy
+
+# Piwigo
+
+  mysql:
+    image: linuxserver/mariadb
+    container_name: piwigo_db
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - MYSQL_ROOT_PASSWORD=$PIWIGO_MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE=piwigo_db
+      - MYSQL_USER=piwigo
+      - MYSQL_PASSWORD=$PIWIGO_MYSQL_USER_PASSWORD
+    volumes:
+      - $PIWIGO_DATA/db:/var/lib/mysql
+    networks:
+      - proxy
+
+  piwigo:
+    image: linuxserver/piwigo
+    container_name: piwigo
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+      - DB_HOST=mysql
+      - DB_DATABASE=piwigo_db
+      - DB_USERNAME=piwigo
+      - DB_PASSWORD=$PIWIGO_MYSQL_USER_PASSWORD
+    volumes:
+      - $PIWIGO_DATA/config:/config
+      - $PIWIGO_PHOTOS:/config/www/gallery/galleries/photos
+#    ports:
+#      - 80:80
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.piwigo-rtr.entrypoints=https"
+      - "traefik.http.routers.piwigo-rtr.rule=Host(`photos.$DOMAINNAME`)"
+      - "traefik.http.routers.piwigo-rtr.tls=true"
+      ## Middlewares
+#      - "traefik.http.routers.backups-rtr.middlewares=chain-authelia@file,add-backups" 
+#      - "traefik.http.middlewares.add-backups.addPrefix.prefix=/backups"
+      ## HTTP Services
+      - "traefik.http.routers.piwigo-rtr.service=piwigo-svc"
+      - "traefik.http.services.piwigo-svc.loadbalancer.server.port=80"
+      - "traefik.http.routers.piwigo-rtr.middlewares=chain-oauth@file"
