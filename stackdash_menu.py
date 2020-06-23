@@ -209,17 +209,21 @@ Enter "yes" or "no" [or "m" to return to main menu; enter "q" to quit]:  """)
         sys.exit
 
 def devops_traefik():
-    devops_env = open('./stacks/devops/traefik/.env', 'a+')
-    with open('./stacks/devops/traefik/.env', 'r') as file :
-        filedata = file.read()
-        c_mail_input.write((input("[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  " 
-        filedata = filedata.replace('$C_EMAIL', 'c_mail_input')
-    with open('./stacks/devops/traefik/.env', 'a+') as file:
-        file.write(c_email)           
-    file.close() 
-
-    
-    traefik_env_copy = shutil.copy('./stacks/devops/traefik/.env', '/opt/stack_dash/devops/traefik')
-    print ("*** Copied Traefik .env fie to /opt/stack_dash/devops/traefik. ***\n")
+    #read input file
+    fin = open("./stacks/devops/traefik/.env", "rt")
+    #read file contents to string
+    data = fin.read()
+    #add user input
+    c_email=raw_input('[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  ')
+    #replace all occurrences of the required string
+    data = data.replace('$C_EMAIL', 'c_email')
+    #close the input file
+    fin.close()
+    #open the input file in write mode
+    fin = open("./stacks/devops/traefik/.env", "wt")
+    #overrite the input file with the resulting data
+    fin.write(data)
+    #close the file
+    fin.close()
 
 main()
