@@ -258,8 +258,6 @@ def devops_traefik():
 
 def c_mail():
     c_email = input("[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  ") 
-
-def c_mail_env():
     os.environ['CF_API_KEY'] = c_mail
     print (os.environ["CF_API_KEY"])
         
