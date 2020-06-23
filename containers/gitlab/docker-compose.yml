@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+
+########################### NETWORKS
+networks:
+  proxy:
+    external:
+      name: proxy
+
+# GitLab
+
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    container_name:  gitlab
+    labels:
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.gitlab-rtr.entrypoints=https"
+      - "traefik.http.routers.gitlab-rtr.rule=Host(`gitlab.$DOMAINNAME`)" 
+      - "traefik.http.routers.gitlab-rtr.tls=true"
+      ## Middlewares
+#      - "traefik.http.routers.gitlab-rtr.middlewares=chain-oauth@file" 
+      ## HTTP Services
+      - "traefik.http.routers.gitlab-rtr.service=gitlab-svc"
+      - "traefik.http.services.gitlab-svc.loadbalancer.server.port=8929"
+      - "traefik.http.routers.gitlab-rtr.middlewares=chain-oauth@file"
+    networks:
+      - proxy
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://gitlab.$DOMAINNAME:8929'
+        gitlab_rails['gitlab_shell_ssh_port'] = 2224
+    volumes:
+      - '$GITLAB_DATA/etc:/etc/gitlab'
+      - '$GITLAB_DATA/log:/var/log/gitlab'
+      - '$GITLAB_DATA/opt:/var/opt/gitlab'
+    restart: unless-stopped
+
+  gitlab-runner:
+    image: gitlab/gitlab-runner:alpine
+    container_name: gitlab-runner
+    networks:
+      - proxy
+    restart: unless-stopped
