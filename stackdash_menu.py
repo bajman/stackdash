@@ -205,25 +205,25 @@ def devops_env_write1():
     userdir = devops_env_file.write('USERDIR=/opt/stack_dash\n')
     
     print ("[Cloudflare: 1/3] Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]")
-    user_c_email = devops_env_file.write("CF_API_EMAIL=" + input('Your Cloudflare Email: \n'))
+    user_c_email = devops_env_file.write("CF_API_EMAIL=" + input('Your Cloudflare Email: ') + "\n")
     
     print ("[Cloudflare: 2/3] Please enter your Cloudflare Global API Key, [See dash.cloudflare.com: My Profile >  API Tokens > API Keys, e.g., bLa1boPhZL0VCerk35XWmbPCaCyWjDaCVx4cM]: Tokens > API Keys, e.g., bLa1boPhZL0VCerk35XWmbPCaCyWjDaCVx4cM]")
-    user_c_api = devops_env_file.write("CF_API_KEY=" + input('Your Cloudflare Global API Key: \n'))
+    user_c_api = devops_env_file.write("CF_API_KEY=" + input('Your Cloudflare Global API Key: ') + "\n")
 
     print ("[Cloudflare: 3/3] Please enter the domain name you would like to use for the DevOps Stack [e.g., devops-example.com]")
-    user_domainname = devops_env_file.write("DOMAINNAME=" + input('Your Domain Name: \n'))
+    user_domainname = devops_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
 
     print ("[Google OAuth 2.0: 1/4] Please enter your Google APIs Client-ID [e.g., MaCcXoD05h7EmkGXqN07G6TJjcTKJYMmpp8tXsdIsILYSp1IqrX.apps.googleusercontent.com]")
-    user_client_id = devops_env_file.write("CLIENT_ID=" + input('Your Google API Client ID: \n'))
+    user_client_id = devops_env_file.write("CLIENT_ID=" + input('Your Google API Client ID: ') + "\n")
 
     print ("[Google OAuth 2.0: 2/4] \n Please enter your Google APIs Client-Secret [E.g., XB6RDMRDrcGAwi3hwdPIPKSr]")
-    user_client_secret = devops_env_file.write("CLIENT_SECRET=" + input('Your Google API Client Secret: \n'))
+    user_client_secret = devops_env_file.write("CLIENT_SECRET=" + input('Your Google API Client Secret: ') + "\n")
 
     print ("[Google OAuth 2.0: 3/4] \n Please enter your Google APIs Secret [E.g., rKyKKgVl9IlzxUfg1CJmjZwj5zk5LMzo]")
-    user_secret = devops_env_file.write("SECRET=" + input('Your Google API Secret: \n'))
-
+    user_secret = devops_env_file.write("SECRET=" + input('Your Google API Secret: ') + "\n")
+    
     print ("[Google OAuth 2.0: 4/4] \n Please enter the Gmail address you used to sign-up with Google APIs, aka: the Whitelist Email Address [Your Google APIs Gmail address, e.g., example@gmail.com]")
-    user_whitelist = devops_env_file.write("WHITELIST=" + input('Your Google API Gmail Address: \n'))
+    user_whitelist = devops_env_file.write("WHITELIST=" + input('Your Google API Gmail Address: ') + "\n")
 
     devops_env_file.write(devops_env_file_data)
     devops_env_file.close()
