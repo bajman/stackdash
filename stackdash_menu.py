@@ -234,7 +234,7 @@ def devops_traefik():
     devops_traefik_env.append((input("CLIENT_SECRET=12315415  "  )))
     devops_traefik_env.append((input("SECRET= " )))
     devops_traefik_env.append((input("WHITELIST= " )))
-    devops_traefik_env.close()
+    devops_traefik_env = close("/opt/stack_dash/devops/traefik/.env", "a")
 
 # Docker Compose
           
