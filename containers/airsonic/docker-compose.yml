@@ -1,0 +1,40 @@
+version: '3.7'
+
+networks:
+  proxy:
+    external: true
+
+services:
+
+# Airsonic
+
+  airsonic:
+    image: linuxserver/airsonic
+    container_name: airsonic
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - $AIRSONIC_DATA/config:/config
+      - $AIRSONIC_DATA/music:/music
+      - $AIRSONIC_DATA/playlists:/playlists
+      - $AIRSONIC_DATA/podcasts:/podcasts
+#    ports:
+#      - 4040:4040
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.airsonic-rtr.entrypoints=https"
+      - "traefik.http.routers.airsonic-rtr.rule=Host(`music.$DOMAINNAME`)"
+      - "traefik.http.routers.airsonic-rtr.tls=true"
+      ## Middlewares
+#      - "traefik.http.routers.backups-rtr.middlewares=chain-authelia@file,add-backups" 
+#      - "traefik.http.middlewares.add-backups.addPrefix.prefix=/backups"
+      ## HTTP Services
+      - "traefik.http.routers.airsonic-rtr.service=airsonic-svc"
+      - "traefik.http.services.airsonic-svc.loadbalancer.server.port=4040"
+      - "traefik.http.routers.airsonic-rtr.middlewares=chain-oauth@file"
