@@ -214,7 +214,7 @@ def devops_traefik():
     #read file contents to string
     data = fin.read()
     #add user input
-    fin.write((input("[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  ")))
+    fin.write((input("[Cloudflare: 1/3]\nPlease enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  ")))
     #replace all occurrences of the required string
     data = data.replace('$C_EMAIL', 'c_email')
     #close the input file
