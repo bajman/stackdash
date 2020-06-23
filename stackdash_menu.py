@@ -209,11 +209,14 @@ Enter "yes" or "no" [or "m" to return to main menu; enter "q" to quit]:  """)
         sys.exit
 
 def devops_traefik():
-    f = open('./stacks/devops/traefik/.env', 'a+')
-    filedata = f.read()
-    c_email = filedata.replace ('$C_EMAIL', 'input("[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  "')
-    f.write(c_mail)
-    f.close() 
+    devops_env = open('./stacks/devops/traefik/.env', 'a+')
+    with open('./stacks/devops/traefik/.env', 'r') as file :
+        filedata = file.read()
+    c_mail_input.write((input("[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  " 
+    c_email = filedata.replace('$C_EMAIL', 'c_mail_input')
+    with open('./stacks/devops/traefik/.env', 'a+') as file:
+        file.write(c_email)           
+    file.close() 
 
     
     traefik_env_copy = shutil.copy('./stacks/devops/traefik/.env', '/opt/stack_dash/devops/traefik')
