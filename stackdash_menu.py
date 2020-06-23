@@ -188,11 +188,14 @@ def devops_stack():
     print ("*** Created /opt/stack_dash/stacks directory ***\n")
     
     stack_dash_dir_copy = shutil.copytree('./stacks/', '/opt/stack_dash/stacks', dirs_exist_ok=True)
-    print ("*** Copied Traefik Directory tree to /opt/stack_dash/ ***\n")
-    
-    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/", shell=True)
+    print ("*** Copied ./stacks/ from Git Clone to /opt/stack_dash/ ***\n")
+      
+    stack_dash_permissions = subprocess.run("sudo touch /opt/stack_dash/stacks/devops/traefik/.env", shell=True)
     print ("*** Corrected Portainer folder permissions. ***\n")
-               
+
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/", shell=True)
+    print ("*** Corrected Stack_Dash directory permissions. ***\n")
+    
     choice = input("""
     
 Do you want to include Traefik with your DevOps deployment?
