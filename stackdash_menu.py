@@ -159,13 +159,10 @@ def stacks_main():
 
     if choice == "1":
         devops_env()
-        print ("*** Deploying DevOps Stack *** \n")
     if choice == "2":
         data_stack()
-        print ("*** Deploying Data Stack *** \n")
-    if choice == "3":
+     if choice == "3":
         media_stack()
-        print ("*** Deploying Media Stack *** \n")
     if choice == "M" or choice == "m":
         main()
     elif choice == "Q" or choice =="q":
@@ -185,10 +182,8 @@ Do you want to include Traefik with your DevOps deployment?
             
     if choice == "yes" or choice == "Yes":
         devops_env_write1()
-        print ("*** Deploying DevOps Standard Stack *** \n")
     if choice == "no" or choice == "No":
         devops_stand()
-        print ("*** Deploying DevOps Stack with Traefik *** \n")
     if choice == "M" or choice == "m":
         main()
     elif choice == "Q" or choice =="q":
