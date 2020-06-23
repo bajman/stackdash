@@ -176,10 +176,10 @@ def stacks_main():
         sys.exit
 
 def devops_stack():
-    mkdir_stack_dash = subprocess.check_call("sudo mkdir /opt/stack_dash/", shell=True)
+    mkdir_stack_dash = subprocess.run("sudo mkdir /opt/stack_dash/", shell=True)
     print("\n\n\n\n\n\n\n\n*** Created stack_dash root folder in /opt/ directory. *** \n")
 
-    mkdir_devops = subprocess.check_call("sudo mkdir /opt/stack_dash/devops", shell=True)
+    mkdir_devops = subprocess.run("sudo mkdir /opt/stack_dash/devops", shell=True)
     print ("*** Created DevOps folder in /opt/stack_dash directory. *** \n")
     
     dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops", shell=True)
@@ -212,13 +212,13 @@ def devops_traefik():
     make_proxy = subprocess.check_call("sudo docker network create proxy", shell=True)
     print("\n\n\n\n\n\n\n\n*** Created Docker network: proxy. *** \n")
 
-    mkdir_traefik = subprocess.check_call("sudo mkdir /opt/stack_dash/devops/traefik", shell=True)
+    mkdir_traefik = subprocess.run("sudo mkdir /opt/stack_dash/devops/traefik", shell=True)
     print ("*** Created Traefik folder in /opt/stack_dash directory. *** \n")
     
     traefik_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/traefik", shell=True)
     print ("*** Corrected Traefik folder permissions. ***\n")
     
-    mkdir_traefik_rules = subprocess.check_call("sudo mkdir /opt/stack_dash/devops/traefik/rules", shell=True)
+    mkdir_traefik_rules = subprocess.run("sudo mkdir /opt/stack_dash/devops/traefik/rules", shell=True)
     print ("*** Created Traefik Rules folder in /opt/stack_dash directory. *** \n")
     
     traefik_rules_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/traefik/rules", shell=True)
@@ -230,25 +230,25 @@ def devops_traefik():
     traefik_rules2_copy = shutil.copy('./stacks/devops/traefik/data/rules/middlewares.toml', '/opt/stack_dash/devops/traefik/rules')
     print ("*** Copied Traefik data and middlewares.toml to /opt/stack_dash/devops/traefik/rules. ***\n")
     
-    mkdir_gitlab = subprocess.check_call("sudo mkdir /opt/stack_dash/devops/gitlab", shell=True)
+    mkdir_gitlab = subprocess.run("sudo mkdir /opt/stack_dash/devops/gitlab", shell=True)
     print ("*** Created GitLab folder in /opt/stack_dash directory. *** \n")
     
     gitlab_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/gitlab", shell=True)
     print ("*** Corrected GitLab folder permissions. ***\n")
     
-    mkdir_coder = subprocess.check_call("sudo mkdir /opt/stack_dash/devops/coder", shell=True)
+    mkdir_coder = subprocess.run("sudo mkdir /opt/stack_dash/devops/coder", shell=True)
     print ("*** Created coder folder in /opt/stack_dash directory. *** \n")
     
     coder_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/coder", shell=True)
     print ("*** Corrected coder folder permissions. ***\n")
 
-    mkdir_portainer = subprocess.check_call("sudo mkdir /opt/stack_dash/devops/portainer", shell=True)
+    mkdir_portainer = subprocess.run("sudo mkdir /opt/stack_dash/devops/portainer", shell=True)
     print ("*** Created Portainer folder in /opt/stack_dash directory. *** \n")
     
     portainer_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/portainer", shell=True)
     print ("*** Corrected Portainer folder permissions. ***\n")
     
-    mkdir_apache_guacamole = subprocess.check_call("sudo mkdir /opt/stack_dash/devops/apache_guacamole", shell=True)
+    mkdir_apache_guacamole = subprocess.run("sudo mkdir /opt/stack_dash/devops/apache_guacamole", shell=True)
     print ("*** Created Apache Guacamole folder in /opt/stack_dash directory. *** \n")
     
     guacamole_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/apache_guacamole", shell=True)
