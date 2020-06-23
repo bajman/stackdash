@@ -223,7 +223,7 @@ def devops_env():
     
     devops_env = open('/opt/stack_dash/stacks/devops/traefik/.env', 'r+')
     for i in range(11):
-        devops_env.write('CF_API_EMAIL=,' cmailvar)
+        devops_env.write(['CF_API_EMAIL=,' cmailvar])
     devops_env.close()
         
 main()
