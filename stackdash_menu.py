@@ -816,4 +816,59 @@ def netdata_compose():
     netdata_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/netdata/docker-compose.yml up -d', shell=True)
     print ("*** Netdata is deployed! ***")
     
+# Nextcloud
+
+def nextcloud_env_write():
+    nextcloud_env_file = open("./containers/nextcloud/.env", "w+")
+    nextcloud_env_file_data = nextcloud_env_file.read()
+    
+    puid = nextcloud_env_file.write('PUID=1000\n')
+    pgid = nextcloud_env_file.write('PGID=1000\n')
+    userdir = nextcloud_env_file.write('USERDIR=/opt/stackdash\n')
+    
+    print ("\nPlease enter the subdomain you would like to use for Nextcloud [e.g., metrics-example.com]\n")
+    user_domainname = nextcloud_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+
+    print ("\nPlease enter the path you like to use to store Nextcloud's appdata\n")
+    user_domainname = nextcloud_env_file.write("NEXTCLOUD_DATA=" + input('Path to Nextcloud appdata: ') + "\n")
+
+    print ("\nPlease enter the password you would like to use for Nextcloud's MYSQL database\n")
+    user_domainname = nextcloud_env_file.write("NEXTCLOUD_MYSQL_USER_PASSWORD=" + input('Nextcloud MYSQL Password: ') + "\n")
+
+    print ("\nPlease enter the root password you would like to use for Nextcloud's MYSQL database\n")
+    user_domainname = nextcloud_env_file.write("NEXTCLOUD_MYSQL_ROOT_PASSWORD" + input('Nextcloud Root MYSQL Password: ') + "\n")
+
+    print ("\nPlease enter a documents path you would like to use with Nextcloud\n")
+    user_domainname = nextcloud_env_file.write("NEXTCLOUD_DOCUMENTS=" + input('Path to your documents: ') + "\n")
+
+    print ("\nPlease enter a downloads path you would like to use with Nextcloud\n")
+    user_domainname = nextcloud_env_file.write("NEXTCLOUD_DOWNLOADS=" + input('Path to your downloads: ') + "\n")
+
+    print ("\nPlease enter a photos path you would like to use with Nextcloud\n")
+    user_domainname = nextcloud_env_file.write("NEXTCLOUD_PHOTOS=" + input('Path to your photos: ') + "\n")
+
+    nextcloud_env_file.write(nextcloud_env_file_data)
+    nextcloud_env_file.close()
+
+    nextcloud_env_migration()
+
+def nextcloud_env_migration():   
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/nextcloud', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+        
+    stack_dash_dir_copy = shutil.copytree('./containers/nextcloud/', '/opt/stackdash/docker-appdata/nextcloud', dirs_exist_ok=True)
+    print ("*** Copied ./containers/nextcloud/ from Git Clone to /opt/stackdash/docker-appdata/nextcloud ***\n")
+      
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/nextcloud", shell=True)
+    print ("*** Corrected Nextcloud's directory permissions. ***\n")
+
+    def nextcloud_compose()
+
+def nextcloud_compose():
+    nextcloud_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/nextcloud/docker-compose.yml up -d', shell=True)
+    print ("*** Nextcloud is deployed! ***")
+    
 main()
