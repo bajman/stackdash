@@ -871,4 +871,111 @@ def nextcloud_compose():
     nextcloud_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/nextcloud/docker-compose.yml up -d', shell=True)
     print ("*** Nextcloud is deployed! ***")
     
+    
+## Piwigo
+
+
+def piwigo_env_write():
+    piwigo_env_file = open("./containers/piwigo/.env", "w+")
+    piwigo_env_file_data = piwigo_env_file.read()
+    
+    puid = piwigo_env_file.write('PUID=1000\n')
+    pgid = piwigo_env_file.write('PGID=1000\n')
+    userdir = piwigo_env_file.write('USERDIR=/opt/stackdash\n')
+    
+    print ("\nPlease enter the subdomain you would like to use for Piwigo [e.g., photos-example.com]\n")
+    user_domainname = piwigo_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+
+    print ("\nPlease enter the path you like to use to store Piwigo's appdata\n")
+    user_domainname = piwigo_env_file.write("PIWIGO_DATA=" + input('Path to Piwigo appdata: ') + "\n")
+
+    print ("\nPlease enter the password you would like to use for Piwigo's MYSQL database\n")
+    user_domainname = piwigo_env_file.write("PIWIGO_MYSQL_USER_PASSWORD=" + input('Piwigo MYSQL Password: ') + "\n")
+
+    print ("\nPlease enter the root password you would like to use for Piwigo's MYSQL database\n")
+    user_domainname = piwigo_env_file.write("PIWIGO_MYSQL_ROOT_PASSWORD=" + input('piwigo Root MYSQL Password: ') + "\n")
+
+    print ("\nPlease enter a photos path you would like to use with Piwigo\n")
+    user_domainname = piwigo_env_file.write("PIWIGO_PHOTOS=" + input('Path to your photos: ') + "\n")
+
+    piwigo_env_file.write(piwigo_env_file_data)
+    piwigo_env_file.close()
+
+    piwigo_env_migration()
+
+def piwigo_env_migration():   
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/piwigo', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+        
+    stack_dash_dir_copy = shutil.copytree('./containers/piwigo/', '/opt/stackdash/docker-appdata/piwigo', dirs_exist_ok=True)
+    print ("*** Copied ./containers/piwigo/ from Git Clone to /opt/stackdash/docker-appdata/piwigo ***\n")
+      
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/piwigo", shell=True)
+    print ("*** Corrected piwigo's directory permissions. ***\n")
+
+    def piwigo_compose()
+
+def piwigo_compose():
+    piwigo_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/piwigo/docker-compose.yml up -d', shell=True)
+    print ("*** piwigo is deployed! ***")
+ 
+#Plex
+
+def plex_env_write():
+    plex_env_file = open("./containers/plex/.env", "w+")
+    plex_env_file_data = plex_env_file.read()
+    
+    puid = plex_env_file.write('PUID=1000\n')
+    pgid = plex_env_file.write('PGID=1000\n')
+    userdir = plex_env_file.write('USERDIR=/opt/stackdash\n')
+    
+    print ("\nPlease enter the subdomain you would like to use for plex [e.g., plex-example.com]\n")
+    user_domainname = plex_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+
+    print ("\nPlease enter the path you like to use to store Plex's appdata\n")
+    user_domainname = plex_env_file.write("PLEX_DATA=" + input('Path to Plex Appdata: ') + "\n")
+
+    print ("\nPlease enter your Plex Claim Token [see plex.tv/claim]\n")
+    user_domainname = plex_env_file.write("PLEX_CLAIM_TOKEN=" + input('Plex Claim Token: ') + "\n")
+
+    print ("\nPlease enter the path you would like Plex to use for movie collection\n")
+    user_domainname = plex_env_file.write("PLEX_MOVIES=" + input('Plex Movie Path: ') + "\n")
+
+    print ("\nPlease enter the path you would like Plex to use for tv-show collection\n")
+    user_domainname = plex_env_file.write("PLEX_TV=" + input('Plex TV Path: ') + "\n")
+
+    print ("\nPlease enter the path you would like Plex to use for your photo collection\n")
+    user_domainname = plex_env_file.write("PLEX_PHOTOS=" + input('Plex Photos Path: ') + "\n")
+
+    print ("\nPlease enter the path you would like Plex to use for your music collection\n")
+    user_domainname = plex_env_file.write("PLEX_MUSIC=" + input('Plex Music Path: ') + "\n")
+
+    plex_env_file.write(plex_env_file_data)
+    plex_env_file.close()
+
+    plex_env_migration()
+
+def plex_env_migration():   
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/plex', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+        
+    stack_dash_dir_copy = shutil.copytree('./containers/plex/', '/opt/stackdash/docker-appdata/plex', dirs_exist_ok=True)
+    print ("*** Copied ./containers/plex/ from Git Clone to /opt/stackdash/docker-appdata/plex ***\n")
+      
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/plex", shell=True)
+    print ("*** Corrected Plex's directory permissions. ***\n")
+
+    def plex_compose()
+
+def plex_compose():
+    plex_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/plex/docker-compose.yml up -d', shell=True)
+    print ("*** Plex is deployed! ***")
+    
+    
 main()
