@@ -253,22 +253,11 @@ def devops_traefik():
     print ("*** Created Traefik folder in /opt/stack_dash directory. *** \n")
     traefik_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/traefik", shell=True)
     print ("*** Corrected Traefik folder permissions. ***\n")
-
     traefik_env_copy = shutil.copytree('./stacks/devops/traefik/', '/opt/stack_dash/devops/traefik/', dirs_exist_ok=True)
     print ("*** Copied Traefik tree to /opt/stack_dash/devops/traefik. ***\n")
-    
-    devops_env = '/opt/stack_dash/devops/traefik/.env'
-    
-#    user_c_email = input("[Cloudflare – 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  ")
-    
-    new_lines = []
-    with open('devops_env', 'r+') as f:
-        content = f.read()
-        for line in f:
-            if 'C_EMAIL' in line:
-                new_lines.append(line.replace('C_EMAIL', 'input("[Cloudflare – 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  ")')
-        f.write('\n'.join(new_lines))
-        f.close()
-  
+
+    C_EMAIL = C_EMAIL.write(input("[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]: "))
+    C_EMAIL_ENV = subprocess.run("sudo export CF_API_EMAIL='C_EMAIL'", shell=True)
+    print ("*** Added Cloudflare email address to environment variables ***")
 
 main()
