@@ -17,7 +17,7 @@ networks:
       - PUID=1000
       - PGID=1000
       - VERSION=docker
-      - UMASK_SET=022 #optional
+#      - UMASK_SET=022 #optional
       - PLEX_CLAIM=$PLEX_CLAIM_TOKEN
       - ADVERTISE_IP=https://plex.$DOMAINNAME:32400/
     volumes:
