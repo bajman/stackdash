@@ -13,23 +13,75 @@ def main():
 
     choice = input("""                           Main Menu
 
+███████╗████████╗ █████╗  ██████╗██╗  ██╗    ██████╗  █████╗ ███████╗██╗  ██╗
+██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝    ██╔══██╗██╔══██╗██╔════╝██║  ██║
+███████╗   ██║   ███████║██║     █████╔╝     ██║  ██║███████║███████╗███████║
+╚════██║   ██║   ██╔══██║██║     ██╔═██╗     ██║  ██║██╔══██║╚════██║██╔══██║
+███████║   ██║   ██║  ██║╚██████╗██║  ██╗    ██████╔╝██║  ██║███████║██║  ██║
+╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
 
-    Supported 64-bit versions of Ubuntu:
-     -Ubuntu Focal 20.04 LTS
-     -Ubuntu Eoan 19.10
-     -Ubuntu Bionic 18.04 LTS
-     -Ubuntu Xenial 16.04 LTS
-    
-    
-    
-                                            1.   Install Docker Engine
-                        
-                                            2.   Deploy Docker Stacks (multiple containers)
+\n
+v.0.1
+\n
+Welcome to StackDash! \n\n\n StackDash is a python script to automate the following: \n
 
-                                            3.   Deploy Docker Containers (individual containers)
+	- Removal of old versions of Dockers and the installation of the lastest version of Docker Engine on Ubunutu (supported versions: 20.04 LTS, 19.10, 18.04 LTS, and 16.04 LTS); \n\n
 
-                                            4.   Quit
-                        
+
+	- Deployment of clusters(stacks)/individual Docker web app containers. Type [w] for a complete list of containers that can be depoyed with StackDash. \n\n
+
+
+	- Configuration of container subdomains (e.g., portainer.example.com or bookstack.example.com). Type [s] for a list of subdomains that must be added as CNAME records to your DNS service (see Documenation for additional information); \n\n
+
+
+  	- Deployment of web page dashboard(s) for easy access to your stacks/containers; and \n\n
+
+
+	- Uses Traefik 2 as reverse proxy & loadbalencer to route web apps to the approriate subdomains. StackDash containers 
+	  deployed with Traefik 2: \n
+
+		a. Use ports 80/443, only; \n
+
+		b. Support HTTPS/TLS through ACME V2 and LetsEncrypt wildcard certifiactes; and \n
+
+		c. Are authenticated using OAuth 2.0 through Google. \n\n\n
+
+==============================================================================================================================================================
+															
+███████╗████████╗ █████╗  ██████╗██╗  ██╗██████╗  █████╗ ███████╗██╗  ██╗     ██████╗ ██████╗ ███╗   ██╗████████╗ █████╗ ██╗███╗   ██╗███████╗██████╗ ███████╗
+██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝██╔══██╗██╔══██╗██╔════╝██║  ██║    ██╔════╝██╔═══██╗████╗  ██║╚══██╔══╝██╔══██╗██║████╗  ██║██╔════╝██╔══██╗██╔════╝
+███████╗   ██║   ███████║██║     █████╔╝ ██║  ██║███████║███████╗███████║    ██║     ██║   ██║██╔██╗ ██║   ██║   ███████║██║██╔██╗ ██║█████╗  ██████╔╝███████╗
+╚════██║   ██║   ██╔══██║██║     ██╔═██╗ ██║  ██║██╔══██║╚════██║██╔══██║    ██║     ██║   ██║██║╚██╗██║   ██║   ██╔══██║██║██║╚██╗██║██╔══╝  ██╔══██╗╚════██║
+███████║   ██║   ██║  ██║╚██████╗██║  ██╗██████╔╝██║  ██║███████║██║  ██║    ╚██████╗╚██████╔╝██║ ╚████║   ██║   ██║  ██║██║██║ ╚████║███████╗██║  ██║███████║
+╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝     ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚══════╝          
+==============================================================================================================================================================
+                                                                                                                      
+Type [w] for a complete list of web apps you can deploy with StackDash. \n
+Type [c] to deploy individual containers. \n\n\n
+
+==============================================================================================================================================================
+															
+███████╗████████╗ █████╗  ██████╗██╗  ██╗██████╗  █████╗ ███████╗██╗  ██╗    ███████╗████████╗ █████╗  ██████╗██╗  ██╗███████╗
+██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝██╔══██╗██╔══██╗██╔════╝██║  ██║    ██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝██╔════╝
+███████╗   ██║   ███████║██║     █████╔╝ ██║  ██║███████║███████╗███████║    ███████╗   ██║   ███████║██║     █████╔╝ ███████╗
+╚════██║   ██║   ██╔══██║██║     ██╔═██╗ ██║  ██║██╔══██║╚════██║██╔══██║    ╚════██║   ██║   ██╔══██║██║     ██╔═██╗ ╚════██║
+███████║   ██║   ██║  ██║╚██████╗██║  ██╗██████╔╝██║  ██║███████║██║  ██║    ███████║   ██║   ██║  ██║╚██████╗██║  ██╗███████║
+╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝    ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝
+==============================================================================================================================================================
+
+
+Type [u] for a complete list of stacks you can deploy with StackDash. \n
+Type [s] for a complete list of web app subdomain aliases used by StackDash. \n
+Type [t] to deploy the Data, DevOps, or Media StackDash Stacks. \n\n\n
+
+NOTE:
+---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬--- 
+\n StackDash v. 0.1 is configured to support HTTPS & TLS only for domains managed by Cloudflare. Additional domain/hosting providers will be made available in future releases of StackDash. For a full list of planned DNS providers see: https://docs.traefik.io/https/acme/#providers. \n
+---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬--- 
+\n If you have domain name (e.g., example.com hosted by GoDaddy or Google Cloud) and would like to make Cloudflare your free, default DNS record manager: \n  
+You simply need to add two DNS records to your Cloudflare account. For more information on adding vendor-specific records to your free Cloudflare account, see: https://support.cloudflare.com/hc/en-us/articles/360020991331-Adding-vendor-specific-DNS-records-to-Cloudflare. Cloudflare can manage DNS records on domains hosted by Google Cloud, Amazon S3, Microsoft Azure, ClickFunnels, WPEngine, and Zoho. \n
+---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬---¬--- 
+\n If you do not have a domain, you can purchase one through Cloudflare (about $8.XX per year) at https://www.cloudflare.com/products/registrar/  
 
     Please enter your choice:  """)
     if choice == "1" or choice =="1.":
