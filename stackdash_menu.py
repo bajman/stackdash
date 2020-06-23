@@ -14,57 +14,15 @@ def main():
     print(" ")
 
     choice = input("""                           
-                ███████╗████████╗ █████╗  ██████╗██╗  ██╗    ██████╗  █████╗ ███████╗██╗  ██╗
-                ██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝    ██╔══██╗██╔══██╗██╔════╝██║  ██║
-                ███████╗   ██║   ███████║██║     █████╔╝     ██║  ██║███████║███████╗███████║
-                ╚════██║   ██║   ██╔══██║██║     ██╔═██╗     ██║  ██║██╔══██║╚════██║██╔══██║
-                ███████║   ██║   ██║  ██║╚██████╗██║  ██╗    ██████╔╝██║  ██║███████║██║  ██║
-                ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ \n\n\n
-StackDash is a python3 script designed to automate Docker installation on Ubuntu and deploy container stacks 
-with subdomain hosting. StackDash features a Docker-Engine install script and Docker web-app containers/stack 
-deployment wizards. All StackDash containers/stacks are preconfigured for external, subdomain access, using 
-HTTPS/TLS via LetsEncrypt and OAuth 2.0 via the Google Cloud Platform. See the Documentation for installation 
-instructions. \n\n
-
-           ==============================================================================
-             __   ___  __        __          __   __       ___              ___  __   __  
-            |  \ |__  |__) |    /  \ \ /    /  ` /  \ |\ |  |   /\  | |\ | |__  |__) /__` 
-            |__/ |___ |    |___ \__/  |     \__, \__/ | \|  |  /~~\ | | \| |___ |  \ .__/ 
-                                                                                                                                                          
-            ==============================================================================
-\n                                                                                                           
-        Type [c] to deploy individual StackDash Containers.
-        Type [w] for a complete list of web apps you can deploy with StackDash. 
-\n
-                              
-                    ============================================================
-                     __   ___  __        __          __  ___       __        __  
-                    |  \ |__  |__) |    /  \ \ /    /__`  |   /\  /  ` |__/ /__` 
-                    |__/ |___ |    |___ \__/  |     .__/  |  /~~\ \__, |  \ .__/ 
-                    
-                    ============================================================
-\n
-        Type [t] to deploy StackDash Stacks. 
-        Type [u] for a complete list of stacks you can deploy with StackDash.
-\n
-
-                                          StackDack Network                                     
-                                                                                                
-                                       +----------------------------------------------------+   
-                                       |                                                    |   
-      +------------+     OAuth 2.0     | +-----------------+   HTTPS/TLS  +---------------+ |   
-      |            |    Google API     | |                | | LetsEncrypt |               | |   
-      |            +-------------------> |    TRAEFIK 2   +--------------->     SERVER    | |   
-      |  INTERNET  <-------------------| |     (Proxy)    <--------------+     (Docker)   | |   
-      |            | Exposed Port Nos: | |                | Proxy Routing |               | |   
-      |            |       80;443      | |                | Rules-Traefik |               | |   
-      +------------+                   | +-----------------+              +---------------+ |   
-                                       |                                                    |   
-                                       +----------------------------------------------------+   
-                                                         INTERNAL NETWORK         
-\n
-        Type [s] for a complete list of web app subdomain aliases used by StackDash. 
-\n
+                                                    ███████╗████████╗ █████╗  ██████╗██╗  ██╗    ██████╗  █████╗ ███████╗██╗  ██╗
+                                                    ██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝    ██╔══██╗██╔══██╗██╔════╝██║  ██║
+                                                    ███████╗   ██║   ███████║██║     █████╔╝     ██║  ██║███████║███████╗███████║
+                                                    ╚════██║   ██║   ██╔══██║██║     ██╔═██╗     ██║  ██║██╔══██║╚════██║██╔══██║
+                                                    ███████║   ██║   ██║  ██║╚██████╗██║  ██╗    ██████╔╝██║  ██║███████║██║  ██║
+                                                    ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ \n\n\n
+StackDash is a python3 script designed to automate Docker installation on Ubuntu and deploy container stacks with subdomain hosting. StackDash features a 
+Docker-Engine install script and Docker web-app containers/stack deployment wizards. All StackDash containers/stacks are preconfigured for external, subdomain 
+access, using HTTPS/TLS via LetsEncrypt and OAuth 2.0 via the Google Cloud Platform. See the Documentation for installation instructions. \n
 ============================================================================================================================================================
 NOTE: CLOUDFARE DNS ONLY
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -74,9 +32,50 @@ If you have domain name (e.g., example.com hosted by GoDaddy or Google Cloud) an
 two DNS domain records to your a newly created Cloudflare account. For more information on adding vendor-specific records to your Cloudflare account, 
 see: https://support.cloudflare.com/hc/en-us/articles/360020991331-Adding-vendor-specific-DNS-records-to-Cloudflare. Cloudflare can manage the DNS of 
 domains hosted by Google Cloud, Amazon S3, Microsoft Azure, ClickFunnels, WPEngine, and Zoho. \n
-If you do not have a domain, you can purchase one through Cloudflare (approx. $8.XX per year) at https://www.cloudflare.com/products/registrar/
+If you do not have a domain, you can purchase one through Cloudflare (approx. $8.XX per year) at https://www.cloudflare.com/products/registrar/ \n
+
+                                           ==============================================================================
+                                             __   ___  __        __          __   __       ___              ___  __   __  
+                                            |  \ |__  |__) |    /  \ \ /    /  ` /  \ |\ |  |   /\  | |\ | |__  |__) /__` 
+                                            |__/ |___ |    |___ \__/  |     \__, \__/ | \|  |  /~~\ | | \| |___ |  \ .__/ 
+
+                                            ==============================================================================
+                                        \n                                                                                                           
+                                                Type [c] to deploy individual StackDash Containers.
+                                                Type [w] for a complete list of web apps you can deploy with StackDash. 
+                                        \n
+                              
+                                                    ============================================================
+                                                     __   ___  __        __          __  ___       __        __  
+                                                    |  \ |__  |__) |    /  \ \ /    /__`  |   /\  /  ` |__/ /__` 
+                                                    |__/ |___ |    |___ \__/  |     .__/  |  /~~\ \__, |  \ .__/ 
+
+                                                    ============================================================
+                                        \n
+                                                Type [t] to deploy StackDash Stacks. 
+                                                Type [u] for a complete list of stacks you can deploy with StackDash.
+                                        \n
+
+                                                                          StackDack Network
+                                                                ===================================
+
+                                                                       +----------------------------------------------------+   
+                                                                       |                                                    |   
+                                      +------------+     OAuth 2.0     | +-----------------+   HTTPS/TLS  +---------------+ |   
+                                      |            |    Google API     | |                | | LetsEncrypt |               | |   
+                                      |            +-------------------> |    TRAEFIK 2   +--------------->     SERVER    | |   
+                                      |  INTERNET  <-------------------| |     (Proxy)    <--------------+     (Docker)   | |   
+                                      |            | Exposed Port Nos: | |                | Proxy Routing |               | |   
+                                      |            |       80;443      | |                | Rules-Traefik |               | |   
+                                      +------------+                   | +-----------------+              +---------------+ |   
+                                                                       |                                                    |   
+                                                                       +----------------------------------------------------+   
+                                                                                         INTERNAL NETWORK         
+                                        \n
+                                                Type [s] for a complete list of web app subdomain aliases used by StackDash. 
+                                        \n
+
 ============================================================================================================================================================
-\n\n
 Please enter your choice:                       """)
     if choice == "1" or choice =="1.":
         docker_install()
