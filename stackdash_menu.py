@@ -14,25 +14,19 @@ def main():
     print(" ")
 
     choice = input("""                           
-                                                    ███████╗████████╗ █████╗  ██████╗██╗  ██╗    ██████╗  █████╗ ███████╗██╗  ██╗
-                                                    ██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝    ██╔══██╗██╔══██╗██╔════╝██║  ██║
-                                                    ███████╗   ██║   ███████║██║     █████╔╝     ██║  ██║███████║███████╗███████║
-                                                    ╚════██║   ██║   ██╔══██║██║     ██╔═██╗     ██║  ██║██╔══██║╚════██║██╔══██║
-                                                    ███████║   ██║   ██║  ██║╚██████╗██║  ██╗    ██████╔╝██║  ██║███████║██║  ██║
-                                                    ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ \n\n\n
+                                              ███████╗████████╗ █████╗  ██████╗██╗  ██╗    ██████╗  █████╗ ███████╗██╗  ██╗
+                                              ██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝    ██╔══██╗██╔══██╗██╔════╝██║  ██║
+                                              ███████╗   ██║   ███████║██║     █████╔╝     ██║  ██║███████║███████╗███████║
+                                              ╚════██║   ██║   ██╔══██║██║     ██╔═██╗     ██║  ██║██╔══██║╚════██║██╔══██║
+                                              ███████║   ██║   ██║  ██║╚██████╗██║  ██╗    ██████╔╝██║  ██║███████║██║  ██║
+                                              ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ v0.13 \n\n\n
 StackDash is a python3 script designed to automate Docker installation on Ubuntu and deploy container stacks with subdomain hosting. StackDash features a 
 Docker-Engine install script and Docker web-app containers/stack deployment wizards. All StackDash containers/stacks are preconfigured for external, subdomain 
 access, using HTTPS/TLS via LetsEncrypt and OAuth 2.0 via the Google Cloud Platform. See the Documentation for installation instructions. \n
-============================================================================================================================================================
-NOTE: CLOUDFARE DNS ONLY
------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 This version of StackDash is configured to support only Cloudflare DNS-managed domains. Additional domain/hosting providers will be made available in future 
 releases of StackDash. For a full list of planned DNS providers see: https://docs.traefik.io/https/acme/#providers.\n
-If you have domain name (e.g., example.com hosted by GoDaddy or Google Cloud) and would like to make Cloudflare your default DNS manager, you need to add 
-two DNS domain records to your a newly created Cloudflare account. For more information on adding vendor-specific records to your Cloudflare account, 
-see: https://support.cloudflare.com/hc/en-us/articles/360020991331-Adding-vendor-specific-DNS-records-to-Cloudflare. Cloudflare can manage the DNS of 
-domains hosted by Google Cloud, Amazon S3, Microsoft Azure, ClickFunnels, WPEngine, and Zoho. \n
-If you do not have a domain, you can purchase one through Cloudflare (approx. $8.XX per year) at https://www.cloudflare.com/products/registrar/ \n
+\n
 
                                            ==============================================================================
                                              __   ___  __        __          __   __       ___              ___  __   __  
@@ -76,7 +70,7 @@ If you do not have a domain, you can purchase one through Cloudflare (approx. $8
                                         \n
 
 ============================================================================================================================================================
-Please enter your choice:                       """)
+                                                        Please enter your choice:                       """)
     if choice == "1" or choice =="1.":
         docker_install()
         print("*** Install Docker Engine **** ")
