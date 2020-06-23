@@ -260,10 +260,10 @@ def devops_env():
     
 #replacing base variables with personal variables
 
-    devops_env_replace = open("/opt/stack_dash/stacks/devops/traefik/.env", "rt")
+    devops_env_replace = open("/opt/stack_dash/stacks/devops/traefik/.env", "w+")
     devops_env_replace_data = devops_env_replace.read()
     devops_env_replace_data =  devops_env_replace_data.replace('C_MAIL', user_c_email)
     devops_env_replace.write(devops_env_replace_data)
-    devops_env_replace_data.close()
+    devops_env_replace.close()
 
 main()
