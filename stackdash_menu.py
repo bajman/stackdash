@@ -320,8 +320,6 @@ def duplicati_env_migration():
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/duplicati", shell=True)
     print ("*** Corrected Duplicati directory permissions. ***\n")
     
-   def duplicati_compose()
-
 def duplicati_compose():
     duplicati_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/duplicati/docker-compose.yml up -d', shell=True)
     print ("*** Duplicati is deployed! ***")
