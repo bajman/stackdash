@@ -236,7 +236,7 @@ devops_env.write((input("WHITELIST= " )))
 
 # Docker Compose
           
-    devops_traefik_compose = subprocess.run("docker-compose -f ./stackdash/stacks/devops/traefik/docker-compose.yml up -d", capture_output=True, shell=True)
+    devops_traefik_compose = subprocess.run("docker-compose -f /opt/stack_dash/devops/traefik/docker-compose.yml up -d", capture_output=True, shell=True)
     print ("*** Deployed DevOps with Traefik! ***\n")
     
           
