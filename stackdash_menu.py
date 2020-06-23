@@ -214,16 +214,14 @@ def devops_traefik():
     #read file contents to string
     data = fin.read()
     #add user input
-    fin.write((input("[Cloudflare: 1/3]\nPlease enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  ")))
+    c_email = fin.write((input("[Cloudflare: 1/3]\nPlease enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  ")))
     #replace all occurrences of the required string
     data = data.replace('$C_EMAIL', 'c_email')
     #close the input file
-    fin.close()
-    #open the input file in write mode
-    fin = open("./stacks/devops/traefik/.env", "wt")
-    #overrite the input file with the resulting data
     fin.write(data)
     #close the file
     fin.close()
+    traefik_env_copy = shutil.copy('./stacks/devops/traefik/.env', '/opt/stack_dash/devops/traefik')
+    print ("*** Copied Traefik .env fie to /opt/stack_dash/devops/traefik. ***\n")
 
 main()
