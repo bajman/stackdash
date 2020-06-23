@@ -447,5 +447,133 @@ def guacamole_env_migration():
 def guacamole_compose():
     guacamole_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/guacamole/docker-compose.yml up -d', shell=True)
     print ("*** guacamole is deployed! ***")
+    
+    
+ #Bitwarden
 
+
+def bitwarden_env_write():
+    bitwarden_env_file = open("./containers/bitwarden/.env", "w+")
+    bitwarden_env_file_data = bitwarden_env_file.read()
+    
+    puid = bitwarden_env_file.write('PUID=1000\n')
+    pgid = bitwarden_env_file.write('PGID=1000\n')
+    userdir = bitwarden_env_file.write('USERDIR=/opt/stackdash\n')
+    
+    print ("\nPlease enter the subdomain you would like to use for Bitwarden [e.g., pass-example.com]\n")
+    user_domainname = bitwarden_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+
+    print ("\nPlease enter the directory you would like to use for Bitwarden's appdata\n")
+    user_client_id = bitwarden_env_file.write("BITWARDEN_DATA=" + input('Path for appdata: ') + "\n")
+
+    bitwarden_env_file.write(bitwarden_env_file_data)
+    bitwarden_env_file.close()
+
+    bitwarden_env_migration()
+
+def bitwarden_env_migration():   
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/bitwarden', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+        
+    stack_dash_dir_copy = shutil.copytree('./containers/bitwarden/', '/opt/stackdash/docker-appdata/bitwarden', dirs_exist_ok=True)
+    print ("*** Copied ./containers/bitwarden/ from Git Clone to /opt/stackdash/docker-appdata/bitwarden ***\n")
+      
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/bitwarden", shell=True)
+    print ("*** Corrected Bitwarden directory permissions. ***\n")
+
+    def bitwarden_compose()
+
+def bitwarden_compose():
+    bitwarden_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/bitwarden/docker-compose.yml up -d', shell=True)
+    print ("*** Bitwarden is deployed! ***")
+    
+ #Bookstack
+
+def bookstack_env_write():
+    bookstack_env_file = open("./containers/bookstack/.env", "w+")
+    bookstack_env_file_data = bookstack_env_file.read()
+    
+    puid = bookstack_env_file.write('PUID=1000\n')
+    pgid = bookstack_env_file.write('PGID=1000\n')
+    userdir = bookstack_env_file.write('USERDIR=/opt/stackdash\n')
+    
+    print ("\nPlease enter the subdomain you would like to use for Bookstack [e.g., wiki-example.com]\n")
+    user_domainname = bookstack_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+
+    print ("\nPlease enter the directory you would like to use for Bookstack's appdata\n")
+    user_client_id = bookstack_env_file.write("BOOKSTACK_DATA=" + input('Path for appdata: ') + "\n")
+
+    print ("\nPlease enter a strong password for Bookstacks's MYSQL user\n")
+    user_client_id = bookstack_env_file.write("BOOKSTACK_MYSQL_USER_PASSWORD=" + input('MYSQL User Password: ') + "\n")
+
+    print ("\nPlease enter a strong password for Bookstacks's MYSQL root user\n")
+    user_client_id = bookstack_env_file.write("BOOKSTACK_MYSQL_ROOT_PASSWORD=" + input('MYSQL Root Password: ') + "\n")
+
+    bookstack_env_file.write(bookstack_env_file_data)
+    bookstack_env_file.close()
+
+    bookstack_env_migration()
+
+def bookstack_env_migration():   
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/bookstack', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+        
+    stack_dash_dir_copy = shutil.copytree('./containers/bookstack/', '/opt/stackdash/docker-appdata/bookstack', dirs_exist_ok=True)
+    print ("*** Copied ./containers/bookstack/ from Git Clone to /opt/stackdash/docker-appdata/bookstack ***\n")
+      
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/bookstack", shell=True)
+    print ("*** Corrected Bookstack directory permissions. ***\n")
+
+    def bookstack_compose()
+
+def bookstack_compose():
+    bookstack_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/bookstack/docker-compose.yml up -d', shell=True)
+    print ("*** bookstack is deployed! ***")
+
+ #calibre-web
+
+def calibre_env_write():
+    calibre_env_file = open("./containers/calibre/.env", "w+")
+    calibre_env_file_data = calibre_env_file.read()
+    
+    puid = calibre_env_file.write('PUID=1000\n')
+    pgid = calibre_env_file.write('PGID=1000\n')
+    userdir = calibre_env_file.write('USERDIR=/opt/stackdash\n')
+    
+    print ("\nPlease enter the subdomain you would like to use for Calibre-Web [e.g., books-example.com]\n")
+    user_domainname = calibre_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+
+    print ("\nPlease enter the directory you would like to use for Calibre-Web's appdata\n")
+    user_client_id = calibre_env_file.write("calibre_DATA=" + input('Path for appdata: ') + "\n")
+
+    calibre_env_file.write(calibre_env_file_data)
+    calibre_env_file.close()
+
+    calibre_env_migration()
+
+def calibre_env_migration():   
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/calibre', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+        
+    stack_dash_dir_copy = shutil.copytree('./containers/calibre/', '/opt/stackdash/docker-appdata/calibre', dirs_exist_ok=True)
+    print ("*** Copied ./containers/calibre/ from Git Clone to /opt/stackdash/docker-appdata/calibre ***\n")
+      
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/calibre", shell=True)
+    print ("*** Corrected Calibre-Web's directory permissions. ***\n")
+
+    def calibre_compose()
+
+def calibre_compose():
+    calibre_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/calibre/docker-compose.yml up -d', shell=True)
+    print ("*** Calibre-Wen is deployed! ***")
+    
 main()
