@@ -23,23 +23,21 @@ def main():
 StackDash is a python3 script, designed to automate Docker installation on Ubunutu and deploy container stacks 
 with subdomain hosting. StackDash feautes a docker-engine install script, a docker containers/stack 
 deployment wizard, and preconfigured external access using HTTPS/TLS/OAuth 2.0.  \n\n\n
-  +----------------------------------------------------------------------------------------------+
-  |                                        StackDack Network                                     |
-  |                                                                                              |
-  |                                     +----------------------------------------------------+   |
-  |                                     |                                                    |   |
-  |    +------------+     OAuth 2.0     | +-----------------+   HTTPS/TLS  +---------------+ |   |
-  |    |            |    Google API     | |                | | LetsEncrypt |               | |   |
-  |    |            +-------------------> |    TRAEFIK 2   +--------------->     SERVER    | |   |
-  |    |  INTERNET  <-------------------| |     (Proxy)    <--------------+     (Docker)   | |   |
-  |    |            | Exposed Port Nos: | |                | Proxy Routing |               | |   |
-  |    |            |       80;443      | |                | Rules-Traefik |               | |   |
-  |    +------------+                   | +-----------------+              +---------------+ |   |
-  |                                     |                                                    |   |
-  |                                     +----------------------------------------------------+   |
-  |                                                       INTERNAL NETWORK                       |
-  |                                                                                              |
-  +----------------------------------------------------------------------------------------------+
+
+                                          StackDack Network                                     
+                                                                                                
+                                       +----------------------------------------------------+   
+                                       |                                                    |   
+      +------------+     OAuth 2.0     | +-----------------+   HTTPS/TLS  +---------------+ |   
+      |            |    Google API     | |                | | LetsEncrypt |               | |   
+      |            +-------------------> |    TRAEFIK 2   +--------------->     SERVER    | |   
+      |  INTERNET  <-------------------| |     (Proxy)    <--------------+     (Docker)   | |   
+      |            | Exposed Port Nos: | |                | Proxy Routing |               | |   
+      |            |       80;443      | |                | Rules-Traefik |               | |   
+      +------------+                   | +-----------------+              +---------------+ |   
+                                       |                                                    |   
+                                       +----------------------------------------------------+   
+                                                         INTERNAL NETWORK         
 \n\n
            ==============================================================================
              __   ___  __        __          __   __       ___              ___  __   __  
@@ -56,6 +54,7 @@ Type [c] to deploy individual containers.
                      __   ___  __        __          __  ___       __        __  
                     |  \ |__  |__) |    /  \ \ /    /__`  |   /\  /  ` |__/ /__` 
                     |__/ |___ |    |___ \__/  |     .__/  |  /~~\ \__, |  \ .__/ 
+                    
                     ============================================================
 \n
 Type [u] for a complete list of stacks you can deploy with StackDash.
