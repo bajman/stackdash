@@ -200,29 +200,8 @@ Do you want to include Traefik with your DevOps deployment?
     elif choice == "Q" or choice =="q":
         sys.exit
 
-def devops_env_write1():
 
-#writing base variables
-    devops_env_file = open("./stacks/devops/traefik/devops.env", "w+")
-    devops_env_file_data = devops_env_file.read()
-    
-    puid = devops_env_file.write('PUID=1000\n')
-    pgid = devops_env_file.write('PGID=1000\n')
-    userdir = devops_env_file.write('USERDIR=/opt/stack_dash\n')
-    c_email = devops_env_file.write('CF_API_EMAIL=C_EMAIL\n')
-    c_api = devops_env_file.write('CF_API_KEY=C_API\n')
-    domainname = devops_env_file.write('DOMAINNAME=YOUR_DOMAINNAME\n')
-    client_id = devops_env_file.write('CLIENT_ID=C_ID\n')
-    client_secret = devops_env_file.write('CLIENT_SECRET=C_SECRET\n')
-    secret = devops_env_file.write('SECRET=YOUR_SECRET\n')
-    whitelist = devops_env_file.write('WHITELIST=YOUR_WHITELIST\n')
-    
-    devops_env_file.write(devops_env_file_data)
-    devops_env_file.close()
-
-    devops_user_write2()
-
-def devops_user_write2():
+def devops_user_write1():
 
 #collecting personalized variables
     
@@ -247,15 +226,28 @@ def devops_user_write2():
     print ("[Google OAuth 2.0: 4/4] \n Please enter your Google APIs Whitelist Email Address [Your Google APIs Gmail address, e.g., example@gmail.com]")
     user_whitelist = input("Your Google API Gmail address: \n")
 
-    devops_env_replace()
+    devops_env_write2()
+    
+def devops_env_write2():
 
-def devops_env_replace():
-#replacing base variables with personal variables
-
+#writing base variables
     devops_env_file = open("./stacks/devops/traefik/devops.env", "w+")
     devops_env_file_data = devops_env_file.read()
     
-    devops_env_file_data =  devops_env_file_data.replace('C_MAIL', user_c_email)
+    puid = devops_env_file.write('PUID=1000\n')
+    pgid = devops_env_file.write('PGID=1000\n')
+    userdir = devops_env_file.write('USERDIR=/opt/stack_dash\n')
+    
+    print ("[Cloudflare: 1/3] Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]")
+    c_email = devops_env_file.write("CF_API_EMAIL=", input('Your Cloudflare Email: \n'))
+    
+    
+    c_api = devops_env_file.write('CF_API_KEY=", user_c_api\n')
+    domainname = devops_env_file.write('DOMAINNAME=YOUR_DOMAINNAME\n')
+    client_id = devops_env_file.write('CLIENT_ID=C_ID\n')
+    client_secret = devops_env_file.write('CLIENT_SECRET=C_SECRET\n')
+    secret = devops_env_file.write('SECRET=YOUR_SECRET\n')
+    whitelist = devops_env_file.write('WHITELIST=YOUR_WHITELIST\n')
     
     devops_env_file.write(devops_env_file_data)
     devops_env_file.close()
