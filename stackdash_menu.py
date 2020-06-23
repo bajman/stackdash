@@ -270,8 +270,7 @@ def devops_traefik():
 
     with open('devops_env', 'r+') as f:
         f.write('\n'.join(new_lines))
-
-    devops_env.close()
+        devops_env.close()
    
 
 main()
