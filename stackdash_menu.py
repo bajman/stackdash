@@ -209,14 +209,14 @@ Enter "yes" or "no" [or "m" to return to main menu; enter "q" to quit]:  """)
     elif choice == "Q" or choice =="q":
         sys.exit
 
-def devops_dir():
+def devops_traefik():
     make_proxy = subprocess.run("sudo docker network create proxy", shell=True)
     print("\n\n\n\n\n\n\n\n*** Created Docker network: proxy. *** \n")
     
-    mkdir_traefik_rules = subprocess.run("sudo mkdir /opt/stack_dash/devops/traefik/rules", shell=True)
+    mkdir_traefik_rules = subprocess.check_call("sudo mkdir /opt/stack_dash/devops/traefik/rules", shell=True)
     print ("*** Created Traefik Rules folder in /opt/stack_dash directory. *** \n")
     
-    traefik_rules_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/traefik/rules", shell=True)
+    traefik_rules_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/devops/traefik/rules", shell=True)
     print ("*** Corrected Traefik Rules folder permissions. ***\n")
     
     traefik_rules1_copy = shutil.copy('./stacks/devops/traefik/data/rules/middleware-chains.toml', '/opt/stack_dash/devops/traefik/rules')
@@ -249,17 +249,13 @@ def devops_dir():
     guacamole_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/apache_guacamole", shell=True)
     print ("*** Corrected Portainer folder permissions. ***\n")
     
-def devops_traefik():
-    mkdir_traefik = subprocess.run("sudo mkdir /opt/stack_dash/devops/traefik", shell=True)
-    print ("*** Created Traefik folder in /opt/stack_dash directory. *** \n")
-    traefik_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/traefik", shell=True)
-    print ("*** Corrected Traefik folder permissions. ***\n")
-    traefik_env_copy = shutil.copytree('./stacks/devops/traefik/', '/opt/stack_dash/devops/traefik/', dirs_exist_ok=True)
-    print ("*** Copied Traefik tree to /opt/stack_dash/devops/traefik. ***\n")
-
-def devops_env():
-    devops_env = open("/opt/stack_dash/devops/traefik/.env" "r+")
-    c_mail = devops_env.write(input(("[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  ")))
-    os.environ['CF_API_KEY'] = c_mail
+#    mkdir_traefik = subprocess.run("sudo mkdir /opt/stack_dash/devops/traefik", shell=True)
+#    print ("*** Created Traefik folder in /opt/stack_dash directory. *** \n")
+#    traefik_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/traefik", shell=True)
+#    print ("*** Corrected Traefik folder permissions. ***\n")
+#    traefik_env_copy = shutil.copytree('./stacks/devops/traefik/', '/opt/stack_dash/devops/traefik/', dirs_exist_ok=True)
+#    print ("*** Copied Traefik tree to /opt/stack_dash/devops/traefik. ***\n")   
+    c_mail_var = input('[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:\n')
+    os.environ['CF_API_KEY'] = c_mail_var
         
 main()
