@@ -233,59 +233,8 @@ devops_env.write((input("CLIENT_SECRET=12315415  "  )))
 devops_env.write((input("SECRET= " )))
 devops_env.write((input("WHITELIST= " )))
 
-
 # Docker Compose
-          
-    devops_traefik_compose = subprocess.run("docker-compose -f /opt/stack_dash/devops/traefik/docker-compose.yml up -d", capture_output=True, shell=True)
-    print ("*** Deployed DevOps with Traefik! ***\n")
-    
-          
-def traefik():
-    traefik_env = open("./traefik/.env", "w")
-    print("Add Environment Variables")
-    stringlist = []
-    stringlist.append((input("Enter DOMAINNAME=<your domain name> " )))
-    stringlist.append((input("Enter CLOUDFLARE_EMAIL=<your Cloudflare email address> " )))
-    stringlist.append((input("Enter CLOUDFLARE_API_KEY=<your Cloudflare API Key> " )))
-
-    traefik_install = subprocess.run("docker-compose -f ./traefik/docker-compose.yml up -d", shell=True)
-    print ("*** Installed Traefik 2. *** \n")
-    time.sleep(2)
-
-def portainer():
-    portainer_env = open("./portainer/.env", "w")
-    print("Add Environment Variables")
-    stringlist = []
-    stringlist.append((input("Enter DOMAINNAME=<your domain name> " )))
-
-    portainer_install = subprocess.run("docker-compose -f ./portainer/docker-compose.yml up -d", capture_output=True, shell=True)
-    print ("*** Installed Portainer. *** \n")
-    time.sleep(2)
-
-def watchtower():
-    watchtower_install = subprocess.run("docker-compose -f ./watchtower/docker-compose.yml up -d", capture_output=True, shell=True)
-    print ("*** Installed Watchtower. *** \n")
-    time.sleep(2)
-
-def apache_guacamole():
-    guacamole_env = open("./apache_guacamole/.env", "w")
-    print ("Add Environment Variables")
-    stringlist = [] 
-    stringlist.append((input("Enter DOMAINNAME=<your domain name> ")))
-    
-    guacamole_install = subprocess.run("docker-compose -f ./apache_guacamole/docker-compose.yml up -d", capture_output=True, shell=True)
-    print ("*** Installed Apache Guacamole. ***")
-    time.sleep(2)
-
-def docker_full():
-    docker_full_env = open("./docker_mgmnt/.env", "w")
-    stringlist = []
-    stringlist.append((input("Enter DOMAINNAME=<your domain name> " )))
-    stringlist.append((input("Enter CLOUDFLARE_EMAIL=<your Cloudflare email address> " )))
-    stringlist.append((input("Enter CLOUDFLARE_API_KEY=<your Cloudflare API Key> " )))
-
-    docker_full_install = subprocess.run("docker-compose -f ./docker_mgmnt/docker-compose.yml up -d", capture_output=True, shell=True)
-    print ("*** Installed Docker Management Stack ***")
-    time.sleep(2)
+devops_traefik_compose = subprocess.run("docker-compose -f /opt/stack_dash/devops/traefik/docker-compose.yml up -d", capture_output=True, shell=True)
+print ("*** Deployed DevOps with Traefik! ***\n")
 
 main()
