@@ -210,7 +210,7 @@ Enter "yes" or "no" [or "m" to return to main menu; enter "q" to quit]:  """)
 
 def devops_traefik():
     devops_env = open("./stacks/devops/traefik/.env", "r")
-    c_email.write((input("[Cloudflare – 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  "  )))
+    c_email = devops_env.write((input("[Cloudflare – 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  "  )))
    
     new_lines = []
     with open('devops_env,' 'r') as f:
