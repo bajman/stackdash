@@ -33,5 +33,5 @@ networks:
       - proxy
     volumes:
       - $CODE_SERVER_DATA/config.yaml:/config/code-server/config.yaml
-      - $CODE_SERVER_DATA//project:/project
+      - $CODE_SERVER_DATA/project:/project
     restart: unless-stopped
