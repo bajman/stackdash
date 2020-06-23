@@ -656,5 +656,44 @@ def fresh-rss_compose():
     fresh-rss_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/fresh-rss/docker-compose.yml up -d', shell=True)
     print ("*** Fresh RSS is deployed! ***")
 
+#GitLab
+
+def gitlab_env_write():
+    gitlab_env_file = open("./containers/gitlab/.env", "w+")
+    gitlab_env_file_data = gitlab_env_file.read()
+    
+    puid = gitlab_env_file.write('PUID=1000\n')
+    pgid = gitlab_env_file.write('PGID=1000\n')
+    userdir = gitlab_env_file.write('USERDIR=/opt/stackdash\n')
+    
+    print ("\nPlease enter the subdomain you would like to use for GitLab [e.g., gitlab-example.com]\n")
+    user_domainname = gitlab_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+
+    print ("\nPlease enter the directory you would like to use for GitLab's appdata\n")
+    user_client_id = gitlab_env_file.write("GITLAB_DATA=" + input('Path for appdata: ') + "\n")
+
+    gitlab_env_file.write(gitlab_env_file_data)
+    gitlab_env_file.close()
+
+    gitlab_env_migration()
+
+def gitlab_env_migration():   
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/gitlab', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+        
+    stack_dash_dir_copy = shutil.copytree('./containers/gitlab/', '/opt/stackdash/docker-appdata/gitlab', dirs_exist_ok=True)
+    print ("*** Copied ./containers/gitlab/ from Git Clone to /opt/stackdash/docker-appdata/gitlab ***\n")
+      
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/gitlab", shell=True)
+    print ("*** Corrected GitLab's directory permissions. ***\n")
+
+    def gitlab_compose()
+
+def gitlab_compose():
+    gitlab_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/gitlab/docker-compose.yml up -d', shell=True)
+    print ("*** GitLab is deployed! ***")
     
 main()
