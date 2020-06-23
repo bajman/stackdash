@@ -257,7 +257,7 @@ def devops_traefik():
     print ("*** Copied Traefik tree to /opt/stack_dash/devops/traefik. ***\n")
 
     c_email = input("[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  ") 
-    os.environ["CF_API_KEY'] = c_mail
+    os.environ["CF_API_KEY'] = "c_mail"
     print (os.environ["CF_API_KEY"])
         
 main()
