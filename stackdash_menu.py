@@ -210,7 +210,7 @@ Enter "yes" or "no" [or "m" to return to main menu; enter "q" to quit]:  """)
 
 def devops_traefik():
     #read input file
-    fin = open("./stacks/devops/traefik/.env", "a+")
+    fin = open("./stacks/devops/traefik/.env", "w")
     #read file contents to string
     data = fin.read()
     #add user input
