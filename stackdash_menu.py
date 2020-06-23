@@ -93,8 +93,9 @@ Please enter your choice:  """)
     else:
         print("You must only select either 1, 2, 3, or 4.")
         print("Please try again")
-============================================================================================================================================================
+
 print (""" 
+============================================================================================================================================================
 NOTE
 \n
 This version of StackDash is configured to support only Cloudflare DNS-managed domains. Additional domain/hosting providers will be made available in future releases of StackDash. 
@@ -102,8 +103,8 @@ For a full list of planned DNS providers see: https://docs.traefik.io/https/acme
 If you have domain name (e.g., example.com hosted by GoDaddy or Google Cloud) and would like to make Cloudflare your default DNS manager, you need to add two DNS domain records to 
 your Cloudflare account. For more information on adding vendor-specific records to your Cloudflare account, see: https://support.cloudflare.com/hc/en-us/articles/360020991331-Adding-vendor-specific-DNS-records-to-Cloudflare. You can transfer DNS management over to Cloudflare on domains hosted by Google Cloud, Amazon S3, Microsoft Azure, ClickFunnels, WPEngine, and Zoho. \n\n
 If you do not have a domain, you can purchase one through Cloudflare (about $8.XX per year) at https://www.cloudflare.com/products/registrar/
-\n\n\n""")
 ============================================================================================================================================================
+\n\n\n""")
 
 def docker_install():
     remove_old_docker = subprocess.run("sudo apt-get remove docker docker-engine docker.io containerd runc", capture_output=True, shell=True)
