@@ -21,7 +21,7 @@ def main():
                 ███████║   ██║   ██║  ██║╚██████╗██║  ██╗    ██████╔╝██║  ██║███████║██║  ██║
                 ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ \n\n\n\n\n
 StackDash is a python3 script designed to automate Docker installation on Ubuntu and deploy container stacks 
-with subdomain hosting. StackDash features: a Docker-Engine install script and Docker web-app containers/stack 
+with subdomain hosting. StackDash features a Docker-Engine install script and Docker web-app containers/stack 
 deployment wizards. All StackDash containers/stacks are preconfigured for external, subdomain access, using 
 HTTPS/TLS via LetsEncrypt and OAuth 2.0 via the Google Cloud Platform. See the Documentation for installation 
 instructions. \n\n\n
@@ -34,8 +34,8 @@ instructions. \n\n\n
                                                                                                                                                           
             ==============================================================================
 \n                                                                                                           
-Type [c] to deploy individual StackDash Containers.
-Type [w] for a complete list of web apps you can deploy with StackDash. 
+        Type [c] to deploy individual StackDash Containers.
+        Type [w] for a complete list of web apps you can deploy with StackDash. 
 \n
                               
                     ============================================================
@@ -45,13 +45,10 @@ Type [w] for a complete list of web apps you can deploy with StackDash.
                     
                     ============================================================
 \n
-Type [t] to deploy StackDash Stacks. 
-Type [u] for a complete list of stacks you can deploy with StackDash.
+        Type [t] to deploy StackDash Stacks. 
+        Type [u] for a complete list of stacks you can deploy with StackDash.
 \n\n
-                                ============================== \n
-Please enter your choice:                       """)
-    
-    print (""" 
+
                                           StackDack Network                                     
                                                                                                 
                                        +----------------------------------------------------+   
@@ -67,7 +64,7 @@ Please enter your choice:                       """)
                                        +----------------------------------------------------+   
                                                          INTERNAL NETWORK         
 \n
-Type [s] for a complete list of web app subdomain aliases used by StackDash. 
+        Type [s] for a complete list of web app subdomain aliases used by StackDash. 
 \n\n\n
 
 ============================================================================================================================================================
@@ -81,7 +78,8 @@ see: https://support.cloudflare.com/hc/en-us/articles/360020991331-Adding-vendor
 domains hosted by Google Cloud, Amazon S3, Microsoft Azure, ClickFunnels, WPEngine, and Zoho. \n
 If you do not have a domain, you can purchase one through Cloudflare (approx. $8.XX per year) at https://www.cloudflare.com/products/registrar/
 ============================================================================================================================================================
-\n\n\n""")
+\n\n\n\n
+Please enter your choice:                       """)
     if choice == "1" or choice =="1.":
         docker_install()
         print("*** Install Docker Engine **** ")
