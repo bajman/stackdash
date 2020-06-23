@@ -69,9 +69,12 @@ releases of StackDash. For a full list of planned DNS providers see: https://doc
     if choice == "i" or choice == "I":
         docker_install()
         print("*** Install Docker Engine **** ")
-    elif choice == "c" or choice :
-        stacks_main()
-        print("*** Deploy Stacks **** ")
+    elif choice == "c" or choice "C":
+        container_deploy()
+        print("*** Deploy Containers **** ")
+    elif choice == "w" or choice "W":
+        containers_list()
+        print("*** Container List **** ")
     elif choice == "3":
         containers_main()
         print("*** Deploy Containers **** ")
@@ -188,8 +191,8 @@ Watchtower  (Docker Image Updater)
 
     Watchtower is an application that will monitor your running Docker containers and watch for changes to the images that those containers were 
     originally started from. If watchtower detects that an image has changed, it will automatically restart the container using the new image.
-
     
+    """)
 
 def docker_install():
     remove_old_docker = subprocess.check_call("sudo apt-get remove docker docker-engine docker.io containerd runc", shell=True)
@@ -212,9 +215,60 @@ def docker_install():
 
     docker_status = subprocess.check_call("sudo systemctl status docker", shell=True)
     print ("*** Docker installation completed! *** \n")
-    
     main()
-  
+
+def stacks_main():
+    print("\n Stack Deploy Menu \n")
+    choice = input("""                           
+    
+                                            1.   DevOps Stack
+                                                    
+                                                    Apache Guacamole        (clientless remote desktop)
+                                                    GitLab                  (private repo, CI/CD pipeline)
+                                                    Netdata                 (realtime server metrics)
+                                                    Portainer               (GUI Docker manager)
+                                                    Traefik                 (Reverse proxy & routing service)
+                                                    Watchtower              (Keeps Docker images up-to-date)
+                                                    Code-Server             (VS Code source code editor)
+                                                    
+                        
+                                            2.   Data Stack
+                                            
+                                                    Duplicati               (Server and cloud backup service)
+                                                    Bitwarden               (Selfhosted password manager)
+                                                    Bookstack               (Wiki)
+                                                    Calibre                 (eBooks library management)
+                                                    Grocy                   (Grocery and household management)
+                                                    Nextcloud               (cloud storage account)
+                                                    
+                                            3.   Media Stack
+                                            
+                                                    Airsonic                (music & podcast streaming service)
+                                                    Fresh RSS               (RSS news reader)
+                                                    Jackett                 (Torrent indexer)
+                                                    Piwigo                  (Photo management)
+                                                    Radarr                  (Movie torrent search)
+                                                    Tautulli                (Media monitor)
+                                                    QBittorrent             (Torrent client)
+                                                    
+                                            4.   Main Menu
+                                            
+                                            
+                                            5.   Quit
+                       
+        Enter Stack No. : """)
+
+    if choice == "1":
+        devops_env()
+    if choice == "2":
+        data_stack()
+    if choice == "3":
+        media_stack()
+    if choice == "M" or choice == "m":
+        main()
+    elif choice == "Q" or choice =="q":
+        sys.exit
+
 def devops_env():
     
     choice = input("""
