@@ -161,7 +161,7 @@ def stacks_main():
         devops_env()
     if choice == "2":
         data_stack()
-     if choice == "3":
+    if choice == "3":
         media_stack()
     if choice == "M" or choice == "m":
         main()
