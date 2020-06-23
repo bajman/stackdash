@@ -96,38 +96,30 @@ If you do not have a domain, you can purchase one through Cloudflare (approx. $8
 \n\n\n""")
 
 def docker_install():
-    remove_old_docker = subprocess.run("sudo apt-get remove docker docker-engine docker.io containerd runc", capture_output=True, shell=True)
+    remove_old_docker = subprocess.check_call("sudo apt-get remove docker docker-engine docker.io containerd runc", shell=True)
     print("\n\n\n\n\n\n\n\n*** Removed older versions of Docker. *** \n")
-    time.sleep(2)
 
-    update = subprocess.run("sudo apt-get update", capture_output=True, shell=True)
+    update = subprocess.check_call("sudo apt-get update", shell=True)
     print ("*** Downloaded package information from all configured resources. *** \n")
     
-    https_repo = subprocess.run("sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y", capture_output=True, shell=True)
+    https_repo = subprocess.check_call("sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y", shell=True)
     print ("*** Updated the apt index and install packages to allow apt to use a repository over HTTPS. ***\n")
-    time.sleep(2)
 
-    gpg_key = subprocess.run("curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -", capture_output=True, shell=True)
+    gpg_key = subprocess.check_call("curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -", shell=True)
     print ("*** Added Docker's official GPG key. *** \n")
-    time.sleep(2)
 
-    docker_repo = subprocess.run("sudo add-apt-repository 'deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable'", capture_output=True, shell=True)
+    docker_repo = subprocess.check_call("sudo add-apt-repository 'deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable'", shell=True)
     print ("*** Set up Docker's stable repository. *** \n")
-    time.sleep(2)
 
-    install = subprocess.run("sudo apt-get install docker-ce docker-ce-cli containerd.io", capture_output=True, shell=True)
+    install = subprocess.check_call("sudo apt-get install docker-ce docker-ce-cli containerd.io", shell=True)
     print ("*** Installed the latest version of Docker Engine. *** \n")
-    time.sleep(2)
 
-    docker_status = subprocess.run("sudo systemctl status docker", shell=True)
+    docker_status = subprocess.check_call("sudo systemctl status docker", shell=True)
     print ("*** Docker installation completed! *** \n")
     main()
 
 def stacks_main():
     print("\n Stack Deploy Menu \n")
-    #time.sleep(1)
-    print()
-
     choice = input("""                           
     
                                             1.   DevOps Stack
@@ -184,16 +176,14 @@ def stacks_main():
         sys.exit
 
 def devops_stack():
-    mkdir_stack_dash = subprocess.run("sudo mkdir /opt/stack_dash/", capture_output=True, shell=True)
+    mkdir_stack_dash = subprocess.check_call("sudo mkdir /opt/stack_dash/", shell=True)
     print("\n\n\n\n\n\n\n\n*** Created stack_dash root folder in /opt/ directory. *** \n")
-    time.sleep(2)
 
-    mkdir_devops = subprocess.run("sudo mkdir /opt/stack_dash/devops", capture_output=True, shell=True)
+    mkdir_devops = subprocess.check_call("sudo mkdir /opt/stack_dash/devops", shell=True)
     print ("*** Created DevOps folder in /opt/stack_dash directory. *** \n")
     
-    dir_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/devops", capture_output=True, shell=True)
+    dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops", shell=True)
     print ("*** Corrected DevOps folder permissions. ***\n")
-    time.sleep(2)
     
     print("\n DevOps Stack: Reverse Proxy by Traefik 2 \n")
     #time.sleep(1)
@@ -219,24 +209,20 @@ Enter "yes" or "no" [or "m" to return to main menu; enter "q" to quit]:  """)
         sys.exit
 
 def devops_traefik():
-    make_proxy = subprocess.run("sudo docker network create proxy", capture_output=True, shell=True)
+    make_proxy = subprocess.check_call("sudo docker network create proxy", shell=True)
     print("\n\n\n\n\n\n\n\n*** Created Docker network: proxy. *** \n")
-    time.sleep(2)
 
-    mkdir_traefik = subprocess.run("sudo mkdir /opt/stack_dash/devops/traefik", capture_output=True, shell=True)
+    mkdir_traefik = subprocess.check_call("sudo mkdir /opt/stack_dash/devops/traefik", shell=True)
     print ("*** Created Traefik folder in /opt/stack_dash directory. *** \n")
     
-    traefik_dir_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/devops/traefik", capture_output=True, shell=True)
+    traefik_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/traefik", shell=True)
     print ("*** Corrected Traefik folder permissions. ***\n")
     
-    mkdir_traefik_rules = subprocess.run("sudo mkdir /opt/stack_dash/devops/traefik/rules", capture_output=True, shell=True)
+    mkdir_traefik_rules = subprocess.check_call("sudo mkdir /opt/stack_dash/devops/traefik/rules", shell=True)
     print ("*** Created Traefik Rules folder in /opt/stack_dash directory. *** \n")
     
-    traefik_rules_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/devops/traefik/rules", capture_output=True, shell=True)
+    traefik_rules_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/traefik/rules", shell=True)
     print ("*** Corrected Traefik Rules folder permissions. ***\n")
-    
-    traefik_compose_copy = shutil.copy('./stacks/devops/traefik/docker-compose.yml', '/opt/stack_dash/devops/traefik')
-    print ("*** Copied Traefik Docker Compose file to /opt/stack_dash/devops/traefik. ***\n")
     
     traefik_rules1_copy = shutil.copy('./stacks/devops/traefik/data/rules/middleware-chains.toml', '/opt/stack_dash/devops/traefik/rules')
     print ("*** Copied Traefik middleware-chain.toml to /opt/stack_dash/devops/traefik/rules. ***\n")
@@ -244,39 +230,40 @@ def devops_traefik():
     traefik_rules2_copy = shutil.copy('./stacks/devops/traefik/data/rules/middlewares.toml', '/opt/stack_dash/devops/traefik/rules')
     print ("*** Copied Traefik data and middlewares.toml to /opt/stack_dash/devops/traefik/rules. ***\n")
     
-    mkdir_gitlab = subprocess.run("sudo mkdir /opt/stack_dash/devops/gitlab", capture_output=True, shell=True)
+    mkdir_gitlab = subprocess.check_call("sudo mkdir /opt/stack_dash/devops/gitlab", shell=True)
     print ("*** Created GitLab folder in /opt/stack_dash directory. *** \n")
     
-    gitlab_dir_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/devops/gitlab", capture_output=True, shell=True)
+    gitlab_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/gitlab", shell=True)
     print ("*** Corrected GitLab folder permissions. ***\n")
     
-    mkdir_coder = subprocess.run("sudo mkdir /opt/stack_dash/devops/coder", capture_output=True, shell=True)
+    mkdir_coder = subprocess.check_call("sudo mkdir /opt/stack_dash/devops/coder", shell=True)
     print ("*** Created coder folder in /opt/stack_dash directory. *** \n")
     
-    coder_dir_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/devops/coder", capture_output=True, shell=True)
+    coder_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/coder", shell=True)
     print ("*** Corrected coder folder permissions. ***\n")
 
-    mkdir_portainer = subprocess.run("sudo mkdir /opt/stack_dash/devops/portainer", capture_output=True, shell=True)
+    mkdir_portainer = subprocess.check_call("sudo mkdir /opt/stack_dash/devops/portainer", shell=True)
     print ("*** Created Portainer folder in /opt/stack_dash directory. *** \n")
     
-    portainer_dir_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/devops/portainer", capture_output=True, shell=True)
+    portainer_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/portainer", shell=True)
     print ("*** Corrected Portainer folder permissions. ***\n")
     
-    mkdir_apache_guacamole = subprocess.run("sudo mkdir /opt/stack_dash/devops/apache_guacamole", capture_output=True, shell=True)
+    mkdir_apache_guacamole = subprocess.check_call("sudo mkdir /opt/stack_dash/devops/apache_guacamole", shell=True)
     print ("*** Created Apache Guacamole folder in /opt/stack_dash directory. *** \n")
     
-    guacamole_dir_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/devops/apache_guacamole", capture_output=True, shell=True)
+    guacamole_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/apache_guacamole", shell=True)
     print ("*** Corrected Portainer folder permissions. ***\n")
     
-    f1 = open('./stacks/devops/traefik/.env', 'a+')
+    f1 = open('/stacks/devops/traefik/.env', 'a+')
     for line in f1:
         f1.write(line.replace('$C_EMAIL', 'input("[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  "'))
+        print ("*** Wrote your Cloudflare Email Address to the .env file. ***\n")
     f1.close()
-
+    
     traefik_env_copy = shutil.copy('./stacks/devops/traefik/.env', '/opt/stack_dash/devops/traefik')
     print ("*** Copied Traefik .env fie to /opt/stack_dash/devops/traefik. ***\n")
 
-    devops_traefik_compose = subprocess.run("docker-compose -f /opt/stack_dash/devops/traefik/docker-compose.yml up -d", capture_output=True, shell=True)
+    devops_traefik_compose = subprocess.check_call("docker-compose -f /opt/stack_dash/devops/traefik/docker-compose.yml up -d", shell=True)
     print ("*** Deployed DevOps with Traefik! ***\n")
 
 main()
