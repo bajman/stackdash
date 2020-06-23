@@ -14,7 +14,6 @@ def main():
     print(" ")
 
     choice = input("""                           
-
                 ███████╗████████╗ █████╗  ██████╗██╗  ██╗    ██████╗  █████╗ ███████╗██╗  ██╗
                 ██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝    ██╔══██╗██╔══██╗██╔════╝██║  ██║
                 ███████╗   ██║   ███████║██║     █████╔╝     ██║  ██║███████║███████╗███████║
@@ -57,7 +56,6 @@ Type [c] to deploy individual containers.
                      __   ___  __        __          __  ___       __        __  
                     |  \ |__  |__) |    /  \ \ /    /__`  |   /\  /  ` |__/ /__` 
                     |__/ |___ |    |___ \__/  |     .__/  |  /~~\ \__, |  \ .__/ 
-
                     ============================================================
 \n
 Type [u] for a complete list of stacks you can deploy with StackDash.
@@ -87,12 +85,10 @@ NOTE: CLOUDFARE DNS ONLY
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 This version of StackDash is configured to support only Cloudflare DNS-managed domains. Additional domain/hosting providers will be made available in future 
 releases of StackDash. For a full list of planned DNS providers see: https://docs.traefik.io/https/acme/#providers.\n
-
 If you have domain name (e.g., example.com hosted by GoDaddy or Google Cloud) and would like to make Cloudflare your default DNS manager, you need to add 
 two DNS domain records to your a newly created Cloudflare account. For more information on adding vendor-specific records to your Cloudflare account, 
 see: https://support.cloudflare.com/hc/en-us/articles/360020991331-Adding-vendor-specific-DNS-records-to-Cloudflare. Cloudflare can manage the DNS of 
 domains hosted by Google Cloud, Amazon S3, Microsoft Azure, ClickFunnels, WPEngine, and Zoho. \n
-
 If you do not have a domain, you can purchase one through Cloudflare (approx. $8.XX per year) at https://www.cloudflare.com/products/registrar/
 ============================================================================================================================================================
 \n\n\n""")
@@ -144,7 +140,6 @@ def stacks_main():
                                                     Grocy                   (Grocery and household management)
                                                     Nextcloud               (cloud storage account)
                                                     
-
                                             3.   Media Stack
                                             
                                                     Airsonic                (music & podcast streaming service)
@@ -155,7 +150,6 @@ def stacks_main():
                                                     Tautulli                (Media monitor)
                                                     QBittorrent             (Torrent client)
                                                     
-
                                             4.   Main Menu
                                             
                                             
@@ -199,33 +193,8 @@ Do you want to include Traefik with your DevOps deployment?
         main()
     elif choice == "Q" or choice =="q":
         sys.exit
-
-
-def devops_env_write1():
-
-#collecting personalized variables
-
-    print ("[Cloudflare: 2/3] Please enter your Cloudflare Global API Key, [See dash.cloudflare.com: My Profile >  API Tokens > API Keys, e.g., bLa1boPhZL0VCerk35XWmbPCaCyWjDaCVx4cM]: Tokens > API Keys, e.g., bLa1boPhZL0VCerk35XWmbPCaCyWjDaCVx4cM]")
-    user_c_api = input("Your Cloudflare Global API Key: \n")
-
-    print ("[Cloudflare: 3/3] Please enter the domain name you would like to use for the DevOps Stack [e.g., devops-example.com]")
-    user_domainname = input("Your Domain name: \n")
-
-    print ("[Google OAuth 2.0: 1/4] Please enter your Google APIs Client-ID [e.g., MaCcXoD05h7EmkGXqN07G6TJjcTKJYMmpp8tXsdIsILYSp1IqrX.apps.googleusercontent.com]")
-    user_client_id = input("Your Google API Client ID: \n")
-
-    print ("[Google OAuth 2.0: 2/4] \n Please enter your Google APIs Client-Secret [E.g., XB6RDMRDrcGAwi3hwdPIPKSr]")
-    user_client_secret = input("Your Google API Client-Secret: \n")
-
-    print ("[Google OAuth 2.0: 3/4] \n Please enter your Google APIs Secret [E.g., rKyKKgVl9IlzxUfg1CJmjZwj5zk5LMzo]")
-    user_secret = input("Your Google API Secret: \n")
-
-    print ("[Google OAuth 2.0: 4/4] \n Please enter your Google APIs Whitelist Email Address [Your Google APIs Gmail address, e.g., example@gmail.com]")
-    user_whitelist = input("Your Google API Gmail address: \n")
-
-    devops_env_write2()
     
-def devops_env_write2():
+def devops_env_write1():
 
 #writing base variables
     devops_env_file = open("./stacks/devops/traefik/devops.env", "w+")
@@ -236,16 +205,26 @@ def devops_env_write2():
     userdir = devops_env_file.write('USERDIR=/opt/stack_dash\n')
     
     print ("[Cloudflare: 1/3] Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]")
-    c_email = devops_env_file.write("CF_API_EMAIL=" + input('Your Cloudflare Email: \n'))
+    user_c_email = devops_env_file.write("CF_API_EMAIL=" + input('Your Cloudflare Email: \n'))
     
-    
-    c_api = devops_env_file.write('CF_API_KEY=", user_c_api\n')
-    domainname = devops_env_file.write('DOMAINNAME=YOUR_DOMAINNAME\n')
-    client_id = devops_env_file.write('CLIENT_ID=C_ID\n')
-    client_secret = devops_env_file.write('CLIENT_SECRET=C_SECRET\n')
-    secret = devops_env_file.write('SECRET=YOUR_SECRET\n')
-    whitelist = devops_env_file.write('WHITELIST=YOUR_WHITELIST\n')
-    
+    print ("[Cloudflare: 2/3] Please enter your Cloudflare Global API Key, [See dash.cloudflare.com: My Profile >  API Tokens > API Keys, e.g., bLa1boPhZL0VCerk35XWmbPCaCyWjDaCVx4cM]: Tokens > API Keys, e.g., bLa1boPhZL0VCerk35XWmbPCaCyWjDaCVx4cM]")
+    user_c_api = devops_env_file.write("CF_API_KEY=" + input('Your Cloudflare Global API Key: \n'))
+
+    print ("[Cloudflare: 3/3] Please enter the domain name you would like to use for the DevOps Stack [e.g., devops-example.com]")
+    user_domainname = devops_env_file.write("DOMAINNAME=" + input('Your Domain Name: \n'))
+
+    print ("[Google OAuth 2.0: 1/4] Please enter your Google APIs Client-ID [e.g., MaCcXoD05h7EmkGXqN07G6TJjcTKJYMmpp8tXsdIsILYSp1IqrX.apps.googleusercontent.com]")
+    user_client_id = devops_env_file.write("CLIENT_ID=" + input('Your Google API Client ID: \n'))
+
+    print ("[Google OAuth 2.0: 2/4] \n Please enter your Google APIs Client-Secret [E.g., XB6RDMRDrcGAwi3hwdPIPKSr]")
+    user_client_secret = devops_env_file.write("CLIENT_SECRET=" + input('Your Google API Client Secret: \n'))
+
+    print ("[Google OAuth 2.0: 3/4] \n Please enter your Google APIs Secret [E.g., rKyKKgVl9IlzxUfg1CJmjZwj5zk5LMzo]")
+    user_secret = devops_env_file.write("SECRET=" + input('Your Google API Secret: \n'))
+
+    print ("[Google OAuth 2.0: 4/4] \n Please enter the Gmail address you used to sign-up with Google APIs, aka: the Whitelist Email Address [Your Google APIs Gmail address, e.g., example@gmail.com]")
+    user_whitelist = devops_env_file.write("WHITELIST=" + input('Your Google API Gmail Address: \n'))
+
     devops_env_file.write(devops_env_file_data)
     devops_env_file.close()
 
@@ -253,7 +232,7 @@ def devops_env_write2():
 
 def devops_env_migration():
     make_proxy = subprocess.run("sudo docker network create proxy", shell=True)
-    print("\n\n\n\n\n\n\n\n*** Created Docker network: proxy. *** \n")
+    print("\n\n*** Created Docker network: proxy. *** \n")
     
     mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/', shell=True)
     print ("*** Created /opt/stackdash/ directory ***\n")
