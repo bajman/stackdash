@@ -262,7 +262,8 @@ def devops_traefik():
     user_c_email = input("[Cloudflare – 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  ")
     
     new_lines = []
-    with open('devops_env,' 'r+') as f:
+    with open('devops_env', 'r+') as f:
+        content = f.read()
         for line in f:
             if 'CF_API_EMAIL=C_EMAIL' in line:
                 new_lines.append(line.replace('C_EMAIL', 'user_c_email'))
