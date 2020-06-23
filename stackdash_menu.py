@@ -201,7 +201,7 @@ Do you want to include Traefik with your DevOps deployment?
         sys.exit
 
 
-def devops_user_write1():
+def devops_env_write1():
 
 #collecting personalized variables
     
