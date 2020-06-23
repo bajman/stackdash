@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+
+########################### NETWORKS
+networks:
+  proxy:
+    external:
+      name: proxy
+
+# Grocy
+
+  grocy:
+    image: linuxserver/grocy
+    container_name: grocy
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - $GROCY_DATA/config:/config
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.grocy-rtr.entrypoints=https"
+      - "traefik.http.routers.grocy-rtr.rule=Host(`grocy.$DOMAINNAME`)"
+      - "traefik.http.routers.grocy-rtr.tls=true"
+      ## Middlewares
+#      - "traefik.http.routers.backups-rtr.middlewares=chain-authelia@file,add-backups" 
+#      - "traefik.http.middlewares.add-backups.addPrefix.prefix=/backups"
+      ## HTTP Services
+      - "traefik.http.routers.grocy-rtr.service=grocy-svc"
+      - "traefik.http.services.grocy-svc.loadbalancer.server.port=80"
+      - "traefik.http.routers.grocy-rtr.middlewares=chain-oauth@file"
