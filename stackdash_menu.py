@@ -19,7 +19,7 @@ def main():
                 ███████╗   ██║   ███████║██║     █████╔╝     ██║  ██║███████║███████╗███████║
                 ╚════██║   ██║   ██╔══██║██║     ██╔═██╗     ██║  ██║██╔══██║╚════██║██╔══██║
                 ███████║   ██║   ██║  ██║╚██████╗██║  ██╗    ██████╔╝██║  ██║███████║██║  ██║
-                ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ \n\n\n\n\n
+                ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ \n\n\n
 StackDash is a python3 script designed to automate Docker installation on Ubuntu and deploy container stacks 
 with subdomain hosting. StackDash features a Docker-Engine install script and Docker web-app containers/stack 
 deployment wizards. All StackDash containers/stacks are preconfigured for external, subdomain access, using 
@@ -65,7 +65,7 @@ instructions. \n\n\n
                                                          INTERNAL NETWORK         
 \n
         Type [s] for a complete list of web app subdomain aliases used by StackDash. 
-\n\n\n
+\n\n
 
 ============================================================================================================================================================
 NOTE: CLOUDFARE DNS ONLY
@@ -78,7 +78,7 @@ see: https://support.cloudflare.com/hc/en-us/articles/360020991331-Adding-vendor
 domains hosted by Google Cloud, Amazon S3, Microsoft Azure, ClickFunnels, WPEngine, and Zoho. \n
 If you do not have a domain, you can purchase one through Cloudflare (approx. $8.XX per year) at https://www.cloudflare.com/products/registrar/
 ============================================================================================================================================================
-\n\n\n\n
+\n\n
 Please enter your choice:                       """)
     if choice == "1" or choice =="1.":
         docker_install()
