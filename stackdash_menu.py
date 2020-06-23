@@ -60,7 +60,7 @@ Type [c] to deploy individual containers.
 \n
 Type [u] for a complete list of stacks you can deploy with StackDash.
 Type [s] for a complete list of web app subdomain aliases used by StackDash. 
-ype [t] to deploy the Data, DevOps, or Media StackDash Stacks. 
+Type [t] to deploy the Data, DevOps, or Media StackDash Stacks. 
 \n\n
                                 ============================== \n
     Please enter your choice:  """)
@@ -268,15 +268,15 @@ def devops_traefik():
     guacamole_dir_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/devops/apache_guacamole", capture_output=True, shell=True)
     print ("*** Corrected Portainer folder permissions. ***\n")
     
-f1 = open('./stacks/devops/traefik/.env', 'a+')
-for line in f1:
-    f1.write(line.replace('$C_EMAIL', 'input("[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  "'))
-f1.close()
+    f1 = open('./stacks/devops/traefik/.env', 'a+')
+    for line in f1:
+        f1.write(line.replace('$C_EMAIL', 'input("[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  "'))
+    f1.close()
 
-traefik_env_copy = shutil.copy('./stacks/devops/traefik/.env', '/opt/stack_dash/devops/traefik')
-print ("*** Copied Traefik .env fie to /opt/stack_dash/devops/traefik. ***\n")
+    traefik_env_copy = shutil.copy('./stacks/devops/traefik/.env', '/opt/stack_dash/devops/traefik')
+    print ("*** Copied Traefik .env fie to /opt/stack_dash/devops/traefik. ***\n")
 
-devops_traefik_compose = subprocess.run("docker-compose -f /opt/stack_dash/devops/traefik/docker-compose.yml up -d", capture_output=True, shell=True)
-print ("*** Deployed DevOps with Traefik! ***\n")
+    devops_traefik_compose = subprocess.run("docker-compose -f /opt/stack_dash/devops/traefik/docker-compose.yml up -d", capture_output=True, shell=True)
+    print ("*** Deployed DevOps with Traefik! ***\n")
 
 main()
