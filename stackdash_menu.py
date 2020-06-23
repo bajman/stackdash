@@ -219,7 +219,7 @@ def devops_traefik():
                 new_lines.append(line.replace('C_EMAIL', 'c_email'))
 
     with open('devops_env', 'a+') as f:
-        f.write(new_lines)
+        f.write('\n'.join(new_lines))
 
     devops_env.close()
     
