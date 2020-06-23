@@ -696,4 +696,87 @@ def gitlab_compose():
     gitlab_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/gitlab/docker-compose.yml up -d', shell=True)
     print ("*** GitLab is deployed! ***")
     
+#Grocy
+
+def grocy_env_write():
+    grocy_env_file = open("./containers/grocy/.env", "w+")
+    grocy_env_file_data = grocy_env_file.read()
+    
+    puid = grocy_env_file.write('PUID=1000\n')
+    pgid = grocy_env_file.write('PGID=1000\n')
+    userdir = grocy_env_file.write('USERDIR=/opt/stackdash\n')
+    
+    print ("\nPlease enter the subdomain you would like to use for Grocy [e.g., grocy-example.com]\n")
+    user_domainname = grocy_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+
+    print ("\nPlease enter the directory you would like to use for Grocy's appdata\n")
+    user_client_id = grocy_env_file.write("GROCY_DATA=" + input('Path for appdata: ') + "\n")
+
+    grocy_env_file.write(grocy_env_file_data)
+    grocy_env_file.close()
+
+    grocy_env_migration()
+
+def grocy_env_migration():   
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/grocy', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+        
+    stack_dash_dir_copy = shutil.copytree('./containers/grocy/', '/opt/stackdash/docker-appdata/grocy', dirs_exist_ok=True)
+    print ("*** Copied ./containers/grocy/ from Git Clone to /opt/stackdash/docker-appdata/grocy ***\n")
+      
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/grocy", shell=True)
+    print ("*** Corrected Grocy's directory permissions. ***\n")
+
+    def grocy_compose()
+
+def grocy_compose():
+    grocy_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/grocy/docker-compose.yml up -d', shell=True)
+    print ("*** Grocy is deployed! ***")
+    
+ #Jackett
+
+def jackett_env_write():
+    jackett_env_file = open("./containers/jackett/.env", "w+")
+    jackett_env_file_data = jackett_env_file.read()
+    
+    puid = jackett_env_file.write('PUID=1000\n')
+    pgid = jackett_env_file.write('PGID=1000\n')
+    userdir = jackett_env_file.write('USERDIR=/opt/stackdash\n')
+    
+    print ("\nPlease enter the subdomain you would like to use for Jackett [e.g., jackett-example.com]\n")
+    user_domainname = jackett_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+
+    print ("\nPlease enter the directory you would like to use for Jackett's appdata\n")
+    user_client_id = jackett_env_file.write("JACKETT_DATA=" + input('Path for appdata: ') + "\n")
+
+    print ("\nPlease enter the directory you would like to use for Jackett's download folder\n")
+    user_client_id = jackett_env_file.write("JACKETT_DOWNLOAD=" + input('Path for downloads: ') + "\n")
+
+    jackett_env_file.write(jackett_env_file_data)
+    jackett_env_file.close()
+
+    jackett_env_migration()
+
+def jackett_env_migration():   
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/jackett', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+        
+    stack_dash_dir_copy = shutil.copytree('./containers/jackett/', '/opt/stackdash/docker-appdata/jackett', dirs_exist_ok=True)
+    print ("*** Copied ./containers/jackett/ from Git Clone to /opt/stackdash/docker-appdata/jackett ***\n")
+      
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/jackett", shell=True)
+    print ("*** Corrected Jackett's directory permissions. ***\n")
+
+    def jackett_compose()
+
+def jackett_compose():
+    jackett_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/jackett/docker-compose.yml up -d', shell=True)
+    print ("*** Jackett is deployed! ***")
+    
 main()
