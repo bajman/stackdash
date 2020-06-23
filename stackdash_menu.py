@@ -181,21 +181,27 @@ def devops_stack():
     make_proxy = subprocess.run("sudo docker network create proxy", shell=True)
     print("\n\n\n\n\n\n\n\n*** Created Docker network: proxy. *** \n")
     
-    stack_dash_dir_copy = shutil.copytree('./stacks/', '/opt/stack_dash/stacks', dirs_exist_ok=True)
-    print ("*** Copied Traefik Directory tree to /opt/stack_dash/ ***\n")   
-           
-    stack_dash_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/stacks", shell=True)
-    print ("*** Corrected Portainer folder permissions. ***\n")
+    mkdir_stack_dash = subprocess.check_call('sudo mkdir /opt/stack_dash/', shell=True)
+    print ("*** Created /opt/stack_dash/ directory ***\n")
     
+    mkdir_stack_stacks = subprocess.check_call('sudo mkdir /opt/stack_dash/stacks', shell=True)
+    print ("*** Created /opt/stack_dash/stacks directory ***\n")
+    
+    stack_dash_dir_copy = shutil.copytree('./stacks/', '/opt/stack_dash/stacks', dirs_exist_ok=True)
+    print ("*** Copied Traefik Directory tree to /opt/stack_dash/ ***\n")
+    
+    stack_dash_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/", shell=True)
+    print ("*** Corrected Portainer folder permissions. ***\n")
+               
     choice = input("""
     
 Do you want to include Traefik with your DevOps deployment?
               
-   Type "yes" if you don't have Traefik and wish to deploy it with the DevOps Stack, or 
+   Type "YES" if you want to deploy the DevOps Stack with Traefik 2
                                                
-   Type "no" if you already have Traefik running and don't need to deploy it with DevOps Stack
+   Type "NO" if you already have a proxy running and don't need to deploy the DevOps Stack with Traefik 2 
                                  
-Enter "yes" or "no" [or "m" to return to main menu; enter "q" to quit]:  """)
+[Or enter "m" to return to the main menu or enter "q" to quit]: """)
             
     if choice == "yes" or choice == "Yes":
         devops_env()
