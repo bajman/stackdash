@@ -267,8 +267,6 @@ def devops_traefik():
         for line in f:
             if 'C_EMAIL' in line:
                 new_lines.append(line.replace('C_EMAIL', 'input("[Cloudflare – 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  ")')
-
-    with open('devops_env', 'r+') as f:
         f.write('\n'.join(new_lines))
         f.close()
   
