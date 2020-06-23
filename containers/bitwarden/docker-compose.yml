@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+
+########################### NETWORKS
+networks:
+  proxy:
+    external:
+      name: proxy
+
+bitwarden:
+    container_name: bitwarden
+    image: bitwardenrs/server:alpine
+    restart: always
+    volumes:
+      - $BITWARDEN/:/data/ 
+    expose: 
+      - 80
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.bitwarden-rtr.entrypoints=https"
+      - "traefik.http.routers.bitwarden-rtr.rule=Host(`auth.$DOMAINNAME`)"
+      - "traefik.http.routers.bitwarden-rtr.tls=true"
+      ## Middlewares
+#      - "traefik.http.routers.backups-rtr.middlewares=chain-authelia@file,add-backups" 
+#      - "traefik.http.middlewares.add-backups.addPrefix.prefix=/backups"
+      ## HTTP Services
+      - "traefik.http.routers.bitwarden-rtr.service=bitwarden-svc"
+      - "traefik.http.services.bitwarden-svc.loadbalancer.server.port=80"  
+      - "traefik.http.routers.bitwarden-rtr.middlewares=chain-oauth@file"
