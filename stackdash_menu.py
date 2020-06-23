@@ -262,7 +262,7 @@ def devops_traefik():
     
     print ("[Cloudflare: 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]: ")
     cmailvar = input('Cloudflare Email: ')
-    echo = subprocess.Popen(["echo", "cmailvar"], stdout=subprocess.PIPE, shell=True) 
+    echo = subprocess.run(["echo", "CF_API_EMAIL=", "cmailvar"], shell=True) 
     print ("\n Environmental variable added")
 
         
