@@ -218,23 +218,53 @@ Do you want to include Traefik with your DevOps deployment?
         sys.exit
 
 def devops_env():
-    print ("[Cloudflare: 1/3] - Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]")
-    cmailvar = input('Cloudflare Email: ')
-    
-    devops_env = open("/opt/stack_dash/stacks/devops/traefik/.env", "w+")
-    puid = devops_env.write('PUID=1000')
-    pgid = devops_env.write('PGID=1000')
-    userdir = devops_env.write('USERDIR=/opt/stack_dash')
-    c_email = devops_env.write('CF_API_EMAIL=C_EMAIL')
-    c_api = devops_env.write('CF_API_KEY=C_API')
-    domainname = devops_env.write('DOMAINNAME=YOUR_DOMAINNAME')
-    
-    devops_env_data = devops_env.read()
-    devops_env_data = devops_env_data.replace('C_EMAIL', cmailvar)     
+
+#writing base variables
+    devops_env_file = open("/opt/stack_dash/stacks/devops/traefik/.env", "w+")
+    puid = devops_env_file.write('PUID=1000\n')
+    pgid = devops_env_file.write('PGID=1000\n')
+    userdir = devops_env_file.write('USERDIR=/opt/stack_dash\n')
+    c_email = devops_env_file.write('CF_API_EMAIL=C_EMAIL\n')
+    c_api = devops_env_file.write('CF_API_KEY=C_API\n')
+    domainname = devops_env_file.write('DOMAINNAME=YOUR_DOMAINNAME\n')
+    client_id = devops_env_file.write('CLIENT_ID=C_ID\n')
+    client_secret = devops_env_file.write('CLIENT_SECRET=C_SECRET\n')
+    secret = devops_env_file.write('SECRET=YOUR_SECRET\n')
+    whitelist = devops_env_file.write('WHITELIST=YOUR_WHITELIST\n')
     devops_env.close()
-    devops_env = open("/opt/stack_dash/stacks/devops/traefik/.env", "w+")
-    devops_env.write(devops_env_data)
-    devops_env.close()
+
+#collecting personalized variables
     
+    print ("[Cloudflare: 1/3] Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]")
+    user_c_email = input("Your Cloudflare Email: \n")
+
+    print ("[Cloudflare: 2/3] Please enter your Cloudflare Global API Key, [See dash.cloudflare.com: My Profile >  API Tokens > API Keys, e.g., bLa1boPhZL0VCerk35XWmbPCaCyWjDaCVx4cM]: Tokens > API Keys, e.g., bLa1boPhZL0VCerk35XWmbPCaCyWjDaCVx4cM]")
+    user_c_api = input("Your Cloudflare Global API Key: \n")
+
+    print ("[Cloudflare: 3/3] Please enter the domain name you would like to use for the DevOps Stack [e.g., devops-example.com]")
+    user_domainname = input("Your Domain name: \n")
+
+    print ("[Google OAuth 2.0: 1/4] Please enter your Google APIs Client-ID [e.g., MaCcXoD05h7EmkGXqN07G6TJjcTKJYMmpp8tXsdIsILYSp1IqrX.apps.googleusercontent.com]")
+    user_client_id = input("Your Google API Client ID: \n")
+
+    print ("[Google OAuth 2.0: 2/4] \n Please enter your Google APIs Client-Secret [E.g., XB6RDMRDrcGAwi3hwdPIPKSr]")
+    user_client_secret = input("Your Google API Client-Secret: \n")
+
+    print ("[Google OAuth 2.0: 3/4] \n Please enter your Google APIs Secret [E.g., rKyKKgVl9IlzxUfg1CJmjZwj5zk5LMzo]")
+    user_secret = input("Your Google API Secret: \n")
+
+    print ("[Google OAuth 2.0: 4/4] \n Please enter your Google APIs Whitelist Email Address [Your Google APIs Gmail address, e.g., example@gmail.com]")
+    user_whitelist = input("Your Google API Gmail address: \n")
+    
+#replacing base variables with personal variables
+
+    dev_env_replace = "/opt/stack_dash/stacks/devops/traefik/.env"
+    with open(dev_env_replace, "r+") as f:
+        c_mail_replace = f.read()
+        c_mail_replace = re.sub('C_MAIL', user_c_email)
+        f.seek(0)
+        f.write(c_mail_replace)
+        f.truncate()
+        
       
 main()
