@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+
+########################### NETWORKS
+networks:
+  proxy:
+    external:
+      name: proxy
+
+# Jackett
+
+  jackett:
+    image: linuxserver/jackett
+    container_name: jackett
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+      - AUTO_UPDATE=true #optional
+      - RUN_OPTS=run options here #optional
+    volumes:
+      - $JACKETT_DATA/config:/config
+      - $JACKETT_DOWNLOAD:/downloads
+    ports:
+      - 9117:9117
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.jackett-rtr.entrypoints=https"
+      - "traefik.http.routers.jackett-rtr.rule=Host(`jackett.$DOMAINNAME`)"
+      - "traefik.http.routers.jackett-rtr.tls=true"
+      ## Middlewares
+#      - "traefik.http.routers.backups-rtr.middlewares=chain-authelia@file,add-backups" 
+#      - "traefik.http.middlewares.add-backups.addPrefix.prefix=/backups"
+      ## HTTP Services
+      - "traefik.http.routers.jackett-rtr.service=jackett-svc"
+      - "traefik.http.services.jackett-svc.loadbalancer.server.port=9117"
+      - "traefik.http.routers.jackett-rtr.middlewares=chain-oauth@file"
