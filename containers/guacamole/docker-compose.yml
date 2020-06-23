@@ -1,0 +1,69 @@
+version: '3.7'
+
+services:
+
+########################### NETWORKS
+networks:
+  proxy:
+    external:
+      name: proxy
+
+# MariaDB - MySQL Database
+  mariadb:
+    container_name: mariadb
+    image: linuxserver/mariadb:latest
+    restart: always
+    networks:
+      - proxy
+    security_opt:
+      - no-new-privileges:true
+#    ports:
+#      - "3306:3306"
+    volumes:
+      - $GUACAMOLE_DATA/config:/config
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - MYSQL_ROOT_PASSWORD=$GUACAMOLE_MYSQL_ROOT_PASSWORD
+
+  guacd:
+    image: guacamole/guacd
+    container_name: guacd
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - proxy
+
+  guacamole:
+    image: guacamole/guacamole:latest
+    container_name: guacamole
+    restart: unless-stopped
+    networks:
+      - proxy
+    security_opt:
+      - no-new-privileges:true
+#    ports:
+#      - "$GUACAMOLE_PORT:8080"
+    environment:
+      GUACD_HOSTNAME: guacd
+      MYSQL_HOSTNAME: mariadb
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: guacamole
+      MYSQL_USER: $GUACAMOLE_MYSQL_USERNAME
+      MYSQL_PASSWORD: $GUACAMOLE_MYSQL_USER_PASSWORD
+    labels:
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.guacamole-rtr.entrypoints=https"
+      - "traefik.http.routers.guacamole-rtr.rule=Host(`remote.$DOMAINNAME`)"
+      - "traefik.http.routers.guacamole-rtr.tls=true"
+      ## Middlewares
+#      - "traefik.http.routers.guacamole-rtr.middlewares=chain-authelia@file,add-guacamole" 
+#      - "traefik.http.middlewares.add-guacamole.addPrefix.prefix=/guacamole"
+      ## HTTP Services
+      - "traefik.http.routers.guacamole-rtr.service=guacamole-svc"
+      - "traefik.http.services.guacamole-svc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.guacamole-rtr.middlewares=chain-oauth@file"
