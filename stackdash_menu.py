@@ -1115,5 +1115,47 @@ def radarr_compose():
     radarr_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/radarr/docker-compose.yml up -d', shell=True)
     print ("*** radarr is deployed! ***")
                                                                 
-                                                                
+## Tautulli
+                                                                     
+def tautulli_env_write():
+    tautulli_env_file = open("./containers/tautulli/.env", "w+")
+    tautulli_env_file_data = tautulli_env_file.read()
+    
+    puid = tautulli_env_file.write('PUID=1000\n')
+    pgid = tautulli_env_file.write('PGID=1000\n')
+    userdir = tautulli_env_file.write('USERDIR=/opt/stackdash\n')
+    
+    print ("\nPlease enter the subdomain you would like to use for Tautulli [e.g., tautulli-example.com]\n")
+    user_domainname = tautulli_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+
+    print ("\nPlease enter the path you like to use to store tautulli's appdata\n")
+    user_domainname = tautulli_env_file.write("TAUTULLI_DATA=" + input('Tautulli's appdata path: ') + "\n")
+
+    tautulli_env_file.write(tautulli_env_file_data)
+    tautulli_env_file.close()
+
+    tautulli_env_migration()
+
+def tautulli_env_migration():   
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/tautulli', shell=True)
+    print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
+        
+    stack_dash_dir_copy = shutil.copytree('./containers/tautulli/', '/opt/stackdash/docker-appdata/tautulli', dirs_exist_ok=True)
+    print ("*** Copied ./containers/tautulli/ from Git Clone to /opt/stackdash/docker-appdata/tautulli ***\n")
+      
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/tautulli", shell=True)
+    print ("*** Corrected Tautulli's directory permissions. ***\n")
+
+    def tautulli_compose()
+
+def tautulli_compose():
+    tautulli_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/tautulli/docker-compose.yml up -d', shell=True)
+    print ("*** tautulli is deployed! ***")
+                                                                     
+                                                                     
+                                                                     
+                                                                     
 main()
