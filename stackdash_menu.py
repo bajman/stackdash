@@ -213,7 +213,7 @@ def devops_traefik():
     make_proxy = subprocess.run("sudo docker network create proxy", shell=True)
     print("\n\n\n\n\n\n\n\n*** Created Docker network: proxy. *** \n")
     
-    mkdir_traefik_rules = subprocess.check_call("sudo mkdir /opt/stack_dash/devops/traefik/rules", shell=True)
+    mkdir_traefik_rules = subprocess.run("sudo mkdir /opt/stack_dash/devops/traefik/rules", shell=True)
     print ("*** Created Traefik Rules folder in /opt/stack_dash directory. *** \n")
     
     traefik_rules_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/devops/traefik/rules", shell=True)
