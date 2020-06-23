@@ -211,12 +211,6 @@ Enter "yes" or "no" [or "m" to return to main menu; enter "q" to quit]:  """)
 def devops_dir():
     make_proxy = subprocess.run("sudo docker network create proxy", shell=True)
     print("\n\n\n\n\n\n\n\n*** Created Docker network: proxy. *** \n")
-
-    mkdir_traefik = subprocess.run("sudo mkdir /opt/stack_dash/devops/traefik", shell=True)
-    print ("*** Created Traefik folder in /opt/stack_dash directory. *** \n")
-    
-    traefik_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/traefik", shell=True)
-    print ("*** Corrected Traefik folder permissions. ***\n")
     
     mkdir_traefik_rules = subprocess.run("sudo mkdir /opt/stack_dash/devops/traefik/rules", shell=True)
     print ("*** Created Traefik Rules folder in /opt/stack_dash directory. *** \n")
@@ -255,9 +249,15 @@ def devops_dir():
     print ("*** Corrected Portainer folder permissions. ***\n")
     
 def devops_traefik():
-    traefik_env_copy = shutil.copy('./stacks/devops/traefik/.env', '/opt/stack_dash/devops/traefik/.env')
-    print ("*** Copied Traefik .env fie to /opt/stack_dash/devops/traefik. ***\n")
-    devops_env = open("/opt/stack_dash/devops/traefik/.env", "a+")
+    mkdir_traefik = subprocess.run("sudo mkdir /opt/stack_dash/devops/traefik", shell=True)
+    print ("*** Created Traefik folder in /opt/stack_dash directory. *** \n")
+    traefik_dir_permissions = subprocess.check_call("sudo chmod 777 -R /opt/stack_dash/devops/traefik", shell=True)
+    print ("*** Corrected Traefik folder permissions. ***\n")
+
+    traefik_env_copy = shutil.copytree('./stacks/devops/traefik/', '/opt/stack_dash/devops/traefik/', dirs_exist_ok=True)
+    print ("*** Copied Traefik tree to /opt/stack_dash/devops/traefik. ***\n")
+    
+    devops_env = open('/opt/stack_dash/devops/traefik/.env', 'w')
     c_email = devops_env.write((input("[Cloudflare – 1/3] \n Please enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]:  "  )))
    
     new_lines = []
@@ -266,7 +266,7 @@ def devops_traefik():
             if 'CF_API_EMAIL=' in line:
                 new_lines.append(line.replace('C_EMAIL', 'c_email'))
 
-    with open('devops_env', 'a+') as f:
+    with open('devops_env', 'w') as f:
         f.write('\n'.join(new_lines))
 
     devops_env.close()
