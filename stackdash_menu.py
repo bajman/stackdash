@@ -164,7 +164,7 @@ def stacks_main():
         Enter Stack No. : """)
 
     if choice == "1":
-        devops_stack()
+        devops_env()
         print ("*** Deploying DevOps Stack *** \n")
     if choice == "2":
         data_stack()
@@ -177,24 +177,7 @@ def stacks_main():
     elif choice == "Q" or choice =="q":
         sys.exit
 
-def devops_stack():
-    make_proxy = subprocess.run("sudo docker network create proxy", shell=True)
-    print("\n\n\n\n\n\n\n\n*** Created Docker network: proxy. *** \n")
-    
-    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stack_dash/', shell=True)
-    print ("*** Created /opt/stack_dash/ directory ***\n")
-    
-    mkdir_stack_stacks = subprocess.run('sudo mkdir /opt/stack_dash/stacks', shell=True)
-    print ("*** Created /opt/stack_dash/stacks directory ***\n")
-    
-    stack_dash_dir_copy = shutil.copytree('./stacks/', '/opt/stack_dash/stacks', dirs_exist_ok=True)
-    print ("*** Copied ./stacks/ from Git Clone to /opt/stack_dash/ ***\n")
-      
-    stack_dash_permissions = subprocess.run("sudo touch /opt/stack_dash/stacks/devops/traefik/.env", shell=True)
-    print ("*** Corrected Portainer folder permissions. ***\n")
-
-    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/", shell=True)
-    print ("*** Corrected Stack_Dash directory permissions. ***\n")
+def devops_env():
     
     choice = input("""
     
@@ -207,7 +190,7 @@ Do you want to include Traefik with your DevOps deployment?
 [Or enter "m" to return to the main menu or enter "q" to quit]: """)
             
     if choice == "yes" or choice == "Yes":
-        devops_env()
+        devops_env_write1()
         print ("*** Deploying DevOps Standard Stack *** \n")
     if choice == "no" or choice == "No":
         devops_stand()
@@ -217,10 +200,10 @@ Do you want to include Traefik with your DevOps deployment?
     elif choice == "Q" or choice =="q":
         sys.exit
 
-def devops_env():
+def devops_env_write1():
 
 #writing base variables
-    devops_env_file = open("/opt/stack_dash/stacks/devops/traefik/.env", "w+")
+    devops_env_file = open("./stackdash/stacks/devops/traefik/devops.env", "w+")
     devops_env_file_data = devops_env_file.read()
     
     puid = devops_env_file.write('PUID=1000\n')
@@ -236,6 +219,10 @@ def devops_env():
     
     devops_env_file.write(devops_env_file_data)
     devops_env_file.close()
+
+    devops_user_write2()
+
+def devops_user_write2():
 
 #collecting personalized variables
     
@@ -259,15 +246,33 @@ def devops_env():
 
     print ("[Google OAuth 2.0: 4/4] \n Please enter your Google APIs Whitelist Email Address [Your Google APIs Gmail address, e.g., example@gmail.com]")
     user_whitelist = input("Your Google API Gmail address: \n")
-    
+
+    devops_env_replace()
+
+def devops_env_replace():
 #replacing base variables with personal variables
 
-    devops_env_file = open("/opt/stack_dash/stacks/devops/traefik/.env", "w+")
+    devops_env_file = open("./stackdash/stacks/devops/traefik/devops.env", "w+")
     devops_env_file_data = devops_env_file.read()
     
     devops_env_file_data =  devops_env_file_data.replace('C_MAIL', user_c_email)
     
     devops_env_file.write(devops_env_file_data)
     devops_env_file.close()
+
+    devops_env_migration()
+
+def devops_env_migration():
+    make_proxy = subprocess.run("sudo docker network create proxy", shell=True)
+    print("\n\n\n\n\n\n\n\n*** Created Docker network: proxy. *** \n")
+    
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/', shell=True)
+    print ("*** Created /opt/stackdash/ directory ***\n")
+        
+    stack_dash_dir_copy = shutil.copytree('./stacks/', '/opt/stackdash/', dirs_exist_ok=True)
+    print ("*** Copied ./stacks/ from Git Clone to /opt/stackdash/ ***\n")
+      
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/", shell=True)
+    print ("*** Corrected stackdash directory permissions. ***\n")
 
 main()
