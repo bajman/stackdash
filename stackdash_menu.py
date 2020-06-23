@@ -19,7 +19,7 @@ def main():
                 ███████╗   ██║   ███████║██║     █████╔╝     ██║  ██║███████║███████╗███████║
                 ╚════██║   ██║   ██╔══██║██║     ██╔═██╗     ██║  ██║██╔══██║╚════██║██╔══██║
                 ███████║   ██║   ██║  ██║╚██████╗██║  ██╗    ██████╔╝██║  ██║███████║██║  ██║
-                ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ \n\n\n
+                ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ \n\n\n\n\n
 StackDash is a python3 script designed to automate Docker installation on Ubuntu and deploy container stacks 
 with subdomain hosting. StackDash features: a Docker-Engine install script and Docker web-app containers/stack 
 deployment wizards. All StackDash containers/stacks are preconfigured for external, subdomain access, using 
@@ -50,22 +50,8 @@ Type [u] for a complete list of stacks you can deploy with StackDash.
 \n\n
                                 ============================== \n
 Please enter your choice:                       """)
-    if choice == "1" or choice =="1.":
-        docker_install()
-        print("*** Install Docker Engine **** ")
-    elif choice == "2":
-        stacks_main()
-        print("*** Deploy Stacks **** ")
-    elif choice == "3":
-        containers_main()
-        print("*** Deploy Containers **** ")
-    elif choice == "4":
-        sys.exit
-    else:
-        print("You must only select either 1, 2, 3, or 4.")
-        print("Please try again")
-
-print (""" 
+    
+    print (""" 
                                           StackDack Network                                     
                                                                                                 
                                        +----------------------------------------------------+   
@@ -96,6 +82,22 @@ domains hosted by Google Cloud, Amazon S3, Microsoft Azure, ClickFunnels, WPEngi
 If you do not have a domain, you can purchase one through Cloudflare (approx. $8.XX per year) at https://www.cloudflare.com/products/registrar/
 ============================================================================================================================================================
 \n\n\n""")
+    if choice == "1" or choice =="1.":
+        docker_install()
+        print("*** Install Docker Engine **** ")
+    elif choice == "2":
+        stacks_main()
+        print("*** Deploy Stacks **** ")
+    elif choice == "3":
+        containers_main()
+        print("*** Deploy Containers **** ")
+    elif choice == "4":
+        sys.exit
+    else:
+        print("You must only select either 1, 2, 3, or 4.")
+        print("Please try again")
+
+
 
 def docker_install():
     remove_old_docker = subprocess.check_call("sudo apt-get remove docker docker-engine docker.io containerd runc", shell=True)
