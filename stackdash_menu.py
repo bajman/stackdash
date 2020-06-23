@@ -222,6 +222,13 @@ def devops_env():
     cmailvar = input('Cloudflare Email: ')
     
     devops_env = open("/opt/stack_dash/stacks/devops/traefik/.env", "w+")
+    puid = devops_env.write('PUID=1000')
+    pgid = devops_env.write('PGID=1000')
+    userdir = devops_env.write('USERDIR=/opt/stack_dash')
+    c_email = devops_env.write('CF_API_EMAIL=C_EMAIL')
+    c_api = devops_env.write('CF_API_KEY=C_API')
+    domainname = devops_env.write('DOMAINNAME=YOUR_DOMAINNAME')
+    
     devops_env_data = devops_env.read()
     devops_env_data = devops_env_data.replace('C_EMAIL', cmailvar)     
     devops_env.close()
