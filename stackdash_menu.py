@@ -38,7 +38,9 @@ deployment wizard, and preconfigured external access using HTTPS/TLS/OAuth 2.0. 
                                        |                                                    |   
                                        +----------------------------------------------------+   
                                                          INTERNAL NETWORK         
-\n\n
+\n
+Type [s] for a complete list of web app subdomain aliases used by StackDash. 
+\n\n\n
            ==============================================================================
              __   ___  __        __          __   __       ___              ___  __   __  
             |  \ |__  |__) |    /  \ \ /    /  ` /  \ |\ |  |   /\  | |\ | |__  |__) /__` 
@@ -46,8 +48,8 @@ deployment wizard, and preconfigured external access using HTTPS/TLS/OAuth 2.0. 
                                                                                                                                                           
             ==============================================================================
 \n                                                                                                           
+Type [c] to deploy individual StackDash Containers.
 Type [w] for a complete list of web apps you can deploy with StackDash. 
-Type [c] to deploy individual containers.
 \n
                               
                     ============================================================
@@ -57,12 +59,11 @@ Type [c] to deploy individual containers.
                     
                     ============================================================
 \n
+Type [t] to deploy StackDash Stacks. 
 Type [u] for a complete list of stacks you can deploy with StackDash.
-Type [s] for a complete list of web app subdomain aliases used by StackDash. 
-Type [t] to deploy the Data, DevOps, or Media StackDash Stacks. 
 \n\n
                                 ============================== \n
-    Please enter your choice:  """)
+Please enter your choice:                       """)
     if choice == "1" or choice =="1.":
         docker_install()
         print("*** Install Docker Engine **** ")
