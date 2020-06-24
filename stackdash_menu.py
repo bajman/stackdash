@@ -582,42 +582,42 @@ def codeserver_compose():
     
  #Fresh RSS
 
-def fresh-rss_env_write():
-    fresh-rss_env_file = open("./containers/fresh-rss/.env", "w+")
-    fresh-rss_env_file_data = fresh-rss_env_file.read()
+def freshrss_env_write():
+    freshrss_env_file = open("./containers/freshrss/.env", "w+")
+    freshrss_env_file_data = freshrss_env_file.read()
     
-    puid = fresh-rss_env_file.write('PUID=1000\n')
-    pgid = fresh-rss_env_file.write('PGID=1000\n')
-    userdir = fresh-rss_env_file.write('USERDIR=/opt/stackdash\n')
+    puid = freshrss_env_file.write('PUID=1000\n')
+    pgid = freshrss_env_file.write('PGID=1000\n')
+    userdir = freshrss_env_file.write('USERDIR=/opt/stackdash\n')
     
     print ("\nPlease enter the subdomain you would like to use for Fresh RSS [e.g., rss-example.com]\n")
-    user_domainname = fresh-rss_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+    user_domainname = freshrss_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
 
     print ("\nPlease enter the directory you would like to use for Fresh RSS's appdata\n")
-    user_client_id = fresh-rss_env_file.write("FRESH_RSS_DATA=" + input('Path for appdata: ') + "\n")
+    user_client_id = freshrss_env_file.write("FRESH_RSS_DATA=" + input('Path for appdata: ') + "\n")
 
-    fresh-rss_env_file.write(fresh-rss_env_file_data)
-    fresh-rss_env_file.close()
+    freshrss_env_file.write(freshrss_env_file_data)
+    freshrss_env_file.close()
 
-    fresh-rss_env_migration()
+    freshrss_env_migration()
 
-def fresh-rss_env_migration():   
+def freshrss_env_migration():   
     mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/', shell=True)
     print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
 
-    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/fresh-rss', shell=True)
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/freshrss', shell=True)
     print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
         
-    stack_dash_dir_copy = shutil.copytree('./containers/fresh-rss/', '/opt/stackdash/docker-appdata/fresh-rss', dirs_exist_ok=True)
-    print ("*** Copied ./containers/fresh-rss/ from Git Clone to /opt/stackdash/docker-appdata/fresh-rss ***\n")
+    stack_dash_dir_copy = shutil.copytree('./containers/freshrss/', '/opt/stackdash/docker-appdata/freshrss', dirs_exist_ok=True)
+    print ("*** Copied ./containers/freshrss/ from Git Clone to /opt/stackdash/docker-appdata/freshrss ***\n")
       
-    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/fresh-rss", shell=True)
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/freshrss", shell=True)
     print ("*** Corrected Fresh RSS's directory permissions. ***\n")
 
-    fresh-rss_compose()
+    freshrss_compose()
 
-def fresh-rss_compose():
-    fresh-rss_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/fresh-rss/docker-compose.yml up -d', shell=True)
+def freshrss_compose():
+    freshrss_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/freshrss/docker-compose.yml up -d', shell=True)
     print ("*** Fresh RSS is deployed! ***")
 
 #GitLab
