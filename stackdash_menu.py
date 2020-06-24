@@ -69,6 +69,9 @@ releases of StackDash. For a full list of planned DNS providers see: https://doc
     elif choice == "c" or choice == "C":
         container_deploy()
         print("*** Deploy Containers **** ")
+    elif choice == "t" or choice == "T":
+        stacks_main()
+        print("*** Deploy Stacks **** ")
     elif choice == "3":
         containers_main()
         print("*** Deploy Containers **** ")
