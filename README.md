@@ -2,7 +2,7 @@
 
 StackDash is a python3 script designed to automate Docker installation on Ubuntu and deploy container stacks with subdomain hosting. StackDash features a 
 Docker-Engine install script and Docker web-app containers/stack deployment wizards. All StackDash containers/stacks are preconfigured for external, subdomain 
-access, using LetsEncrypt HTTPS/TLS and OAuth 2.0 SSO via the Google Cloud Platform. See the Documentation for installation instructions. \n
+access, using LetsEncrypt HTTPS/TLS and OAuth 2.0 SSO via the Google Cloud Platform. See the Documentation for installation instructions.
 
 
 Please Note: this version of StackDash is configured to support only Cloudflare DNS-managed domains. Additional domain/hosting providers will be made available in future 
