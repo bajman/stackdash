@@ -448,7 +448,7 @@ def bitwarden_env_migration():
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/bitwarden", shell=True)
     print ("*** Corrected Bitwarden directory permissions. ***\n")
 
-     bitwarden_compose()
+    bitwarden_compose()
 
 def bitwarden_compose():
     bitwarden_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/bitwarden/docker-compose.yml up -d', shell=True)
