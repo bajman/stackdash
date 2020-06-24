@@ -79,99 +79,99 @@ releases of StackDash. For a full list of planned DNS providers see: https://doc
         print("Please try again")
 
 def containers_list():
-    print(""""\n\n                               List of Supported Containers (v0.13) \n\n
+    print("""\n\n                                      List of Supported Containers (v0.13) \n\n
                                                    
-╔══════════════════════════════════════════════╦══════════════════════════════════════════════════════════════════════════════════════════════════╗
-║             Image/Container Name             ║                                            Description                                           ║
-╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
-║    Airsonic  (Music & Podcast Management)    ║ Airsonic is a free, web-based media streamer, providing ubiquitous access to your                ║
-║                                              ║ music. Use it to share your music with friends, or to listen to your own                         ║
-║                                              ║ music while at work. You can stream to multiple players simultaneously, for                      ║
-║                                              ║ instance to one player in your kitchen and another in your living room.                          ║
-╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
-║  Apache Guacamole  (Remote Desktop Gateway)  ║ Apache Guacamole is a clientless remote desktop gateway. It supports standard                    ║
-║                                              ║ protocols like VNC, RDP, and SSH. This container is only the backend server                      ║
-║                                              ║ component needed to use The official or 3rd party HTML5 frontends.                               ║
-╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
-║         Bitwarden  (Password Manager)        ║ Bitwarden is an open-source password management service that stores sensitive                    ║
-║                                              ║ information such as website credentials in an encrypted vault. Bitwarden                         ║
-║                                              ║ platform offers a variety of client applications including a web interface,                      ║
-║                                              ║ desktop applications, browser extensions, mobile apps, and a CLI.                                ║
-╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
-║               Bookstack  (Wiki)              ║ BookStack is a simple, self-hosted, opinionated wiki system that provides a                      ║
-║                                              ║ pleasant   and simple out of the box experience for organizing and storing information.          ║
-╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
-║          Calibre  (eBook Management)         ║ Calibre-web is a web app providing a clean interface for browsing, reading and                   ║
-║                                              ║ downloading eBooks using an existing Calibre database. It is also possible to                    ║
-║                                              ║ integrate google drive and edit metadata and your calibre library through the app itself.        ║
-╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
-║           Code-Server  (IDE Server)          ║ Visual Studio Code is a edit-build-debug code editor with comprehensive code                     ║
-║                                              ║ editing, navigation, and understanding support along with lightweight                            ║
-║                                              ║ debugging, a rich extensibility model, and lightweight integration with existing tools.          ║
-╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
-║ Duplicati  (Server and cloud backup service) ║ Duplicati is an automatic server backup service which backup options with                        ║
-║                                              ║ local backup   options for most support standard protocols such as FTP,                          ║
-║                                              ║ SSH, WebDAV and for   popular services like Microsoft OneDrive, Amazon Cloud                     ║
-║                                              ║ Drive & S3, Google   Drive, box.com, Mega, hubiC and many others.                                ║
-╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
-║          Fresh RSS  (RSS Management)         ║ FreshRSS is a lightweight, multi-user application self-hosted RSS feed aggregator                ║
-║                                              ║ like   Leed or Kriss Feed with support for custom tags, an API for (mobile) clients,             ║
-║                                              ║ and a Command-Line Interface.                                                                    ║
-╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
-║   GitLab  (Private Source Code Repository)   ║ GitLab includes Git repository management, issue tracking, code review, an IDE,                  ║
-║                                              ║ activity streams, and wikis. GitLab provides source collaboration and source                     ║
-║                                              ║ control management to code, test, and deploy.                                                    ║
-╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
-║         Grocy  (Household Management)        ║ Grocey is a web-based self-hosted groceries & household management solution for                  ║
-║                                              ║ your home. It allows you to track your purchases, automate & optimize                            ║
-║                                              ║ your shopping list, waste less (by always knowing what is expiring next),                        ║
-║                                              ║ lets you plan/manage meals, recipes, and household chores.                                       ║
-╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
-║  Jackett (Proxy Server -   Torrent Indexer)  ║ Jackett works as a proxy server: it translates queries from apps (Sonarr, SickRage,              ║
-║                                              ║ CouchPotato, Mylar, etc) into tracker-site-specific http queries, parses the                     ║
-║                                              ║ html response, then sends results back to the requesting software. This                          ║
-║                                              ║ allows for getting recent uploads (like RSS) and performing searches.                            ║
-╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
-║         Netdata  (Server Monitoring)         ║ Netdata is distributed, real-time, performance and health monitoring for systems                 ║
-║                                              ║ and applications. It is a highly optimized monitoring agent you install on                       ║
-║                                              ║ all your systems and containers.                                                                 ║
-╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
-║         Nextcloud  (File Management)         ║ Nextcloud is a suite of client-server software for creating and using file hosting               ║
-║                                              ║ services for. Similar to Dropbox, Office 365, or Google Drive, it can be used                    ║
-║                                              ║ on home-local computers or for off-premises file storage. Nextcloud’s App                        ║
-║                                              ║ Store contains over 200 extensions including calendars &  contacts (CardDAV),                    ║
-║                                              ║ streaming media   (Ampache), document viewer tools, and external connections to                  ║
-║                                              ║ Dropbox, Google   Drive, and Amazon.                                                             ║
-╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
-║          Piwigo  (Photo Management)          ║ Piwigo is a photo gallery software for the web that comes with powerful features                 ║
-║                                              ║ to publish and manage your collection of pictures.                                               ║
-╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
-║           Plex  (Media Management)           ║ Plex organizes video, music and photos from personal media libraries and streams                 ║
-║                                              ║ them to smart TVs, streaming boxes and mobile devices.                                           ║
-╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
-║       Portainer  (Docker Management UI)      ║ Portainer   allows you to manage your Docker stacks, containers, images, volumes, and            ║
-║                                              ║ networks. It is compatible with the standalone Docker engine and with Docker Swarm.              ║
-╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
-║         QBittorrent  (Torrent Client)        ║ The   Qbittorrent project aims to provide an open-source software alternative to                 ║
-║                                              ║ µTorrent. qBittorrent is based on the Qt toolkit and libtorrent-rasterbar library.               ║
-╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
-║              Radarr  (Movie PVR)             ║ Radarr   is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS feeds             ║
-║                                              ║ for movies and will grab, sort, and rename them. It can also be configured to                    ║
-║                                              ║ automatically upgrade the quality of files already downloaded when a better-quality              ║
-║                                              ║ format becomes available.                                                                        ║
-╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
-║         Tautulli  (Media Monitoring)         ║ Tautulli   is a 3rd party application that you can run alongside your Plex Media Server          ║
-║                                              ║ to monitor activity and track various statistics. Most importantly, these statistics include     ║
-║                                              ║ what has been watched, who watched it, when and where they   watched it, and how it was watched. ║
-╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
-║    Traefik  (Reverse Proxy & Loadbalencer)   ║ Traefik   is an edge router, meaning, it immediately and automatically, intercepts and           ║
-║                                              ║ routes every incoming request to the appropriate running service.                                ║
-╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
-║      Watchtower  (Docker Image Updater)      ║ Watchtower   is an application that will monitor your running Docker containers and watch        ║
-║                                              ║ for changes to the images that those containers were originally started from.                    ║
-║                                              ║ If watchtower detects that an image has changed, it will automatically restart                   ║
-║                                              ║ the container using the new image.                                                               ║
-╚══════════════════════════════════════════════╩══════════════════════════════════════════════════════════════════════════════════════════════════╝
+        ╔══════════════════════════════════════════════╦══════════════════════════════════════════════════════════════════════════════════════════════════╗
+        ║             Image/Container Name             ║                                            Description                                           ║
+        ╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
+        ║    Airsonic  (Music & Podcast Management)    ║ Airsonic is a free, web-based media streamer, providing ubiquitous access to your                ║
+        ║                                              ║ music. Use it to share your music with friends, or to listen to your own                         ║
+        ║                                              ║ music while at work. You can stream to multiple players simultaneously, for                      ║
+        ║                                              ║ instance to one player in your kitchen and another in your living room.                          ║
+        ╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
+        ║  Apache Guacamole  (Remote Desktop Gateway)  ║ Apache Guacamole is a clientless remote desktop gateway. It supports standard                    ║
+        ║                                              ║ protocols like VNC, RDP, and SSH. This container is only the backend server                      ║
+        ║                                              ║ component needed to use The official or 3rd party HTML5 frontends.                               ║
+        ╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
+        ║         Bitwarden  (Password Manager)        ║ Bitwarden is an open-source password management service that stores sensitive                    ║
+        ║                                              ║ information such as website credentials in an encrypted vault. Bitwarden                         ║
+        ║                                              ║ platform offers a variety of client applications including a web interface,                      ║
+        ║                                              ║ desktop applications, browser extensions, mobile apps, and a CLI.                                ║
+        ╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
+        ║               Bookstack  (Wiki)              ║ BookStack is a simple, self-hosted, opinionated wiki system that provides a                      ║
+        ║                                              ║ pleasant   and simple out of the box experience for organizing and storing information.          ║
+        ╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
+        ║          Calibre  (eBook Management)         ║ Calibre-web is a web app providing a clean interface for browsing, reading and                   ║
+        ║                                              ║ downloading eBooks using an existing Calibre database. It is also possible to                    ║
+        ║                                              ║ integrate google drive and edit metadata and your calibre library through the app itself.        ║
+        ╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
+        ║           Code-Server  (IDE Server)          ║ Visual Studio Code is a edit-build-debug code editor with comprehensive code                     ║
+        ║                                              ║ editing, navigation, and understanding support along with lightweight                            ║
+        ║                                              ║ debugging, a rich extensibility model, and lightweight integration with existing tools.          ║
+        ╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
+        ║ Duplicati  (Server and cloud backup service) ║ Duplicati is an automatic server backup service which backup options with                        ║
+        ║                                              ║ local backup   options for most support standard protocols such as FTP,                          ║
+        ║                                              ║ SSH, WebDAV and for   popular services like Microsoft OneDrive, Amazon Cloud                     ║
+        ║                                              ║ Drive & S3, Google   Drive, box.com, Mega, hubiC and many others.                                ║
+        ╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
+        ║          Fresh RSS  (RSS Management)         ║ FreshRSS is a lightweight, multi-user application self-hosted RSS feed aggregator                ║
+        ║                                              ║ like   Leed or Kriss Feed with support for custom tags, an API for (mobile) clients,             ║
+        ║                                              ║ and a Command-Line Interface.                                                                    ║
+        ╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
+        ║   GitLab  (Private Source Code Repository)   ║ GitLab includes Git repository management, issue tracking, code review, an IDE,                  ║
+        ║                                              ║ activity streams, and wikis. GitLab provides source collaboration and source                     ║
+        ║                                              ║ control management to code, test, and deploy.                                                    ║
+        ╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
+        ║         Grocy  (Household Management)        ║ Grocey is a web-based self-hosted groceries & household management solution for                  ║
+        ║                                              ║ your home. It allows you to track your purchases, automate & optimize                            ║
+        ║                                              ║ your shopping list, waste less (by always knowing what is expiring next),                        ║
+        ║                                              ║ lets you plan/manage meals, recipes, and household chores.                                       ║
+        ╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
+        ║  Jackett (Proxy Server -   Torrent Indexer)  ║ Jackett works as a proxy server: it translates queries from apps (Sonarr, SickRage,              ║
+        ║                                              ║ CouchPotato, Mylar, etc) into tracker-site-specific http queries, parses the                     ║
+        ║                                              ║ html response, then sends results back to the requesting software. This                          ║
+        ║                                              ║ allows for getting recent uploads (like RSS) and performing searches.                            ║
+        ╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
+        ║         Netdata  (Server Monitoring)         ║ Netdata is distributed, real-time, performance and health monitoring for systems                 ║
+        ║                                              ║ and applications. It is a highly optimized monitoring agent you install on                       ║
+        ║                                              ║ all your systems and containers.                                                                 ║
+        ╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
+        ║         Nextcloud  (File Management)         ║ Nextcloud is a suite of client-server software for creating and using file hosting               ║
+        ║                                              ║ services for. Similar to Dropbox, Office 365, or Google Drive, it can be used                    ║
+        ║                                              ║ on home-local computers or for off-premises file storage. Nextcloud’s App                        ║
+        ║                                              ║ Store contains over 200 extensions including calendars &  contacts (CardDAV),                    ║
+        ║                                              ║ streaming media   (Ampache), document viewer tools, and external connections to                  ║
+        ║                                              ║ Dropbox, Google   Drive, and Amazon.                                                             ║
+        ╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
+        ║          Piwigo  (Photo Management)          ║ Piwigo is a photo gallery software for the web that comes with powerful features                 ║
+        ║                                              ║ to publish and manage your collection of pictures.                                               ║
+        ╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
+        ║           Plex  (Media Management)           ║ Plex organizes video, music and photos from personal media libraries and streams                 ║
+        ║                                              ║ them to smart TVs, streaming boxes and mobile devices.                                           ║
+        ╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
+        ║       Portainer  (Docker Management UI)      ║ Portainer   allows you to manage your Docker stacks, containers, images, volumes, and            ║
+        ║                                              ║ networks. It is compatible with the standalone Docker engine and with Docker Swarm.              ║
+        ╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
+        ║         QBittorrent  (Torrent Client)        ║ The   Qbittorrent project aims to provide an open-source software alternative to                 ║
+        ║                                              ║ µTorrent. qBittorrent is based on the Qt toolkit and libtorrent-rasterbar library.               ║
+        ╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
+        ║              Radarr  (Movie PVR)             ║ Radarr   is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS feeds             ║
+        ║                                              ║ for movies and will grab, sort, and rename them. It can also be configured to                    ║
+        ║                                              ║ automatically upgrade the quality of files already downloaded when a better-quality              ║
+        ║                                              ║ format becomes available.                                                                        ║
+        ╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
+        ║         Tautulli  (Media Monitoring)         ║ Tautulli   is a 3rd party application that you can run alongside your Plex Media Server          ║
+        ║                                              ║ to monitor activity and track various statistics. Most importantly, these statistics include     ║
+        ║                                              ║ what has been watched, who watched it, when and where they   watched it, and how it was watched. ║
+        ╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
+        ║    Traefik  (Reverse Proxy & Loadbalencer)   ║ Traefik   is an edge router, meaning, it immediately and automatically, intercepts and           ║
+        ║                                              ║ routes every incoming request to the appropriate running service.                                ║
+        ╠══════════════════════════════════════════════╬══════════════════════════════════════════════════════════════════════════════════════════════════╣
+        ║      Watchtower  (Docker Image Updater)      ║ Watchtower   is an application that will monitor your running Docker containers and watch        ║
+        ║                                              ║ for changes to the images that those containers were originally started from.                    ║
+        ║                                              ║ If watchtower detects that an image has changed, it will automatically restart                   ║
+        ║                                              ║ the container using the new image.                                                               ║
+        ╚══════════════════════════════════════════════╩══════════════════════════════════════════════════════════════════════════════════════════════════╝
     
     """)
 
