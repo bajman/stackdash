@@ -542,42 +542,42 @@ def calibre_compose():
     
  #VS-Code Server
 
-def code-server_env_write():
-    code-server_env_file = open("./containers/code-server/.env", "w+")
-    code-server_env_file_data = code-server_env_file.read()
+def codeserver_env_write():
+    codeserver_env_file = open("./containers/codeserver/.env", "w+")
+    codeserver_env_file_data = codeserver_env_file.read()
     
-    puid = code-server_env_file.write('PUID=1000\n')
-    pgid = code-server_env_file.write('PGID=1000\n')
-    userdir = code-server_env_file.write('USERDIR=/opt/stackdash\n')
+    puid = codeserver_env_file.write('PUID=1000\n')
+    pgid = codeserver_env_file.write('PGID=1000\n')
+    userdir = codeserver_env_file.write('USERDIR=/opt/stackdash\n')
     
-    print ("\nPlease enter the subdomain you would like to use for VS Code-Server [e.g., code-example.com]\n")
-    user_domainname = code-server_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+    print ("\nPlease enter the subdomain you would like to use for VS Code-Server [e.g., codeexample.com]\n")
+    user_domainname = codeserver_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
 
     print ("\nPlease enter the directory you would like to use for VS Code-Server's appdata\n")
-    user_client_id = code-server_env_file.write("CODE_SERVER_DATA=" + input('Path for appdata: ') + "\n")
+    user_client_id = codeserver_env_file.write("CODE_SERVER_DATA=" + input('Path for appdata: ') + "\n")
 
-    code-server_env_file.write(code-server_env_file_data)
-    code-server_env_file.close()
+    codeserver_env_file.write(codeserver_env_file_data)
+    codeserver_env_file.close()
 
-    code-server_env_migration()
+    codeserver_env_migration()
 
-def code-server_env_migration():   
+def codeserver_env_migration():   
     mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/', shell=True)
     print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
 
-    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/code-server', shell=True)
+    mkdir_stack_dash = subprocess.run('sudo mkdir /opt/stackdash/docker-appdata/codeserver', shell=True)
     print ("*** Created /opt/stackdash/docker-appdata directory ***\n")
         
-    stack_dash_dir_copy = shutil.copytree('./containers/code-server/', '/opt/stackdash/docker-appdata/code-server', dirs_exist_ok=True)
-    print ("*** Copied ./containers/code-server/ from Git Clone to /opt/stackdash/docker-appdata/code-server ***\n")
+    stack_dash_dir_copy = shutil.copytree('./containers/codeserver/', '/opt/stackdash/docker-appdata/codeserver', dirs_exist_ok=True)
+    print ("*** Copied ./containers/codeserver/ from Git Clone to /opt/stackdash/docker-appdata/codeserver ***\n")
       
-    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/code-server", shell=True)
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/codeserver", shell=True)
     print ("*** Corrected VS Code-Server's directory permissions. ***\n")
 
-    code-server_compose()
+    codeserver_compose()
 
-def code-server_compose():
-    code-server_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/code-server/docker-compose.yml up -d', shell=True)
+def codeserver_compose():
+    codeserver_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/codeserver/docker-compose.yml up -d', shell=True)
     print ("*** VS Code-Server is deployed! ***")
     
  #Fresh RSS
