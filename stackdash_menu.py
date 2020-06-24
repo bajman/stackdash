@@ -277,44 +277,60 @@ def docker_install():
 
 def stacks_main():
     print("\n Stack Deploy Menu \n")
-    choice = input("""                           
+    choice = input("""
     
-                                            1.   DevOps Stack
-                                                    
-                                                    Apache Guacamole        (clientless remote desktop)
-                                                    GitLab                  (private repo, CI/CD pipeline)
-                                                    Netdata                 (realtime server metrics)
-                                                    Portainer               (GUI Docker manager)
-                                                    Traefik                 (Reverse proxy & routing service)
-                                                    Watchtower              (Keeps Docker images up-to-date)
-                                                    Code-Server             (VS Code source code editor)
-                                                    
-                        
-                                            2.   Data Stack
-                                            
-                                                    Duplicati               (Server and cloud backup service)
-                                                    Bitwarden               (Selfhosted password manager)
-                                                    Bookstack               (Wiki)
-                                                    Calibre                 (eBooks library management)
-                                                    Grocy                   (Grocery and household management)
-                                                    Nextcloud               (cloud storage account)
-                                                    
-                                            3.   Media Stack
-                                            
-                                                    Airsonic                (music & podcast streaming service)
-                                                    Fresh RSS               (RSS news reader)
-                                                    Jackett                 (Torrent indexer)
-                                                    Piwigo                  (Photo management)
-                                                    Radarr                  (Movie torrent search)
-                                                    Tautulli                (Media monitor)
-                                                    QBittorrent             (Torrent client)
-                                                    
-                                            4.   Main Menu
-                                            
-                                            
-                                            5.   Quit
+                                                    ============================================================
+                                                     __   ___  __        __          __  ___       __        __  
+                                                    |  \ |__  |__) |    /  \ \ /    /__`  |   /\  /  ` |__/ /__` 
+                                                    |__/ |___ |    |___ \__/  |     .__/  |  /~~\ \__, |  \ .__/ 
+                                                    ============================================================
+    
+                                        ╔══════════════╦══════════════╦══════════════════╦═════════════════════════════════════╗
+                                        ║ Stack Name   ║ Stack Number ║    Container     ║         Brief Description           ║
+                                        ╠══════════════╬══════════════╬══════════════════╬═════════════════════════════════════╣
+                                        ║    DevOps    ║     1        ║ Apache Guacamole ║ Clientless, remote desktop          ║
+                                        ║              ║              ╠══════════════════╬═════════════════════════════════════╣
+                                        ║              ║              ║ GitLab           ║ Private repo, CI/CD pipeline        ║
+                                        ║              ║              ╠══════════════════╬═════════════════════════════════════╣
+                                        ║              ║              ║ Netdata          ║ Realtime server metrics             ║
+                                        ║              ║              ╠══════════════════╬═════════════════════════════════════╣
+                                        ║              ║              ║ Portainer        ║ GUI Docker manager                  ║
+                                        ║              ║              ╠══════════════════╬═════════════════════════════════════╣
+                                        ║              ║              ║ Traefik          ║ Reverse proxy & routing service     ║
+                                        ║              ║              ╠══════════════════╬═════════════════════════════════════╣
+                                        ║              ║              ║ Watchtower       ║ Automatic Docker image updater      ║
+                                        ║              ║              ╠══════════════════╬═════════════════════════════════════╣
+                                        ║              ║              ║ Code-Server      ║ Visual Studio IDE                   ║
+                                        ╠══════════════╬══════════════╬══════════════════╬═════════════════════════════════════╣
+                                        ║    Data      ║     2        ║ Duplicati        ║ Server backup service               ║
+                                        ║              ║              ╠══════════════════╬═════════════════════════════════════╣
+                                        ║              ║              ║ Bitwarden        ║ Selfhosted password manager         ║
+                                        ║              ║              ╠══════════════════╬═════════════════════════════════════╣
+                                        ║              ║              ║ Calibre          ║ eBooks library management           ║
+                                        ║              ║              ╠══════════════════╬═════════════════════════════════════╣
+                                        ║              ║              ║ Grocy            ║ Grocery and household management    ║
+                                        ║              ║              ╠══════════════════╬═════════════════════════════════════╣
+                                        ║              ║              ║ Nextcloud        ║ Cloud storage                       ║
+                                        ║              ║              ╠══════════════════╬═════════════════════════════════════╣
+                                        ║              ║              ║ Bookstack        ║ Wiki                                ║
+                                        ╠══════════════╬══════════════╬══════════════════╬═════════════════════════════════════╣
+                                        ║    Media     ║     3        ║ Airsonic         ║ Music and podcast streaming service ║
+                                        ║              ║              ╠══════════════════╬═════════════════════════════════════╣
+                                        ║              ║              ║ Fresh RSS        ║ RSS news reader                     ║
+                                        ║              ║              ╠══════════════════╬═════════════════════════════════════╣
+                                        ║              ║              ║ Jackett          ║ Torrent indexer                     ║
+                                        ║              ║              ╠══════════════════╬═════════════════════════════════════╣
+                                        ║              ║              ║ Piwigo           ║ Photo management                    ║
+                                        ║              ║              ╠══════════════════╬═════════════════════════════════════╣
+                                        ║              ║              ║ Radarr           ║ Movie torrent search                ║
+                                        ║              ║              ╠══════════════════╬═════════════════════════════════════╣
+                                        ║              ║              ║ Tautulli         ║ Media metrics                       ║
+                                        ║              ║              ╠══════════════════╬═════════════════════════════════════╣
+                                        ║              ║              ║ Qbittorrent      ║ Torrent client                      ║
+                                        ╚══════════════╩══════════════╩══════════════════╩═════════════════════════════════════╝
                        
-        Enter Stack No. : """)
+ ============================================================================================================================================================
+                                                        Please enter your selection:                       """)
 
     if choice == "1":
         devops_env_write1()
