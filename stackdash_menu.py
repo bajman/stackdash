@@ -358,7 +358,7 @@ def airsonic_env_migration():
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/airsonic", shell=True)
     print ("*** Corrected airsonic directory permissions. ***\n")
 
-    def airsonic_compose()
+    airsonic_compose()
 
 def airsonic_compose():
     airsonic_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/airsonic/docker-compose.yml up -d', shell=True)
@@ -407,14 +407,13 @@ def guacamole_env_migration():
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/guacamole", shell=True)
     print ("*** Corrected guacamole directory permissions. ***\n")
 
-    def guacamole_compose()
+    guacamole_compose()
 
 def guacamole_compose():
     guacamole_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/guacamole/docker-compose.yml up -d', shell=True)
     print ("*** guacamole is deployed! ***")
     
-    
- #Bitwarden
+#Bitwarden
 
 
 def bitwarden_env_write():
@@ -449,7 +448,7 @@ def bitwarden_env_migration():
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/bitwarden", shell=True)
     print ("*** Corrected Bitwarden directory permissions. ***\n")
 
-    def bitwarden_compose()
+     bitwarden_compose()
 
 def bitwarden_compose():
     bitwarden_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/bitwarden/docker-compose.yml up -d', shell=True)
@@ -495,7 +494,7 @@ def bookstack_env_migration():
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/bookstack", shell=True)
     print ("*** Corrected Bookstack directory permissions. ***\n")
 
-    def bookstack_compose()
+    bookstack_compose()
 
 def bookstack_compose():
     bookstack_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/bookstack/docker-compose.yml up -d', shell=True)
@@ -535,7 +534,7 @@ def calibre_env_migration():
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/calibre", shell=True)
     print ("*** Corrected Calibre-Web's directory permissions. ***\n")
 
-    def calibre_compose()
+    calibre_compose()
 
 def calibre_compose():
     calibre_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/calibre/docker-compose.yml up -d', shell=True)
@@ -575,7 +574,7 @@ def code-server_env_migration():
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/code-server", shell=True)
     print ("*** Corrected VS Code-Server's directory permissions. ***\n")
 
-    def code-server_compose()
+    code-server_compose()
 
 def code-server_compose():
     code-server_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/code-server/docker-compose.yml up -d', shell=True)
@@ -615,7 +614,7 @@ def fresh-rss_env_migration():
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/fresh-rss", shell=True)
     print ("*** Corrected Fresh RSS's directory permissions. ***\n")
 
-    def fresh-rss_compose()
+    fresh-rss_compose()
 
 def fresh-rss_compose():
     fresh-rss_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/fresh-rss/docker-compose.yml up -d', shell=True)
@@ -655,7 +654,7 @@ def gitlab_env_migration():
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/gitlab", shell=True)
     print ("*** Corrected GitLab's directory permissions. ***\n")
 
-    def gitlab_compose()
+    gitlab_compose()
 
 def gitlab_compose():
     gitlab_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/gitlab/docker-compose.yml up -d', shell=True)
@@ -695,7 +694,7 @@ def grocy_env_migration():
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/grocy", shell=True)
     print ("*** Corrected Grocy's directory permissions. ***\n")
 
-    def grocy_compose()
+    grocy_compose()
 
 def grocy_compose():
     grocy_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/grocy/docker-compose.yml up -d', shell=True)
@@ -738,7 +737,7 @@ def jackett_env_migration():
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/jackett", shell=True)
     print ("*** Corrected Jackett's directory permissions. ***\n")
 
-    def jackett_compose()
+    jackett_compose()
 
 def jackett_compose():
     jackett_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/jackett/docker-compose.yml up -d', shell=True)
@@ -775,7 +774,7 @@ def netdata_env_migration():
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/netdata", shell=True)
     print ("*** Corrected Netdata's directory permissions. ***\n")
 
-    def netdata_compose()
+    netdata_compose()
 
 def netdata_compose():
     netdata_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/netdata/docker-compose.yml up -d', shell=True)
@@ -830,7 +829,7 @@ def nextcloud_env_migration():
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/nextcloud", shell=True)
     print ("*** Corrected Nextcloud's directory permissions. ***\n")
 
-    def nextcloud_compose()
+    nextcloud_compose()
 
 def nextcloud_compose():
     nextcloud_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/nextcloud/docker-compose.yml up -d', shell=True)
@@ -881,7 +880,7 @@ def piwigo_env_migration():
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/piwigo", shell=True)
     print ("*** Corrected piwigo's directory permissions. ***\n")
 
-    def piwigo_compose()
+    piwigo_compose()
 
 def piwigo_compose():
     piwigo_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/piwigo/docker-compose.yml up -d', shell=True)
@@ -936,7 +935,7 @@ def plex_env_migration():
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/plex", shell=True)
     print ("*** Corrected Plex's directory permissions. ***\n")
 
-    def plex_compose()
+    plex_compose()
 
 def plex_compose():
     plex_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/plex/docker-compose.yml up -d', shell=True)
@@ -976,7 +975,7 @@ def portainer_env_migration():
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/portainer", shell=True)
     print ("*** Corrected Portainer's directory permissions. ***\n")
 
-    def portainer_compose()
+    portainer_compose()
 
 def portainer_compose():
     portainer_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/portainer/docker-compose.yml up -d', shell=True)
@@ -1028,7 +1027,7 @@ def qbit_env_migration():
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/qbit", shell=True)
     print ("*** Corrected qbit's directory permissions. ***\n")
 
-    def qbit_compose()
+    qbit_compose()
 
 def qbit_compose():
     qbit_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/qbit/docker-compose.yml up -d', shell=True)
@@ -1074,7 +1073,7 @@ def radarr_env_migration():
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/radarr", shell=True)
     print ("*** Corrected radarr's directory permissions. ***\n")
 
-    def radarr_compose()
+    radarr_compose()
 
 def radarr_compose():
     radarr_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/radarr/docker-compose.yml up -d', shell=True)
@@ -1113,8 +1112,8 @@ def tautulli_env_migration():
       
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/tautulli", shell=True)
     print ("*** Corrected Tautulli's directory permissions. ***\n")
-
-    def tautulli_compose()
+                                                                       
+    tautulli_compose()
 
 def tautulli_compose():
     tautulli_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/tautulli/docker-compose.yml up -d', shell=True)
@@ -1160,7 +1159,7 @@ def traefik_env_migration():
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/traefik", shell=True)
     print ("*** Corrected Traefik's directory permissions. ***\n")
 
-    def traefik_compose()
+    traefik_compose()
 
 def traefik_compose():
     traefik_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/traefik/docker-compose.yml up -d', shell=True)
@@ -1210,7 +1209,7 @@ def oauthenv_migration():
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/traefik", shell=True)
     print ("*** Corrected Traefik's directory permissions. ***\n")
 
-    def oauthcompose()
+    oauthcompose()
 
 def oauthcompose():
     oauthcompose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/traefik/docker-compose.yml up -d', shell=True)
