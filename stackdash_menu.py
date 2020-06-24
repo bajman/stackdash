@@ -177,6 +177,81 @@ def containers_list():
     
     """)
 
+def container_deploy():
+    choice = input("""
+    
+                                           ==============================================================================
+                                             __   ___  __        __          __   __       ___              ___  __   __  
+                                            |  \ |__  |__) |    /  \ \ /    /  ` /  \ |\ |  |   /\  | |\ | |__  |__) /__` 
+                                            |__/ |___ |    |___ \__/  |     \__, \__/ | \|  |  /~~\ | | \| |___ |  \ .__/ 
+                                            ==============================================================================
+    
+                                                ╔══════════════════════════════════════════════╦══════════════════╗
+                                                ║             Image/Container Name             ║ Container Number ║
+                                                ╠══════════════════════════════════════════════╬══════════════════╣
+                                                ║ Airsonic  (Music & Podcast Management)       ║         1        ║
+                                                ╠══════════════════════════════════════════════╬══════════════════╣
+                                                ║ Apache Guacamole  (Remote Desktop Gateway)   ║         2        ║
+                                                ╠══════════════════════════════════════════════╬══════════════════╣
+                                                ║ Bitwarden  (Password Manager)                ║         3        ║
+                                                ╠══════════════════════════════════════════════╬══════════════════╣
+                                                ║ Bookstack  (Wiki)                            ║         4        ║
+                                                ╠══════════════════════════════════════════════╬══════════════════╣
+                                                ║ Calibre  (eBook Management)                  ║         5        ║
+                                                ╠══════════════════════════════════════════════╬══════════════════╣
+                                                ║ Code-Server  (IDE Server)                    ║         6        ║
+                                                ╠══════════════════════════════════════════════╬══════════════════╣
+                                                ║ Duplicati  (Server and cloud backup service) ║         7        ║
+                                                ╠══════════════════════════════════════════════╬══════════════════╣
+                                                ║ Fresh RSS  (RSS Management)                  ║         8        ║
+                                                ╠══════════════════════════════════════════════╬══════════════════╣
+                                                ║ GitLab  (Private Source Code Repository)     ║         9        ║
+                                                ╠══════════════════════════════════════════════╬══════════════════╣
+                                                ║ Grocy  (Household Management)                ║        10        ║
+                                                ╠══════════════════════════════════════════════╬══════════════════╣
+                                                ║ Jackett (Proxy Server - Torrent Indexer)     ║        11        ║
+                                                ╠══════════════════════════════════════════════╬══════════════════╣
+                                                ║ Netdata  (Server Monitoring)                 ║        12        ║
+                                                ╠══════════════════════════════════════════════╬══════════════════╣
+                                                ║ Nextcloud  (File Management)                 ║        13        ║
+                                                ╠══════════════════════════════════════════════╬══════════════════╣
+                                                ║ Piwigo  (Photo Management)                   ║        14        ║
+                                                ╠══════════════════════════════════════════════╬══════════════════╣
+                                                ║ Plex  (Media Management)                     ║        15        ║
+                                                ╠══════════════════════════════════════════════╬══════════════════╣
+                                                ║ Portainer  (Docker Management UI)            ║        16        ║
+                                                ╠══════════════════════════════════════════════╬══════════════════╣
+                                                ║ QBittorrent  (Torrent Client)                ║        17        ║
+                                                ╠══════════════════════════════════════════════╬══════════════════╣
+                                                ║ Radarr  (Movie PVR)                          ║        18        ║
+                                                ╠══════════════════════════════════════════════╬══════════════════╣
+                                                ║ Tautulli  (Media Monitoring)                 ║        19        ║
+                                                ╠══════════════════════════════════════════════╬══════════════════╣
+                                                ║ Traefik  (Reverse Proxy & Loadbalencer)      ║        20        ║
+                                                ╠══════════════════════════════════════════════╬══════════════════╣
+                                                ║ Watchtower  (Docker Image Updater)           ║        21        ║
+                                                ╚══════════════════════════════════════════════╩══════════════════╝
+                                                    
+============================================================================================================================================================
+                                                        Please enter your selection:                       """)
+    if choice == "i" or choice == "I":
+        docker_install()
+        print("*** Install Docker Engine **** ")
+    elif choice == "w" or choice == "W":
+        containers_list()
+        print("*** Container List **** ")
+    elif choice == "c" or choice == "C":
+        container_deploy()
+        print("*** Deploy Containers **** ")
+    elif choice == "3":
+        containers_main()
+        print("*** Deploy Containers **** ")
+    elif choice == "4":
+        sys.exit
+    else:
+        print("You must only select either 1, 2, 3, or 4.")
+        print("Please try again")
+    
 def docker_install():
     remove_old_docker = subprocess.check_call("sudo apt-get remove docker docker-engine docker.io containerd runc", shell=True)
     print("\n\n\n\n\n\n\n\n*** Removed older versions of Docker. *** \n")
