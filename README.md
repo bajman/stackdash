@@ -14,5 +14,5 @@ releases of StackDash. For a full list of planned DNS providers see: https://doc
 # screenshots
 ![stackdash-ss2](https://i.imgur.com/MEJxMkZ.png)
 ![stackdash-ss3](https://i.imgur.com/2sqNNbj.png)
-![stackdash-ss4](hhttps://i.imgur.com/5XSVs8G.png)
+![stackdash-ss4](https://i.imgur.com/5XSVs8G.png)
 ![stackdash-ss5](https://i.imgur.com/746I8WF.png)
