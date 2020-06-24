@@ -1,11 +1,18 @@
 # stackdash
 
-StackDash is a simple python script designed to automate the installation of Docker Engine, deploy Docker "stacks" or clusters of Docker containers through Docker Swarm, and create static web pages to host dashboards using Homer for each stack you deploy. Version 1.0 will support deployment of three stacks: (1) DevOps; (2) Data; and (3) Media
+StackDash is a python3 script designed to automate Docker installation on Ubuntu and deploy container stacks with subdomain hosting. StackDash features a 
+Docker-Engine install script and Docker web-app containers/stack deployment wizards. All StackDash containers/stacks are preconfigured for external, subdomain 
+access, using LetsEncrypt HTTPS/TLS and OAuth 2.0 SSO via the Google Cloud Platform. See the Documentation for installation instructions. \n
 
-![stackdash-ss4](https://i.imgur.com/DPHFg4r.png)
+
+Please Note: this version of StackDash is configured to support only Cloudflare DNS-managed domains. Additional domain/hosting providers will be made available in future 
+releases of StackDash. For a full list of planned DNS providers see: https://docs.traefik.io/https/acme/#providers.
+
+![stackdash-ss1](https://i.imgur.com/pOVXZ04.png)
 
 
 # screenshots
-![stackdash-ss3](https://i.imgur.com/3ZY2p2q.png)
-![stackdash-ss1](https://i.imgur.com/xsQCRnM.png)
-![stackdash-ss2](https://i.imgur.com/Z5vjFs0.png)
+![stackdash-ss2](https://i.imgur.com/MEJxMkZ.png)
+![stackdash-ss3](https://i.imgur.com/2sqNNbj.png)
+![stackdash-ss4](hhttps://i.imgur.com/5XSVs8G.png)
+![stackdash-ss5](https://i.imgur.com/746I8WF.png)
