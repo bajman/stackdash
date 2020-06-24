@@ -1162,7 +1162,7 @@ def traefik_compose():
 
 # Google OAUTH
                                                                      
-                                                                     def oauthenv_write():
+def oauthenv_write():
     oauthenv_file = open("./containers/traefik/.env", "w+")
     oauthenv_file_data = oauthenv_file.read()
     
