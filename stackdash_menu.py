@@ -19,7 +19,6 @@ def main():
 StackDash is a python3 script designed to automate Docker installation on Ubuntu and deploy container stacks with subdomain hosting. StackDash features a 
 Docker-Engine install script and Docker web-app containers/stack deployment wizards. All StackDash containers/stacks are preconfigured for external, subdomain 
 access, using LetsEncrypt HTTPS/TLS and OAuth 2.0 SSO via the Google Cloud Platform. See the Documentation for installation instructions. \n
-
 This version of StackDash is configured to support only Cloudflare DNS-managed domains. Additional domain/hosting providers will be made available in future 
 releases of StackDash. For a full list of planned DNS providers see: https://docs.traefik.io/https/acme/#providers.\n
 \n
@@ -28,7 +27,6 @@ releases of StackDash. For a full list of planned DNS providers see: https://doc
                                              __   ___  __        __          __   __       ___              ___  __   __  
                                             |  \ |__  |__) |    /  \ \ /    /  ` /  \ |\ |  |   /\  | |\ | |__  |__) /__` 
                                             |__/ |___ |    |___ \__/  |     \__, \__/ | \|  |  /~~\ | | \| |___ |  \ .__/ 
-
                                             ==============================================================================
                                         \n                                                                                                           
                                                 Type [c] to deploy individual StackDash Containers.
@@ -38,16 +36,13 @@ releases of StackDash. For a full list of planned DNS providers see: https://doc
                                                      __   ___  __        __          __  ___       __        __  
                                                     |  \ |__  |__) |    /  \ \ /    /__`  |   /\  /  ` |__/ /__` 
                                                     |__/ |___ |    |___ \__/  |     .__/  |  /~~\ \__, |  \ .__/ 
-
                                                     ============================================================
                                         \n
                                                 Type [t] to deploy StackDash Stacks. 
                                                 Type [u] for a complete list of stacks you can deploy with StackDash.
                                         \n
-
                                                                           StackDack Network
                                                                 ===================================
-
                                                                        +----------------------------------------------------+   
                                                                        |                                                    |   
                                       +------------+     OAuth 2.0     | +-----------------+   HTTPS/TLS  +---------------+ |   
@@ -63,7 +58,6 @@ releases of StackDash. For a full list of planned DNS providers see: https://doc
                                         \n
                                                 Type [s] for a complete list of web app subdomain aliases used by StackDash. 
                                         \n
-
 ============================================================================================================================================================
                                                         Please enter your choice:                       """)
     if choice == "i" or choice == "I":
@@ -299,7 +293,7 @@ def duplicati_env_write():
     print ("\nPlease enter the subdomain you would like to use for Duplicati [e.g., duplicati-example.com]\n")
     user_domainname = duplicati_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
 
-    print ("\nPlease enter the directory you would like to use for Duplicati's appdata\n")
+    print ("\nPlease enter the directory you would like to use for Duplicatis appdata\n")
     user_client_id = duplicati_env_file.write("DUPLICATI_DATA=" + input('Path for appdata: ') + "\n")
 
     duplicati_env_file.write(duplicati_env_file_data)
@@ -337,7 +331,7 @@ def airsonic_env_write():
     print ("\nPlease enter the subdomain you would like to use for Airsonic [e.g., music-example.com]\n")
     user_domainname = airsonic_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
 
-    print ("\nPlease enter the directory you would like to use for Airsonic's appdata\n")
+    print ("\nPlease enter the directory you would like to use for Airsonics appdata\n")
     user_client_id = airsonic_env_file.write("AIRSONIC_DATA=" + input('Path for appdata: ') + "\n")
 
     airsonic_env_file.write(airsonic_env_file_data)
@@ -377,16 +371,16 @@ def guacamole_env_write():
     print ("\nPlease enter the subdomain you would like to use for Apache Guacamole [e.g., remote-example.com]\n")
     user_domainname = guacamole_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
 
-    print ("\nPlease enter the directory you would like to use for Apache Guacamole's appdata\n")
+    print ("\nPlease enter the directory you would like to use for Apache Guacamoles appdata\n")
     user_client_id = guacamole_env_file.write("GUACAMOLE_DATA=" + input('Path for appdata: ') + "\n")
 
-    print ("\nPlease enter a username for Apache Guacamole's MYSQL database\n")
+    print ("\nPlease enter a username for Apache Guacamoles MYSQL database\n")
     user_client_id = guacamole_env_file.write("GUACAMOLE_MYSQL_USERNAME=" + input('MYSQL Username: ') + "\n")
 
-    print ("\nPlease enter a strong password for Apache Guacamole's MYSQL user\n")
+    print ("\nPlease enter a strong password for Apache Guacamoles MYSQL user\n")
     user_client_id = guacamole_env_file.write("GUACAMOLE_MYSQL_USER_PASSWORD=" + input('MYSQL User Password: ') + "\n")
 
-    print ("\nPlease enter a strong password for Apache Guacamole's MYSQL root user\n")
+    print ("\nPlease enter a strong password for Apache Guacamoles MYSQL root user\n")
     user_client_id = guacamole_env_file.write("GUACAMOLE_MYSQL_ROOT_PASSWORD=" + input('MYSQL Root Password: ') + "\n")
 
     guacamole_env_file.write(guacamole_env_file_data)
@@ -427,7 +421,7 @@ def bitwarden_env_write():
     print ("\nPlease enter the subdomain you would like to use for Bitwarden [e.g., pass-example.com]\n")
     user_domainname = bitwarden_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
 
-    print ("\nPlease enter the directory you would like to use for Bitwarden's appdata\n")
+    print ("\nPlease enter the directory you would like to use for Bitwardens appdata\n")
     user_client_id = bitwarden_env_file.write("BITWARDEN_DATA=" + input('Path for appdata: ') + "\n")
 
     bitwarden_env_file.write(bitwarden_env_file_data)
@@ -467,7 +461,7 @@ def bookstack_env_write():
     print ("\nPlease enter the subdomain you would like to use for Bookstack [e.g., wiki-example.com]\n")
     user_domainname = bookstack_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
 
-    print ("\nPlease enter the directory you would like to use for Bookstack's appdata\n")
+    print ("\nPlease enter the directory you would like to use for Bookstacks appdata\n")
     user_client_id = bookstack_env_file.write("BOOKSTACK_DATA=" + input('Path for appdata: ') + "\n")
 
     print ("\nPlease enter a strong password for Bookstacks's MYSQL user\n")
@@ -633,7 +627,7 @@ def gitlab_env_write():
     print ("\nPlease enter the subdomain you would like to use for GitLab [e.g., gitlab-example.com]\n")
     user_domainname = gitlab_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
 
-    print ("\nPlease enter the directory you would like to use for GitLab's appdata\n")
+    print ("\nPlease enter the directory you would like to use for GitLabs appdata\n")
     user_client_id = gitlab_env_file.write("GITLAB_DATA=" + input('Path for appdata: ') + "\n")
 
     gitlab_env_file.write(gitlab_env_file_data)
@@ -652,7 +646,7 @@ def gitlab_env_migration():
     print ("*** Copied ./containers/gitlab/ from Git Clone to /opt/stackdash/docker-appdata/gitlab ***\n")
       
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/gitlab", shell=True)
-    print ("*** Corrected GitLab's directory permissions. ***\n")
+    print ("*** Corrected GitLabs directory permissions. ***\n")
 
     gitlab_compose()
 
@@ -673,7 +667,7 @@ def grocy_env_write():
     print ("\nPlease enter the subdomain you would like to use for Grocy [e.g., grocy-example.com]\n")
     user_domainname = grocy_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
 
-    print ("\nPlease enter the directory you would like to use for Grocy's appdata\n")
+    print ("\nPlease enter the directory you would like to use for Grocys appdata\n")
     user_client_id = grocy_env_file.write("GROCY_DATA=" + input('Path for appdata: ') + "\n")
 
     grocy_env_file.write(grocy_env_file_data)
@@ -692,7 +686,7 @@ def grocy_env_migration():
     print ("*** Copied ./containers/grocy/ from Git Clone to /opt/stackdash/docker-appdata/grocy ***\n")
       
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/grocy", shell=True)
-    print ("*** Corrected Grocy's directory permissions. ***\n")
+    print ("*** Corrected Grocys directory permissions. ***\n")
 
     grocy_compose()
 
@@ -713,10 +707,10 @@ def jackett_env_write():
     print ("\nPlease enter the subdomain you would like to use for Jackett [e.g., jackett-example.com]\n")
     user_domainname = jackett_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
 
-    print ("\nPlease enter the directory you would like to use for Jackett's appdata\n")
+    print ("\nPlease enter the directory you would like to use for Jacketts appdata\n")
     user_client_id = jackett_env_file.write("JACKETT_DATA=" + input('Path for appdata: ') + "\n")
 
-    print ("\nPlease enter the directory you would like to use for Jackett's download folder\n")
+    print ("\nPlease enter the directory you would like to use for Jacketts download folder\n")
     user_client_id = jackett_env_file.write("JACKETT_DOWNLOAD=" + input('Path for downloads: ') + "\n")
 
     jackett_env_file.write(jackett_env_file_data)
@@ -735,7 +729,7 @@ def jackett_env_migration():
     print ("*** Copied ./containers/jackett/ from Git Clone to /opt/stackdash/docker-appdata/jackett ***\n")
       
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/jackett", shell=True)
-    print ("*** Corrected Jackett's directory permissions. ***\n")
+    print ("*** Corrected Jacketts directory permissions. ***\n")
 
     jackett_compose()
 
@@ -793,13 +787,13 @@ def nextcloud_env_write():
     print ("\nPlease enter the subdomain you would like to use for Nextcloud [e.g., metrics-example.com]\n")
     user_domainname = nextcloud_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
 
-    print ("\nPlease enter the path you like to use to store Nextcloud's appdata\n")
+    print ("\nPlease enter the path you like to use to store Nextclouds appdata\n")
     user_domainname = nextcloud_env_file.write("NEXTCLOUD_DATA=" + input('Path to Nextcloud appdata: ') + "\n")
 
-    print ("\nPlease enter the password you would like to use for Nextcloud's MYSQL database\n")
+    print ("\nPlease enter the password you would like to use for Nextclouds MYSQL database\n")
     user_domainname = nextcloud_env_file.write("NEXTCLOUD_MYSQL_USER_PASSWORD=" + input('Nextcloud MYSQL Password: ') + "\n")
 
-    print ("\nPlease enter the root password you would like to use for Nextcloud's MYSQL database\n")
+    print ("\nPlease enter the root password you would like to use for Nextclouds MYSQL database\n")
     user_domainname = nextcloud_env_file.write("NEXTCLOUD_MYSQL_ROOT_PASSWORD" + input('Nextcloud Root MYSQL Password: ') + "\n")
 
     print ("\nPlease enter a documents path you would like to use with Nextcloud\n")
@@ -827,7 +821,7 @@ def nextcloud_env_migration():
     print ("*** Copied ./containers/nextcloud/ from Git Clone to /opt/stackdash/docker-appdata/nextcloud ***\n")
       
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/nextcloud", shell=True)
-    print ("*** Corrected Nextcloud's directory permissions. ***\n")
+    print ("*** Corrected Nextclouds directory permissions. ***\n")
 
     nextcloud_compose()
 
@@ -850,13 +844,13 @@ def piwigo_env_write():
     print ("\nPlease enter the subdomain you would like to use for Piwigo [e.g., photos-example.com]\n")
     user_domainname = piwigo_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
 
-    print ("\nPlease enter the path you like to use to store Piwigo's appdata\n")
+    print ("\nPlease enter the path you like to use to store Piwigios appdata\n")
     user_domainname = piwigo_env_file.write("PIWIGO_DATA=" + input('Path to Piwigo appdata: ') + "\n")
 
-    print ("\nPlease enter the password you would like to use for Piwigo's MYSQL database\n")
+    print ("\nPlease enter the password you would like to use for Piwigios MYSQL database\n")
     user_domainname = piwigo_env_file.write("PIWIGO_MYSQL_USER_PASSWORD=" + input('Piwigo MYSQL Password: ') + "\n")
 
-    print ("\nPlease enter the root password you would like to use for Piwigo's MYSQL database\n")
+    print ("\nPlease enter the root password you would like to use for Piwigios MYSQL database\n")
     user_domainname = piwigo_env_file.write("PIWIGO_MYSQL_ROOT_PASSWORD=" + input('piwigo Root MYSQL Password: ') + "\n")
 
     print ("\nPlease enter a photos path you would like to use with Piwigo\n")
@@ -878,7 +872,7 @@ def piwigo_env_migration():
     print ("*** Copied ./containers/piwigo/ from Git Clone to /opt/stackdash/docker-appdata/piwigo ***\n")
       
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/piwigo", shell=True)
-    print ("*** Corrected piwigo's directory permissions. ***\n")
+    print ("*** Corrected Piwigios directory permissions. ***\n")
 
     piwigo_compose()
 
@@ -899,7 +893,7 @@ def plex_env_write():
     print ("\nPlease enter the subdomain you would like to use for plex [e.g., plex-example.com]\n")
     user_domainname = plex_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
 
-    print ("\nPlease enter the path you like to use to store Plex's appdata\n")
+    print ("\nPlease enter the path you like to use to store Plexs appdata\n")
     user_domainname = plex_env_file.write("PLEX_DATA=" + input('Path to Plex Appdata: ') + "\n")
 
     print ("\nPlease enter your Plex Claim Token [see plex.tv/claim]\n")
@@ -933,7 +927,7 @@ def plex_env_migration():
     print ("*** Copied ./containers/plex/ from Git Clone to /opt/stackdash/docker-appdata/plex ***\n")
       
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/plex", shell=True)
-    print ("*** Corrected Plex's directory permissions. ***\n")
+    print ("*** Corrected Plexs directory permissions. ***\n")
 
     plex_compose()
 
@@ -954,7 +948,7 @@ def portainer_env_write():
     print ("\nPlease enter the subdomain you would like to use for Portainer [e.g., portainer-example.com]\n")
     user_domainname = portainer_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
 
-    print ("\nPlease enter the path you like to use to store Portainer's appdata\n")
+    print ("\nPlease enter the path you like to use to store Portainers appdata\n")
     user_domainname = portainer_env_file.write("PORTAINER_DATA=" + input('Path to Portainer Appdata: ') + "\n")
 
     portainer_env_file.write(portainer_env_file_data)
@@ -973,7 +967,7 @@ def portainer_env_migration():
     print ("*** Copied ./containers/portainer/ from Git Clone to /opt/stackdash/docker-appdata/portainer ***\n")
       
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/portainer", shell=True)
-    print ("*** Corrected Portainer's directory permissions. ***\n")
+    print ("*** Corrected Portainers directory permissions. ***\n")
 
     portainer_compose()
 
@@ -994,20 +988,20 @@ def qbit_env_write():
     print ("\nPlease enter the subdomain you would like to use for QBittorrent [e.g., qbit-example.com]\n")
     user_domainname = qbit_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
 
-    print ("\nPlease enter the path you like to use to store QBittorrent's appdata\n")
+    print ("\nPlease enter the path you like to use to store QBittorents appdata\n")
     user_domainname = qbit_env_file.write("QBIT_DATA=" + input('Path to QBittorrent appdata: ') + "\n")
 
-    print ("\nPlease enter the path you like to use to for QBittorrent's main download directory\n")
-    user_domainname = qbit_env_file.write("QBIT_DOWNLOADS=" + input('Path to QBittorrent's Download Path: ') + "\n")
+    print ("\nPlease enter the path you like to use to for QBittorents main download directory\n")
+    user_domainname = qbit_env_file.write("QBIT_DOWNLOADS=" + input('Path to QBittorents Download Path: ') + "\n")
 
     print ("\nPlease enter the path you would like QBittorrent to use for movie collection\n")
-    user_domainname = qbit_env_file.write("QBIT_MOVIES=" + input('QBittorrent's Movie Path: ') + "\n")
+    user_domainname = qbit_env_file.write("QBIT_MOVIES=" + input('QBittorents Movie Path: ') + "\n")
 
     print ("\nPlease enter the path you would like QBittorrent to use for TV-show collection\n")
-    user_domainname = qbit_env_file.write("QBIT_TV=" + input('QBittorrent's TV Path: ') + "\n")
+    user_domainname = qbit_env_file.write("QBIT_TV=" + input('QBittorents TV Path: ') + "\n")
 
     print ("\nPlease enter the path you would like QBittorrent to use for eBook collection\n")
-    user_domainname = qbit_env_file.write("QBIT_BOOKS=" + input('QBittorrent's eBook Path: ') + "\n")
+    user_domainname = qbit_env_file.write("QBIT_BOOKS=" + input('QBittorents eBook Path: ') + "\n")
 
     qbit_env_file.write(qbit_env_file_data)
     qbit_env_file.close()
@@ -1025,7 +1019,7 @@ def qbit_env_migration():
     print ("*** Copied ./containers/qbit/ from Git Clone to /opt/stackdash/docker-appdata/qbit ***\n")
       
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/qbit", shell=True)
-    print ("*** Corrected qbit's directory permissions. ***\n")
+    print ("*** Corrected QBittorents directory permissions. ***\n")
 
     qbit_compose()
 
@@ -1046,14 +1040,14 @@ def radarr_env_write():
     print ("\nPlease enter the subdomain you would like to use for Radarr [e.g., radarr-example.com]\n")
     user_domainname = radarr_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
 
-    print ("\nPlease enter the path you like to use to store Radarr's appdata\n")
-    user_domainname = radarr_env_file.write("RADARR_DATA=" + input('Path to Radarr's appdata: ') + "\n")
+    print ("\nPlease enter the path you like to use to store Radarrs appdata\n")
+    user_domainname = radarr_env_file.write("RADARR_DATA=" + input('Path to Radarrs appdata: ') + "\n")
 
-    print ("\nPlease enter the path you like to use to for Radarr's main download directory\n")
-    user_domainname = radarr_env_file.write("RADARR_DOWNLOADS=" + input('Radarr's Download Path: ') + "\n")
+    print ("\nPlease enter the path you like to use to for Radarrs main download directory\n")
+    user_domainname = radarr_env_file.write("RADARR_DOWNLOADS=" + input('Radarrs Download Path: ') + "\n")
 
     print ("\nPlease enter the path you would like Radarr to use for movie collection\n")
-    user_domainname = radarr_env_file.write("RADARR_MOVIES=" + input('Radarr's Movie Path: ') + "\n")
+    user_domainname = radarr_env_file.write("RADARR_MOVIES=" + input('Radarrs Movie Path: ') + "\n")
 
     radarr_env_file.write(radarr_env_file_data)
     radarr_env_file.close()
@@ -1071,7 +1065,7 @@ def radarr_env_migration():
     print ("*** Copied ./containers/radarr/ from Git Clone to /opt/stackdash/docker-appdata/radarr ***\n")
       
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/radarr", shell=True)
-    print ("*** Corrected radarr's directory permissions. ***\n")
+    print ("*** Corrected Radarrs directory permissions. ***\n")
 
     radarr_compose()
 
@@ -1092,8 +1086,8 @@ def tautulli_env_write():
     print ("\nPlease enter the subdomain you would like to use for Tautulli [e.g., tautulli-example.com]\n")
     user_domainname = tautulli_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
 
-    print ("\nPlease enter the path you like to use to store tautulli's appdata\n")
-    user_domainname = tautulli_env_file.write("TAUTULLI_DATA=" + input('Tautulli's appdata path: ') + "\n")
+    print ("\nPlease enter the path you like to use to store Tautullis appdata\n")
+    user_domainname = tautulli_env_file.write("TAUTULLI_DATA=" + input('Tautullis appdata path: ') + "\n")
 
     tautulli_env_file.write(tautulli_env_file_data)
     tautulli_env_file.close()
@@ -1111,7 +1105,7 @@ def tautulli_env_migration():
     print ("*** Copied ./containers/tautulli/ from Git Clone to /opt/stackdash/docker-appdata/tautulli ***\n")
       
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/tautulli", shell=True)
-    print ("*** Corrected Tautulli's directory permissions. ***\n")
+    print ("*** Corrected Tautullis directory permissions. ***\n")
                                                                        
     tautulli_compose()
 
@@ -1132,8 +1126,8 @@ def traefik_env_write():
     print ("\nPlease enter the subdomain you would like to use for Traefik [e.g., traefik-example.com]\n")
     user_domainname = traefik_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
 
-    print ("\nPlease enter the path you like to use to store Traefik's appdata\n")
-    user_domainname = traefik_env_file.write("TRAEFIK_DATA=" + input('Traefik's appdata path: ') + "\n")
+    print ("\nPlease enter the path you like to use to store Traefiks appdata\n")
+    user_domainname = traefik_env_file.write("TRAEFIK_DATA=" + input('Traefiks appdata path: ') + "\n")
 
     print ("\nPlease enter your Cloudflare Email Address, [Email address associated with your Cloudflare account, see https://dash.cloudflare.com, e.g., mail@example.com]\n")
     user_domainname = traefik_env_file.write("TRAEFIK_CLOUDFLARE_EMAIL=" + input('Your Cloudflare email address: ') + "\n")
@@ -1157,7 +1151,7 @@ def traefik_env_migration():
     print ("*** Copied ./containers/traefik/ from Git Clone to /opt/stackdash/docker-appdata/traefik ***\n")
       
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/traefik", shell=True)
-    print ("*** Corrected Traefik's directory permissions. ***\n")
+    print ("*** Corrected Traefiks directory permissions. ***\n")
 
     traefik_compose()
 
@@ -1207,7 +1201,7 @@ def oauthenv_migration():
     print ("*** Copied ./containers/traefik/ from Git Clone to /opt/stackdash/docker-appdata/traefik ***\n")
       
     stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/docker-appdata/traefik", shell=True)
-    print ("*** Corrected Traefik's directory permissions. ***\n")
+    print ("*** Corrected Traefiks directory permissions. ***\n")
 
     oauthcompose()
 
