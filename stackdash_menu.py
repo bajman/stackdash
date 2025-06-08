@@ -8,6 +8,18 @@ import os
 import string
 
 
+def write_env_file(path, variables):
+    """Write key/value pairs to a .env file."""
+    with open(path, "w") as env_file:
+        for key, value in variables.items():
+            env_file.write(f"{key}={value}\n")
+
+
+def deploy_compose(compose_path):
+    """Run docker-compose using the supplied compose file."""
+    subprocess.run(f"sudo docker-compose -f {compose_path} up -d", shell=True)
+
+
 def main():
     choice = input("""                           
                                               ███████╗████████╗ █████╗  ██████╗██╗  ██╗    ██████╗  █████╗ ███████╗██╗  ██╗
@@ -398,21 +410,19 @@ def devops_env_migration():
 ###CONTAINERS
 #duplicati
 def duplicati_env_write():
-    duplicati_env_file = open("./containers/duplicati/.env", "w+")
-    duplicati_env_file_data = duplicati_env_file.read()
-    
-    puid = duplicati_env_file.write('PUID=1000\n')
-    pgid = duplicati_env_file.write('PGID=1000\n')
-    userdir = duplicati_env_file.write('USERDIR=/opt/stackdash\n')
-    
-    print ("\nPlease enter the subdomain you would like to use for Duplicati [e.g., duplicati-example.com]\n")
-    user_domainname = duplicati_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+    variables = {
+        "PUID": "1000",
+        "PGID": "1000",
+        "USERDIR": "/opt/stackdash",
+    }
 
-    print ("\nPlease enter the directory you would like to use for Duplicatis appdata\n")
-    user_client_id = duplicati_env_file.write("DUPLICATI_DATA=" + input('Path for appdata: ') + "\n")
+    print("\nPlease enter the subdomain you would like to use for Duplicati [e.g., duplicati-example.com]\n")
+    variables["DOMAINNAME"] = input('Your Domain Name: ')
 
-    duplicati_env_file.write(duplicati_env_file_data)
-    duplicati_env_file.close()
+    print("\nPlease enter the directory you would like to use for Duplicatis appdata\n")
+    variables["DUPLICATI_DATA"] = input('Path for appdata: ')
+
+    write_env_file("./containers/duplicati/.env", variables)
 
     duplicati_env_migration()
 
@@ -430,27 +440,25 @@ def duplicati_env_migration():
     print ("*** Corrected Duplicati directory permissions. ***\n")
     
 def duplicati_compose():
-    duplicati_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/duplicati/docker-compose.yml up -d', shell=True)
-    print ("*** Duplicati is deployed! ***")
+    deploy_compose('/opt/stackdash/docker-appdata/duplicati/docker-compose.yml')
+    print("*** Duplicati is deployed! ***")
     
 #airsonic
 
 def airsonic_env_write():
-    airsonic_env_file = open("./containers/airsonic/.env", "w+")
-    airsonic_env_file_data = airsonic_env_file.read()
-    
-    puid = airsonic_env_file.write('PUID=1000\n')
-    pgid = airsonic_env_file.write('PGID=1000\n')
-    userdir = airsonic_env_file.write('USERDIR=/opt/stackdash\n')
-    
-    print ("\nPlease enter the subdomain you would like to use for Airsonic [e.g., music-example.com]\n")
-    user_domainname = airsonic_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+    variables = {
+        "PUID": "1000",
+        "PGID": "1000",
+        "USERDIR": "/opt/stackdash",
+    }
 
-    print ("\nPlease enter the directory you would like to use for Airsonics appdata\n")
-    user_client_id = airsonic_env_file.write("AIRSONIC_DATA=" + input('Path for appdata: ') + "\n")
+    print("\nPlease enter the subdomain you would like to use for Airsonic [e.g., music-example.com]\n")
+    variables["DOMAINNAME"] = input('Your Domain Name: ')
 
-    airsonic_env_file.write(airsonic_env_file_data)
-    airsonic_env_file.close()
+    print("\nPlease enter the directory you would like to use for Airsonics appdata\n")
+    variables["AIRSONIC_DATA"] = input('Path for appdata: ')
+
+    write_env_file("./containers/airsonic/.env", variables)
 
     airsonic_env_migration()
 
@@ -470,36 +478,34 @@ def airsonic_env_migration():
     airsonic_compose()
 
 def airsonic_compose():
-    airsonic_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/airsonic/docker-compose.yml up -d', shell=True)
-    print ("*** Airsonic is deployed! ***")
+    deploy_compose('/opt/stackdash/docker-appdata/airsonic/docker-compose.yml')
+    print("*** Airsonic is deployed! ***")
 
 #apache guacamole
 
 def guacamole_env_write():
-    guacamole_env_file = open("./containers/guacamole/.env", "w+")
-    guacamole_env_file_data = guacamole_env_file.read()
-    
-    puid = guacamole_env_file.write('PUID=1000\n')
-    pgid = guacamole_env_file.write('PGID=1000\n')
-    userdir = guacamole_env_file.write('USERDIR=/opt/stack_dash\n')
-    
-    print ("\nPlease enter the subdomain you would like to use for Apache Guacamole [e.g., remote-example.com]\n")
-    user_domainname = guacamole_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+    variables = {
+        "PUID": "1000",
+        "PGID": "1000",
+        "USERDIR": "/opt/stack_dash",
+    }
 
-    print ("\nPlease enter the directory you would like to use for Apache Guacamoles appdata\n")
-    user_client_id = guacamole_env_file.write("GUACAMOLE_DATA=" + input('Path for appdata: ') + "\n")
+    print("\nPlease enter the subdomain you would like to use for Apache Guacamole [e.g., remote-example.com]\n")
+    variables["DOMAINNAME"] = input('Your Domain Name: ')
 
-    print ("\nPlease enter a username for Apache Guacamoles MYSQL database\n")
-    user_client_id = guacamole_env_file.write("GUACAMOLE_MYSQL_USERNAME=" + input('MYSQL Username: ') + "\n")
+    print("\nPlease enter the directory you would like to use for Apache Guacamoles appdata\n")
+    variables["GUACAMOLE_DATA"] = input('Path for appdata: ')
 
-    print ("\nPlease enter a strong password for Apache Guacamoles MYSQL user\n")
-    user_client_id = guacamole_env_file.write("GUACAMOLE_MYSQL_USER_PASSWORD=" + input('MYSQL User Password: ') + "\n")
+    print("\nPlease enter a username for Apache Guacamoles MYSQL database\n")
+    variables["GUACAMOLE_MYSQL_USERNAME"] = input('MYSQL Username: ')
 
-    print ("\nPlease enter a strong password for Apache Guacamoles MYSQL root user\n")
-    user_client_id = guacamole_env_file.write("GUACAMOLE_MYSQL_ROOT_PASSWORD=" + input('MYSQL Root Password: ') + "\n")
+    print("\nPlease enter a strong password for Apache Guacamoles MYSQL user\n")
+    variables["GUACAMOLE_MYSQL_USER_PASSWORD"] = input('MYSQL User Password: ')
 
-    guacamole_env_file.write(guacamole_env_file_data)
-    guacamole_env_file.close()
+    print("\nPlease enter a strong password for Apache Guacamoles MYSQL root user\n")
+    variables["GUACAMOLE_MYSQL_ROOT_PASSWORD"] = input('MYSQL Root Password: ')
+
+    write_env_file("./containers/guacamole/.env", variables)
 
     guacamole_env_migration()
 
@@ -519,28 +525,26 @@ def guacamole_env_migration():
     guacamole_compose()
 
 def guacamole_compose():
-    guacamole_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/guacamole/docker-compose.yml up -d', shell=True)
-    print ("*** guacamole is deployed! ***")
+    deploy_compose('/opt/stackdash/docker-appdata/guacamole/docker-compose.yml')
+    print("*** guacamole is deployed! ***")
     
 #Bitwarden
 
 
 def bitwarden_env_write():
-    bitwarden_env_file = open("./containers/bitwarden/.env", "w+")
-    bitwarden_env_file_data = bitwarden_env_file.read()
-    
-    puid = bitwarden_env_file.write('PUID=1000\n')
-    pgid = bitwarden_env_file.write('PGID=1000\n')
-    userdir = bitwarden_env_file.write('USERDIR=/opt/stackdash\n')
-    
-    print ("\nPlease enter the subdomain you would like to use for Bitwarden [e.g., pass-example.com]\n")
-    user_domainname = bitwarden_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+    variables = {
+        "PUID": "1000",
+        "PGID": "1000",
+        "USERDIR": "/opt/stackdash",
+    }
 
-    print ("\nPlease enter the directory you would like to use for Bitwardens appdata\n")
-    user_client_id = bitwarden_env_file.write("BITWARDEN_DATA=" + input('Path for appdata: ') + "\n")
+    print("\nPlease enter the subdomain you would like to use for Bitwarden [e.g., pass-example.com]\n")
+    variables["DOMAINNAME"] = input('Your Domain Name: ')
 
-    bitwarden_env_file.write(bitwarden_env_file_data)
-    bitwarden_env_file.close()
+    print("\nPlease enter the directory you would like to use for Bitwardens appdata\n")
+    variables["BITWARDEN_DATA"] = input('Path for appdata: ')
+
+    write_env_file("./containers/bitwarden/.env", variables)
 
     bitwarden_env_migration()
 
@@ -560,33 +564,31 @@ def bitwarden_env_migration():
     bitwarden_compose()
 
 def bitwarden_compose():
-    bitwarden_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/bitwarden/docker-compose.yml up -d', shell=True)
-    print ("*** Bitwarden is deployed! ***")
+    deploy_compose('/opt/stackdash/docker-appdata/bitwarden/docker-compose.yml')
+    print("*** Bitwarden is deployed! ***")
     
  #Bookstack
 
 def bookstack_env_write():
-    bookstack_env_file = open("./containers/bookstack/.env", "w+")
-    bookstack_env_file_data = bookstack_env_file.read()
-    
-    puid = bookstack_env_file.write('PUID=1000\n')
-    pgid = bookstack_env_file.write('PGID=1000\n')
-    userdir = bookstack_env_file.write('USERDIR=/opt/stackdash\n')
-    
-    print ("\nPlease enter the subdomain you would like to use for Bookstack [e.g., wiki-example.com]\n")
-    user_domainname = bookstack_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+    variables = {
+        "PUID": "1000",
+        "PGID": "1000",
+        "USERDIR": "/opt/stackdash",
+    }
 
-    print ("\nPlease enter the directory you would like to use for Bookstacks appdata\n")
-    user_client_id = bookstack_env_file.write("BOOKSTACK_DATA=" + input('Path for appdata: ') + "\n")
+    print("\nPlease enter the subdomain you would like to use for Bookstack [e.g., wiki-example.com]\n")
+    variables["DOMAINNAME"] = input('Your Domain Name: ')
 
-    print ("\nPlease enter a strong password for Bookstacks's MYSQL user\n")
-    user_client_id = bookstack_env_file.write("BOOKSTACK_MYSQL_USER_PASSWORD=" + input('MYSQL User Password: ') + "\n")
+    print("\nPlease enter the directory you would like to use for Bookstacks appdata\n")
+    variables["BOOKSTACK_DATA"] = input('Path for appdata: ')
 
-    print ("\nPlease enter a strong password for Bookstacks's MYSQL root user\n")
-    user_client_id = bookstack_env_file.write("BOOKSTACK_MYSQL_ROOT_PASSWORD=" + input('MYSQL Root Password: ') + "\n")
+    print("\nPlease enter a strong password for Bookstacks's MYSQL user\n")
+    variables["BOOKSTACK_MYSQL_USER_PASSWORD"] = input('MYSQL User Password: ')
 
-    bookstack_env_file.write(bookstack_env_file_data)
-    bookstack_env_file.close()
+    print("\nPlease enter a strong password for Bookstacks's MYSQL root user\n")
+    variables["BOOKSTACK_MYSQL_ROOT_PASSWORD"] = input('MYSQL Root Password: ')
+
+    write_env_file("./containers/bookstack/.env", variables)
 
     bookstack_env_migration()
 
@@ -606,27 +608,25 @@ def bookstack_env_migration():
     bookstack_compose()
 
 def bookstack_compose():
-    bookstack_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/bookstack/docker-compose.yml up -d', shell=True)
-    print ("*** bookstack is deployed! ***")
+    deploy_compose('/opt/stackdash/docker-appdata/bookstack/docker-compose.yml')
+    print("*** bookstack is deployed! ***")
 
  #calibre-web
 
 def calibre_env_write():
-    calibre_env_file = open("./containers/calibre/.env", "w+")
-    calibre_env_file_data = calibre_env_file.read()
-    
-    puid = calibre_env_file.write('PUID=1000\n')
-    pgid = calibre_env_file.write('PGID=1000\n')
-    userdir = calibre_env_file.write('USERDIR=/opt/stackdash\n')
-    
-    print ("\nPlease enter the subdomain you would like to use for Calibre-Web [e.g., books-example.com]\n")
-    user_domainname = calibre_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+    variables = {
+        "PUID": "1000",
+        "PGID": "1000",
+        "USERDIR": "/opt/stackdash",
+    }
 
-    print ("\nPlease enter the directory you would like to use for Calibre-Web's appdata\n")
-    user_client_id = calibre_env_file.write("calibre_DATA=" + input('Path for appdata: ') + "\n")
+    print("\nPlease enter the subdomain you would like to use for Calibre-Web [e.g., books-example.com]\n")
+    variables["DOMAINNAME"] = input('Your Domain Name: ')
 
-    calibre_env_file.write(calibre_env_file_data)
-    calibre_env_file.close()
+    print("\nPlease enter the directory you would like to use for Calibre-Web's appdata\n")
+    variables["calibre_DATA"] = input('Path for appdata: ')
+
+    write_env_file("./containers/calibre/.env", variables)
 
     calibre_env_migration()
 
@@ -646,27 +646,25 @@ def calibre_env_migration():
     calibre_compose()
 
 def calibre_compose():
-    calibre_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/calibre/docker-compose.yml up -d', shell=True)
-    print ("*** Calibre-Wen is deployed! ***")
+    deploy_compose('/opt/stackdash/docker-appdata/calibre/docker-compose.yml')
+    print("*** Calibre-Wen is deployed! ***")
     
  #VS-Code Server
 
 def codeserver_env_write():
-    codeserver_env_file = open("./containers/codeserver/.env", "w+")
-    codeserver_env_file_data = codeserver_env_file.read()
-    
-    puid = codeserver_env_file.write('PUID=1000\n')
-    pgid = codeserver_env_file.write('PGID=1000\n')
-    userdir = codeserver_env_file.write('USERDIR=/opt/stackdash\n')
-    
-    print ("\nPlease enter the subdomain you would like to use for VS Code-Server [e.g., codeexample.com]\n")
-    user_domainname = codeserver_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+    variables = {
+        "PUID": "1000",
+        "PGID": "1000",
+        "USERDIR": "/opt/stackdash",
+    }
 
-    print ("\nPlease enter the directory you would like to use for VS Code-Server's appdata\n")
-    user_client_id = codeserver_env_file.write("CODE_SERVER_DATA=" + input('Path for appdata: ') + "\n")
+    print("\nPlease enter the subdomain you would like to use for VS Code-Server [e.g., codeexample.com]\n")
+    variables["DOMAINNAME"] = input('Your Domain Name: ')
 
-    codeserver_env_file.write(codeserver_env_file_data)
-    codeserver_env_file.close()
+    print("\nPlease enter the directory you would like to use for VS Code-Server's appdata\n")
+    variables["CODE_SERVER_DATA"] = input('Path for appdata: ')
+
+    write_env_file("./containers/codeserver/.env", variables)
 
     codeserver_env_migration()
 
@@ -686,27 +684,25 @@ def codeserver_env_migration():
     codeserver_compose()
 
 def codeserver_compose():
-    codeserver_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/codeserver/docker-compose.yml up -d', shell=True)
-    print ("*** VS Code-Server is deployed! ***")
+    deploy_compose('/opt/stackdash/docker-appdata/codeserver/docker-compose.yml')
+    print("*** VS Code-Server is deployed! ***")
     
  #Fresh RSS
 
 def freshrss_env_write():
-    freshrss_env_file = open("./containers/freshrss/.env", "w+")
-    freshrss_env_file_data = freshrss_env_file.read()
-    
-    puid = freshrss_env_file.write('PUID=1000\n')
-    pgid = freshrss_env_file.write('PGID=1000\n')
-    userdir = freshrss_env_file.write('USERDIR=/opt/stackdash\n')
-    
-    print ("\nPlease enter the subdomain you would like to use for Fresh RSS [e.g., rss-example.com]\n")
-    user_domainname = freshrss_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+    variables = {
+        "PUID": "1000",
+        "PGID": "1000",
+        "USERDIR": "/opt/stackdash",
+    }
 
-    print ("\nPlease enter the directory you would like to use for Fresh RSS's appdata\n")
-    user_client_id = freshrss_env_file.write("FRESH_RSS_DATA=" + input('Path for appdata: ') + "\n")
+    print("\nPlease enter the subdomain you would like to use for Fresh RSS [e.g., rss-example.com]\n")
+    variables["DOMAINNAME"] = input('Your Domain Name: ')
 
-    freshrss_env_file.write(freshrss_env_file_data)
-    freshrss_env_file.close()
+    print("\nPlease enter the directory you would like to use for Fresh RSS's appdata\n")
+    variables["FRESH_RSS_DATA"] = input('Path for appdata: ')
+
+    write_env_file("./containers/freshrss/.env", variables)
 
     freshrss_env_migration()
 
@@ -726,27 +722,25 @@ def freshrss_env_migration():
     freshrss_compose()
 
 def freshrss_compose():
-    freshrss_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/freshrss/docker-compose.yml up -d', shell=True)
-    print ("*** Fresh RSS is deployed! ***")
+    deploy_compose('/opt/stackdash/docker-appdata/freshrss/docker-compose.yml')
+    print("*** Fresh RSS is deployed! ***")
 
 #GitLab
 
 def gitlab_env_write():
-    gitlab_env_file = open("./containers/gitlab/.env", "w+")
-    gitlab_env_file_data = gitlab_env_file.read()
-    
-    puid = gitlab_env_file.write('PUID=1000\n')
-    pgid = gitlab_env_file.write('PGID=1000\n')
-    userdir = gitlab_env_file.write('USERDIR=/opt/stackdash\n')
-    
-    print ("\nPlease enter the subdomain you would like to use for GitLab [e.g., gitlab-example.com]\n")
-    user_domainname = gitlab_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+    variables = {
+        "PUID": "1000",
+        "PGID": "1000",
+        "USERDIR": "/opt/stackdash",
+    }
 
-    print ("\nPlease enter the directory you would like to use for GitLabs appdata\n")
-    user_client_id = gitlab_env_file.write("GITLAB_DATA=" + input('Path for appdata: ') + "\n")
+    print("\nPlease enter the subdomain you would like to use for GitLab [e.g., gitlab-example.com]\n")
+    variables["DOMAINNAME"] = input('Your Domain Name: ')
 
-    gitlab_env_file.write(gitlab_env_file_data)
-    gitlab_env_file.close()
+    print("\nPlease enter the directory you would like to use for GitLabs appdata\n")
+    variables["GITLAB_DATA"] = input('Path for appdata: ')
+
+    write_env_file("./containers/gitlab/.env", variables)
 
     gitlab_env_migration()
 
@@ -766,27 +760,25 @@ def gitlab_env_migration():
     gitlab_compose()
 
 def gitlab_compose():
-    gitlab_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/gitlab/docker-compose.yml up -d', shell=True)
-    print ("*** GitLab is deployed! ***")
+    deploy_compose('/opt/stackdash/docker-appdata/gitlab/docker-compose.yml')
+    print("*** GitLab is deployed! ***")
     
 #Grocy
 
 def grocy_env_write():
-    grocy_env_file = open("./containers/grocy/.env", "w+")
-    grocy_env_file_data = grocy_env_file.read()
-    
-    puid = grocy_env_file.write('PUID=1000\n')
-    pgid = grocy_env_file.write('PGID=1000\n')
-    userdir = grocy_env_file.write('USERDIR=/opt/stackdash\n')
-    
-    print ("\nPlease enter the subdomain you would like to use for Grocy [e.g., grocy-example.com]\n")
-    user_domainname = grocy_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+    variables = {
+        "PUID": "1000",
+        "PGID": "1000",
+        "USERDIR": "/opt/stackdash",
+    }
 
-    print ("\nPlease enter the directory you would like to use for Grocys appdata\n")
-    user_client_id = grocy_env_file.write("GROCY_DATA=" + input('Path for appdata: ') + "\n")
+    print("\nPlease enter the subdomain you would like to use for Grocy [e.g., grocy-example.com]\n")
+    variables["DOMAINNAME"] = input('Your Domain Name: ')
 
-    grocy_env_file.write(grocy_env_file_data)
-    grocy_env_file.close()
+    print("\nPlease enter the directory you would like to use for Grocys appdata\n")
+    variables["GROCY_DATA"] = input('Path for appdata: ')
+
+    write_env_file("./containers/grocy/.env", variables)
 
     grocy_env_migration()
 
@@ -806,30 +798,28 @@ def grocy_env_migration():
     grocy_compose()
 
 def grocy_compose():
-    grocy_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/grocy/docker-compose.yml up -d', shell=True)
-    print ("*** Grocy is deployed! ***")
+    deploy_compose('/opt/stackdash/docker-appdata/grocy/docker-compose.yml')
+    print("*** Grocy is deployed! ***")
     
  #Jackett
 
 def jackett_env_write():
-    jackett_env_file = open("./containers/jackett/.env", "w+")
-    jackett_env_file_data = jackett_env_file.read()
-    
-    puid = jackett_env_file.write('PUID=1000\n')
-    pgid = jackett_env_file.write('PGID=1000\n')
-    userdir = jackett_env_file.write('USERDIR=/opt/stackdash\n')
-    
-    print ("\nPlease enter the subdomain you would like to use for Jackett [e.g., jackett-example.com]\n")
-    user_domainname = jackett_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+    variables = {
+        "PUID": "1000",
+        "PGID": "1000",
+        "USERDIR": "/opt/stackdash",
+    }
 
-    print ("\nPlease enter the directory you would like to use for Jacketts appdata\n")
-    user_client_id = jackett_env_file.write("JACKETT_DATA=" + input('Path for appdata: ') + "\n")
+    print("\nPlease enter the subdomain you would like to use for Jackett [e.g., jackett-example.com]\n")
+    variables["DOMAINNAME"] = input('Your Domain Name: ')
 
-    print ("\nPlease enter the directory you would like to use for Jacketts download folder\n")
-    user_client_id = jackett_env_file.write("JACKETT_DOWNLOAD=" + input('Path for downloads: ') + "\n")
+    print("\nPlease enter the directory you would like to use for Jacketts appdata\n")
+    variables["JACKETT_DATA"] = input('Path for appdata: ')
 
-    jackett_env_file.write(jackett_env_file_data)
-    jackett_env_file.close()
+    print("\nPlease enter the directory you would like to use for Jacketts download folder\n")
+    variables["JACKETT_DOWNLOAD"] = input('Path for downloads: ')
+
+    write_env_file("./containers/jackett/.env", variables)
 
     jackett_env_migration()
 
@@ -849,24 +839,22 @@ def jackett_env_migration():
     jackett_compose()
 
 def jackett_compose():
-    jackett_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/jackett/docker-compose.yml up -d', shell=True)
-    print ("*** Jackett is deployed! ***")
+    deploy_compose('/opt/stackdash/docker-appdata/jackett/docker-compose.yml')
+    print("*** Jackett is deployed! ***")
     
 #Netdata
 
 def netdata_env_write():
-    netdata_env_file = open("./containers/netdata/.env", "w+")
-    netdata_env_file_data = netdata_env_file.read()
-    
-    puid = netdata_env_file.write('PUID=1000\n')
-    pgid = netdata_env_file.write('PGID=1000\n')
-    userdir = netdata_env_file.write('USERDIR=/opt/stackdash\n')
-    
-    print ("\nPlease enter the subdomain you would like to use for Netdata [e.g., metrics-example.com]\n")
-    user_domainname = netdata_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+    variables = {
+        "PUID": "1000",
+        "PGID": "1000",
+        "USERDIR": "/opt/stackdash",
+    }
 
-    netdata_env_file.write(netdata_env_file_data)
-    netdata_env_file.close()
+    print("\nPlease enter the subdomain you would like to use for Netdata [e.g., metrics-example.com]\n")
+    variables["DOMAINNAME"] = input('Your Domain Name: ')
+
+    write_env_file("./containers/netdata/.env", variables)
 
     netdata_env_migration()
 
@@ -886,42 +874,40 @@ def netdata_env_migration():
     netdata_compose()
 
 def netdata_compose():
-    netdata_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/netdata/docker-compose.yml up -d', shell=True)
-    print ("*** Netdata is deployed! ***")
+    deploy_compose('/opt/stackdash/docker-appdata/netdata/docker-compose.yml')
+    print("*** Netdata is deployed! ***")
     
 # Nextcloud
 
 def nextcloud_env_write():
-    nextcloud_env_file = open("./containers/nextcloud/.env", "w+")
-    nextcloud_env_file_data = nextcloud_env_file.read()
-    
-    puid = nextcloud_env_file.write('PUID=1000\n')
-    pgid = nextcloud_env_file.write('PGID=1000\n')
-    userdir = nextcloud_env_file.write('USERDIR=/opt/stackdash\n')
-    
-    print ("\nPlease enter the subdomain you would like to use for Nextcloud [e.g., metrics-example.com]\n")
-    user_domainname = nextcloud_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+    variables = {
+        "PUID": "1000",
+        "PGID": "1000",
+        "USERDIR": "/opt/stackdash",
+    }
 
-    print ("\nPlease enter the path you like to use to store Nextclouds appdata\n")
-    user_domainname = nextcloud_env_file.write("NEXTCLOUD_DATA=" + input('Path to Nextcloud appdata: ') + "\n")
+    print("\nPlease enter the subdomain you would like to use for Nextcloud [e.g., metrics-example.com]\n")
+    variables["DOMAINNAME"] = input('Your Domain Name: ')
 
-    print ("\nPlease enter the password you would like to use for Nextclouds MYSQL database\n")
-    user_domainname = nextcloud_env_file.write("NEXTCLOUD_MYSQL_USER_PASSWORD=" + input('Nextcloud MYSQL Password: ') + "\n")
+    print("\nPlease enter the path you like to use to store Nextclouds appdata\n")
+    variables["NEXTCLOUD_DATA"] = input('Path to Nextcloud appdata: ')
 
-    print ("\nPlease enter the root password you would like to use for Nextclouds MYSQL database\n")
-    user_domainname = nextcloud_env_file.write("NEXTCLOUD_MYSQL_ROOT_PASSWORD" + input('Nextcloud Root MYSQL Password: ') + "\n")
+    print("\nPlease enter the password you would like to use for Nextclouds MYSQL database\n")
+    variables["NEXTCLOUD_MYSQL_USER_PASSWORD"] = input('Nextcloud MYSQL Password: ')
 
-    print ("\nPlease enter a documents path you would like to use with Nextcloud\n")
-    user_domainname = nextcloud_env_file.write("NEXTCLOUD_DOCUMENTS=" + input('Path to your documents: ') + "\n")
+    print("\nPlease enter the root password you would like to use for Nextclouds MYSQL database\n")
+    variables["NEXTCLOUD_MYSQL_ROOT_PASSWORD"] = input('Nextcloud Root MYSQL Password: ')
 
-    print ("\nPlease enter a downloads path you would like to use with Nextcloud\n")
-    user_domainname = nextcloud_env_file.write("NEXTCLOUD_DOWNLOADS=" + input('Path to your downloads: ') + "\n")
+    print("\nPlease enter a documents path you would like to use with Nextcloud\n")
+    variables["NEXTCLOUD_DOCUMENTS"] = input('Path to your documents: ')
 
-    print ("\nPlease enter a photos path you would like to use with Nextcloud\n")
-    user_domainname = nextcloud_env_file.write("NEXTCLOUD_PHOTOS=" + input('Path to your photos: ') + "\n")
+    print("\nPlease enter a downloads path you would like to use with Nextcloud\n")
+    variables["NEXTCLOUD_DOWNLOADS"] = input('Path to your downloads: ')
 
-    nextcloud_env_file.write(nextcloud_env_file_data)
-    nextcloud_env_file.close()
+    print("\nPlease enter a photos path you would like to use with Nextcloud\n")
+    variables["NEXTCLOUD_PHOTOS"] = input('Path to your photos: ')
+
+    write_env_file("./containers/nextcloud/.env", variables)
 
     nextcloud_env_migration()
 
@@ -941,38 +927,36 @@ def nextcloud_env_migration():
     nextcloud_compose()
 
 def nextcloud_compose():
-    nextcloud_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/nextcloud/docker-compose.yml up -d', shell=True)
-    print ("*** Nextcloud is deployed! ***")
+    deploy_compose('/opt/stackdash/docker-appdata/nextcloud/docker-compose.yml')
+    print("*** Nextcloud is deployed! ***")
     
     
 ## Piwigo
 
 
 def piwigo_env_write():
-    piwigo_env_file = open("./containers/piwigo/.env", "w+")
-    piwigo_env_file_data = piwigo_env_file.read()
-    
-    puid = piwigo_env_file.write('PUID=1000\n')
-    pgid = piwigo_env_file.write('PGID=1000\n')
-    userdir = piwigo_env_file.write('USERDIR=/opt/stackdash\n')
-    
-    print ("\nPlease enter the subdomain you would like to use for Piwigo [e.g., photos-example.com]\n")
-    user_domainname = piwigo_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+    variables = {
+        "PUID": "1000",
+        "PGID": "1000",
+        "USERDIR": "/opt/stackdash",
+    }
 
-    print ("\nPlease enter the path you like to use to store Piwigios appdata\n")
-    user_domainname = piwigo_env_file.write("PIWIGO_DATA=" + input('Path to Piwigo appdata: ') + "\n")
+    print("\nPlease enter the subdomain you would like to use for Piwigo [e.g., photos-example.com]\n")
+    variables["DOMAINNAME"] = input('Your Domain Name: ')
 
-    print ("\nPlease enter the password you would like to use for Piwigios MYSQL database\n")
-    user_domainname = piwigo_env_file.write("PIWIGO_MYSQL_USER_PASSWORD=" + input('Piwigo MYSQL Password: ') + "\n")
+    print("\nPlease enter the path you like to use to store Piwigios appdata\n")
+    variables["PIWIGO_DATA"] = input('Path to Piwigo appdata: ')
 
-    print ("\nPlease enter the root password you would like to use for Piwigios MYSQL database\n")
-    user_domainname = piwigo_env_file.write("PIWIGO_MYSQL_ROOT_PASSWORD=" + input('piwigo Root MYSQL Password: ') + "\n")
+    print("\nPlease enter the password you would like to use for Piwigios MYSQL database\n")
+    variables["PIWIGO_MYSQL_USER_PASSWORD"] = input('Piwigo MYSQL Password: ')
 
-    print ("\nPlease enter a photos path you would like to use with Piwigo\n")
-    user_domainname = piwigo_env_file.write("PIWIGO_PHOTOS=" + input('Path to your photos: ') + "\n")
+    print("\nPlease enter the root password you would like to use for Piwigios MYSQL database\n")
+    variables["PIWIGO_MYSQL_ROOT_PASSWORD"] = input('piwigo Root MYSQL Password: ')
 
-    piwigo_env_file.write(piwigo_env_file_data)
-    piwigo_env_file.close()
+    print("\nPlease enter a photos path you would like to use with Piwigo\n")
+    variables["PIWIGO_PHOTOS"] = input('Path to your photos: ')
+
+    write_env_file("./containers/piwigo/.env", variables)
 
     piwigo_env_migration()
 
@@ -992,42 +976,40 @@ def piwigo_env_migration():
     piwigo_compose()
 
 def piwigo_compose():
-    piwigo_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/piwigo/docker-compose.yml up -d', shell=True)
-    print ("*** piwigo is deployed! ***")
+    deploy_compose('/opt/stackdash/docker-appdata/piwigo/docker-compose.yml')
+    print("*** piwigo is deployed! ***")
  
 #Plex
 
 def plex_env_write():
-    plex_env_file = open("./containers/plex/.env", "w+")
-    plex_env_file_data = plex_env_file.read()
-    
-    puid = plex_env_file.write('PUID=1000\n')
-    pgid = plex_env_file.write('PGID=1000\n')
-    userdir = plex_env_file.write('USERDIR=/opt/stackdash\n')
-    
-    print ("\nPlease enter the subdomain you would like to use for plex [e.g., plex-example.com]\n")
-    user_domainname = plex_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+    variables = {
+        "PUID": "1000",
+        "PGID": "1000",
+        "USERDIR": "/opt/stackdash",
+    }
 
-    print ("\nPlease enter the path you like to use to store Plexs appdata\n")
-    user_domainname = plex_env_file.write("PLEX_DATA=" + input('Path to Plex Appdata: ') + "\n")
+    print("\nPlease enter the subdomain you would like to use for plex [e.g., plex-example.com]\n")
+    variables["DOMAINNAME"] = input('Your Domain Name: ')
 
-    print ("\nPlease enter your Plex Claim Token [see plex.tv/claim]\n")
-    user_domainname = plex_env_file.write("PLEX_CLAIM_TOKEN=" + input('Plex Claim Token: ') + "\n")
+    print("\nPlease enter the path you like to use to store Plexs appdata\n")
+    variables["PLEX_DATA"] = input('Path to Plex Appdata: ')
 
-    print ("\nPlease enter the path you would like Plex to use for movie collection\n")
-    user_domainname = plex_env_file.write("PLEX_MOVIES=" + input('Plex Movie Path: ') + "\n")
+    print("\nPlease enter your Plex Claim Token [see plex.tv/claim]\n")
+    variables["PLEX_CLAIM_TOKEN"] = input('Plex Claim Token: ')
 
-    print ("\nPlease enter the path you would like Plex to use for tv-show collection\n")
-    user_domainname = plex_env_file.write("PLEX_TV=" + input('Plex TV Path: ') + "\n")
+    print("\nPlease enter the path you would like Plex to use for movie collection\n")
+    variables["PLEX_MOVIES"] = input('Plex Movie Path: ')
 
-    print ("\nPlease enter the path you would like Plex to use for your photo collection\n")
-    user_domainname = plex_env_file.write("PLEX_PHOTOS=" + input('Plex Photos Path: ') + "\n")
+    print("\nPlease enter the path you would like Plex to use for tv-show collection\n")
+    variables["PLEX_TV"] = input('Plex TV Path: ')
 
-    print ("\nPlease enter the path you would like Plex to use for your music collection\n")
-    user_domainname = plex_env_file.write("PLEX_MUSIC=" + input('Plex Music Path: ') + "\n")
+    print("\nPlease enter the path you would like Plex to use for your photo collection\n")
+    variables["PLEX_PHOTOS"] = input('Plex Photos Path: ')
 
-    plex_env_file.write(plex_env_file_data)
-    plex_env_file.close()
+    print("\nPlease enter the path you would like Plex to use for your music collection\n")
+    variables["PLEX_MUSIC"] = input('Plex Music Path: ')
+
+    write_env_file("./containers/plex/.env", variables)
 
     plex_env_migration()
 
@@ -1047,27 +1029,25 @@ def plex_env_migration():
     plex_compose()
 
 def plex_compose():
-    plex_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/plex/docker-compose.yml up -d', shell=True)
-    print ("*** Plex is deployed! ***")
+    deploy_compose('/opt/stackdash/docker-appdata/plex/docker-compose.yml')
+    print("*** Plex is deployed! ***")
     
 #Portainer
 
 def portainer_env_write():
-    portainer_env_file = open("./containers/portainer/.env", "w+")
-    portainer_env_file_data = portainer_env_file.read()
-    
-    puid = portainer_env_file.write('PUID=1000\n')
-    pgid = portainer_env_file.write('PGID=1000\n')
-    userdir = portainer_env_file.write('USERDIR=/opt/stackdash\n')
-    
-    print ("\nPlease enter the subdomain you would like to use for Portainer [e.g., portainer-example.com]\n")
-    user_domainname = portainer_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+    variables = {
+        "PUID": "1000",
+        "PGID": "1000",
+        "USERDIR": "/opt/stackdash",
+    }
 
-    print ("\nPlease enter the path you like to use to store Portainers appdata\n")
-    user_domainname = portainer_env_file.write("PORTAINER_DATA=" + input('Path to Portainer Appdata: ') + "\n")
+    print("\nPlease enter the subdomain you would like to use for Portainer [e.g., portainer-example.com]\n")
+    variables["DOMAINNAME"] = input('Your Domain Name: ')
 
-    portainer_env_file.write(portainer_env_file_data)
-    portainer_env_file.close()
+    print("\nPlease enter the path you like to use to store Portainers appdata\n")
+    variables["PORTAINER_DATA"] = input('Path to Portainer Appdata: ')
+
+    write_env_file("./containers/portainer/.env", variables)
 
     portainer_env_migration()
 
@@ -1087,39 +1067,37 @@ def portainer_env_migration():
     portainer_compose()
 
 def portainer_compose():
-    portainer_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/portainer/docker-compose.yml up -d', shell=True)
-    print ("*** Portainer is deployed! ***")
+    deploy_compose('/opt/stackdash/docker-appdata/portainer/docker-compose.yml')
+    print("*** Portainer is deployed! ***")
 
 #Qbittorrent
 
 def qbit_env_write():
-    qbit_env_file = open("./containers/qbit/.env", "w+")
-    qbit_env_file_data = qbit_env_file.read()
-    
-    puid = qbit_env_file.write('PUID=1000\n')
-    pgid = qbit_env_file.write('PGID=1000\n')
-    userdir = qbit_env_file.write('USERDIR=/opt/stackdash\n')
-    
-    print ("\nPlease enter the subdomain you would like to use for QBittorrent [e.g., qbit-example.com]\n")
-    user_domainname = qbit_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+    variables = {
+        "PUID": "1000",
+        "PGID": "1000",
+        "USERDIR": "/opt/stackdash",
+    }
 
-    print ("\nPlease enter the path you like to use to store QBittorents appdata\n")
-    user_domainname = qbit_env_file.write("QBIT_DATA=" + input('Path to QBittorrent appdata: ') + "\n")
+    print("\nPlease enter the subdomain you would like to use for QBittorrent [e.g., qbit-example.com]\n")
+    variables["DOMAINNAME"] = input('Your Domain Name: ')
 
-    print ("\nPlease enter the path you like to use to for QBittorents main download directory\n")
-    user_domainname = qbit_env_file.write("QBIT_DOWNLOADS=" + input('Path to QBittorents Download Path: ') + "\n")
+    print("\nPlease enter the path you like to use to store QBittorents appdata\n")
+    variables["QBIT_DATA"] = input('Path to QBittorrent appdata: ')
 
-    print ("\nPlease enter the path you would like QBittorrent to use for movie collection\n")
-    user_domainname = qbit_env_file.write("QBIT_MOVIES=" + input('QBittorents Movie Path: ') + "\n")
+    print("\nPlease enter the path you like to use to for QBittorents main download directory\n")
+    variables["QBIT_DOWNLOADS"] = input('Path to QBittorents Download Path: ')
 
-    print ("\nPlease enter the path you would like QBittorrent to use for TV-show collection\n")
-    user_domainname = qbit_env_file.write("QBIT_TV=" + input('QBittorents TV Path: ') + "\n")
+    print("\nPlease enter the path you would like QBittorrent to use for movie collection\n")
+    variables["QBIT_MOVIES"] = input('QBittorents Movie Path: ')
 
-    print ("\nPlease enter the path you would like QBittorrent to use for eBook collection\n")
-    user_domainname = qbit_env_file.write("QBIT_BOOKS=" + input('QBittorents eBook Path: ') + "\n")
+    print("\nPlease enter the path you would like QBittorrent to use for TV-show collection\n")
+    variables["QBIT_TV"] = input('QBittorents TV Path: ')
 
-    qbit_env_file.write(qbit_env_file_data)
-    qbit_env_file.close()
+    print("\nPlease enter the path you would like QBittorrent to use for eBook collection\n")
+    variables["QBIT_BOOKS"] = input('QBittorents eBook Path: ')
+
+    write_env_file("./containers/qbit/.env", variables)
 
     qbit_env_migration()
 
@@ -1139,33 +1117,31 @@ def qbit_env_migration():
     qbit_compose()
 
 def qbit_compose():
-    qbit_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/qbit/docker-compose.yml up -d', shell=True)
-    print ("*** qbit is deployed! ***")
+    deploy_compose('/opt/stackdash/docker-appdata/qbit/docker-compose.yml')
+    print("*** qbit is deployed! ***")
                                                                                                                               
 # Radarr
                                                                 
 def radarr_env_write():
-    radarr_env_file = open("./containers/radarr/.env", "w+")
-    radarr_env_file_data = radarr_env_file.read()
-    
-    puid = radarr_env_file.write('PUID=1000\n')
-    pgid = radarr_env_file.write('PGID=1000\n')
-    userdir = radarr_env_file.write('USERDIR=/opt/stackdash\n')
-    
-    print ("\nPlease enter the subdomain you would like to use for Radarr [e.g., radarr-example.com]\n")
-    user_domainname = radarr_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+    variables = {
+        "PUID": "1000",
+        "PGID": "1000",
+        "USERDIR": "/opt/stackdash",
+    }
 
-    print ("\nPlease enter the path you like to use to store Radarrs appdata\n")
-    user_domainname = radarr_env_file.write("RADARR_DATA=" + input('Path to Radarrs appdata: ') + "\n")
+    print("\nPlease enter the subdomain you would like to use for Radarr [e.g., radarr-example.com]\n")
+    variables["DOMAINNAME"] = input('Your Domain Name: ')
 
-    print ("\nPlease enter the path you like to use to for Radarrs main download directory\n")
-    user_domainname = radarr_env_file.write("RADARR_DOWNLOADS=" + input('Radarrs Download Path: ') + "\n")
+    print("\nPlease enter the path you like to use to store Radarrs appdata\n")
+    variables["RADARR_DATA"] = input('Path to Radarrs appdata: ')
 
-    print ("\nPlease enter the path you would like Radarr to use for movie collection\n")
-    user_domainname = radarr_env_file.write("RADARR_MOVIES=" + input('Radarrs Movie Path: ') + "\n")
+    print("\nPlease enter the path you like to use to for Radarrs main download directory\n")
+    variables["RADARR_DOWNLOADS"] = input('Radarrs Download Path: ')
 
-    radarr_env_file.write(radarr_env_file_data)
-    radarr_env_file.close()
+    print("\nPlease enter the path you would like Radarr to use for movie collection\n")
+    variables["RADARR_MOVIES"] = input('Radarrs Movie Path: ')
+
+    write_env_file("./containers/radarr/.env", variables)
 
     radarr_env_migration()
 
@@ -1185,27 +1161,25 @@ def radarr_env_migration():
     radarr_compose()
 
 def radarr_compose():
-    radarr_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/radarr/docker-compose.yml up -d', shell=True)
-    print ("*** radarr is deployed! ***")
+    deploy_compose('/opt/stackdash/docker-appdata/radarr/docker-compose.yml')
+    print("*** radarr is deployed! ***")
                                                                 
 ## Tautulli
                                                                      
 def tautulli_env_write():
-    tautulli_env_file = open("./containers/tautulli/.env", "w+")
-    tautulli_env_file_data = tautulli_env_file.read()
-    
-    puid = tautulli_env_file.write('PUID=1000\n')
-    pgid = tautulli_env_file.write('PGID=1000\n')
-    userdir = tautulli_env_file.write('USERDIR=/opt/stackdash\n')
-    
-    print ("\nPlease enter the subdomain you would like to use for Tautulli [e.g., tautulli-example.com]\n")
-    user_domainname = tautulli_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+    variables = {
+        "PUID": "1000",
+        "PGID": "1000",
+        "USERDIR": "/opt/stackdash",
+    }
 
-    print ("\nPlease enter the path you like to use to store Tautullis appdata\n")
-    user_domainname = tautulli_env_file.write("TAUTULLI_DATA=" + input('Tautullis appdata path: ') + "\n")
+    print("\nPlease enter the subdomain you would like to use for Tautulli [e.g., tautulli-example.com]\n")
+    variables["DOMAINNAME"] = input('Your Domain Name: ')
 
-    tautulli_env_file.write(tautulli_env_file_data)
-    tautulli_env_file.close()
+    print("\nPlease enter the path you like to use to store Tautullis appdata\n")
+    variables["TAUTULLI_DATA"] = input('Tautullis appdata path: ')
+
+    write_env_file("./containers/tautulli/.env", variables)
 
     tautulli_env_migration()
 
@@ -1225,33 +1199,31 @@ def tautulli_env_migration():
     tautulli_compose()
 
 def tautulli_compose():
-    tautulli_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/tautulli/docker-compose.yml up -d', shell=True)
-    print ("*** tautulli is deployed! ***")
+    deploy_compose('/opt/stackdash/docker-appdata/tautulli/docker-compose.yml')
+    print("*** tautulli is deployed! ***")
                                                                      
 # Traefik
                                                                        
 def traefik_env_write():
-    traefik_env_file = open("./containers/traefik/.env", "w+")
-    traefik_env_file_data = traefik_env_file.read()
-    
-    puid = traefik_env_file.write('PUID=1000\n')
-    pgid = traefik_env_file.write('PGID=1000\n')
-    userdir = traefik_env_file.write('USERDIR=/opt/stackdash\n')
-    
-    print ("\nPlease enter the subdomain you would like to use for Traefik [e.g., traefik-example.com]\n")
-    user_domainname = traefik_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+    variables = {
+        "PUID": "1000",
+        "PGID": "1000",
+        "USERDIR": "/opt/stackdash",
+    }
 
-    print ("\nPlease enter the path you like to use to store Traefiks appdata\n")
-    user_domainname = traefik_env_file.write("TRAEFIK_DATA=" + input('Traefiks appdata path: ') + "\n")
+    print("\nPlease enter the subdomain you would like to use for Traefik [e.g., traefik-example.com]\n")
+    variables["DOMAINNAME"] = input('Your Domain Name: ')
 
-    print ("\nPlease enter your Cloudflare Email Address, [Email address associated with your Cloudflare account, see https://dash.cloudflare.com, e.g., mail@example.com]\n")
-    user_domainname = traefik_env_file.write("TRAEFIK_CLOUDFLARE_EMAIL=" + input('Your Cloudflare email address: ') + "\n")
+    print("\nPlease enter the path you like to use to store Traefiks appdata\n")
+    variables["TRAEFIK_DATA"] = input('Traefiks appdata path: ')
 
-    print ("\nPlease enter your Cloudflare Global API Key, see dash.cloudflare.com: My Profile >  API Tokens > API Keys, e.g., bLa1boPhZL0VCerk35XWmbPCaCyWjDaCVx4cM]: Tokens > API Keys, e.g., bLa1boPhZL0VCerk35XWmbPCaCyWjDaCVx4cM]\n")
-    user_domainname = traefik_env_file.write("TRAEFIK_CLOUDFLARE_API_KEY=" + input('Your Cloudflare API Key: ') + "\n")
+    print("\nPlease enter your Cloudflare Email Address, [Email address associated with your Cloudflare account, see https://dash.cloudflare.com, e.g., mail@example.com]\n")
+    variables["TRAEFIK_CLOUDFLARE_EMAIL"] = input('Your Cloudflare email address: ')
 
-    traefik_env_file.write(traefik_env_file_data)
-    traefik_env_file.close()
+    print("\nPlease enter your Cloudflare Global API Key, see dash.cloudflare.com: My Profile >  API Tokens > API Keys, e.g., bLa1boPhZL0VCerk35XWmbPCaCyWjDaCVx4cM]: Tokens > API Keys, e.g., bLa1boPhZL0VCerk35XWmbPCaCyWjDaCVx4cM]\n")
+    variables["TRAEFIK_CLOUDFLARE_API_KEY"] = input('Your Cloudflare API Key: ')
+
+    write_env_file("./containers/traefik/.env", variables)
 
     traefik_env_migration()
 
@@ -1271,37 +1243,35 @@ def traefik_env_migration():
     traefik_compose()
 
 def traefik_compose():
-    traefik_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/traefik/docker-compose.yml up -d', shell=True)
-    print ("*** Traefik is deployed! ***")
+    deploy_compose('/opt/stackdash/docker-appdata/traefik/docker-compose.yml')
+    print("*** Traefik is deployed! ***")
                                                                      
 
 # Google OAUTH
                                                                      
 def oauthenv_write():
-    oauthenv_file = open("./containers/traefik/.env", "w+")
-    oauthenv_file_data = oauthenv_file.read()
-    
-    puid = oauthenv_file.write('PUID=1000\n')
-    pgid = oauthenv_file.write('PGID=1000\n')
-    userdir = oauthenv_file.write('USERDIR=/opt/stackdash\n')
-    
-    print ("\nPlease enter the subdomain you would like to use for Google OAuth 2.0 [e.g., oauth-example.com]\n")
-    user_domainname = oauthenv_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+    variables = {
+        "PUID": "1000",
+        "PGID": "1000",
+        "USERDIR": "/opt/stackdash",
+    }
 
-    print ("\n[Google OAuth 2.0: 1/4]\nPlease enter your Google APIs Client-ID [e.g., MaCcXoD05h7EmkGXqN07G6TJjcTKJYMmpp8tXsdIsILYSp1IqrX.apps.googleusercontent.com]\n")
-    user_client_id = devops_env_file.write("OAUTH_CLIENT_ID=" + input('Your Google API Client ID: ') + "\n")
+    print("\nPlease enter the subdomain you would like to use for Google OAuth 2.0 [e.g., oauth-example.com]\n")
+    variables["DOMAINNAME"] = input('Your Domain Name: ')
 
-    print ("\n[Google OAuth 2.0: 2/4]\nPlease enter your Google APIs Client-Secret [E.g., XB6RDMRDrcGAwi3hwdPIPKSr]\n")
-    user_client_secret = devops_env_file.write("OAUTH_CLIENT_SECRET=" + input('Your Google API Client Secret: ') + "\n")
+    print("\n[Google OAuth 2.0: 1/4]\nPlease enter your Google APIs Client-ID [e.g., MaCcXoD05h7EmkGXqN07G6TJjcTKJYMmpp8tXsdIsILYSp1IqrX.apps.googleusercontent.com]\n")
+    variables["OAUTH_CLIENT_ID"] = input('Your Google API Client ID: ')
 
-    print ("\n[Google OAuth 2.0: 3/4]\nPlease enter your Google APIs Secret [E.g., rKyKKgVl9IlzxUfg1CJmjZwj5zk5LMzo]\n")
-    user_secret = devops_env_file.write("OAUTH_SECRET=" + input('Your Google API Secret: ') + "\n")
-    
-    print ("\n[Google OAuth 2.0: 4/4]\nPlease enter the Gmail address you used to sign-up with Google APIs, aka: the Whitelist Email Address [e.g., example@gmail.com]\n")
-    user_whitelist = devops_env_file.write("OAUTH_WHITELIST=" + input('Your Google API Gmail Address: ') + "\n")
+    print("\n[Google OAuth 2.0: 2/4]\nPlease enter your Google APIs Client-Secret [E.g., XB6RDMRDrcGAwi3hwdPIPKSr]\n")
+    variables["OAUTH_CLIENT_SECRET"] = input('Your Google API Client Secret: ')
 
-    oauthenv_file.write(oauthenv_file_data)
-    oauthenv_file.close()
+    print("\n[Google OAuth 2.0: 3/4]\nPlease enter your Google APIs Secret [E.g., rKyKKgVl9IlzxUfg1CJmjZwj5zk5LMzo]\n")
+    variables["OAUTH_SECRET"] = input('Your Google API Secret: ')
+
+    print("\n[Google OAuth 2.0: 4/4]\nPlease enter the Gmail address you used to sign-up with Google APIs, aka: the Whitelist Email Address [e.g., example@gmail.com]\n")
+    variables["OAUTH_WHITELIST"] = input('Your Google API Gmail Address: ')
+
+    write_env_file("./containers/traefik/.env", variables)
 
     oauthenv_migration()
 
@@ -1321,7 +1291,7 @@ def oauthenv_migration():
     oauthcompose()
 
 def oauthcompose():
-    oauthcompose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/traefik/docker-compose.yml up -d', shell=True)
-    print ("*** Traefik is deployed! ***")
+    deploy_compose('/opt/stackdash/docker-appdata/traefik/docker-compose.yml')
+    print("*** Traefik is deployed! ***")
                                                                      
 main()
