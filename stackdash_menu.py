@@ -1324,4 +1324,5 @@ def oauthcompose():
     oauthcompose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/traefik/docker-compose.yml up -d', shell=True)
     print ("*** Traefik is deployed! ***")
                                                                      
-main()
+if __name__ == "__main__":
+    main()
