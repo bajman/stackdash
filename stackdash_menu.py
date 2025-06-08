@@ -354,7 +354,7 @@ def devops_env_write1():
     
     puid = devops_env_file.write('PUID=1000\n')
     pgid = devops_env_file.write('PGID=1000\n')
-    userdir = devops_env_file.write('USERDIR=/opt/stack_dash\n')
+    userdir = devops_env_file.write('USERDIR=/opt/stackdash\n')
     
     print ("\n\n\n[Cloudflare: 1/3]\nPlease enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]\n")
     user_c_email = devops_env_file.write("CF_API_EMAIL=" + input('Your Cloudflare Email: ') + "\n")
@@ -392,7 +392,7 @@ def devops_env_migration():
     stack_dash_dir_copy = shutil.copytree('./stacks/', '/opt/stackdash/', dirs_exist_ok=True)
     print ("*** Copied ./stacks/ from Git Clone to /opt/stackdash/ ***\n")
       
-    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/", shell=True)
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/", shell=True)
     print ("*** Corrected stackdash directory permissions. ***\n")
    
 ###CONTAINERS
@@ -481,7 +481,7 @@ def guacamole_env_write():
     
     puid = guacamole_env_file.write('PUID=1000\n')
     pgid = guacamole_env_file.write('PGID=1000\n')
-    userdir = guacamole_env_file.write('USERDIR=/opt/stack_dash\n')
+    userdir = guacamole_env_file.write('USERDIR=/opt/stackdash\n')
     
     print ("\nPlease enter the subdomain you would like to use for Apache Guacamole [e.g., remote-example.com]\n")
     user_domainname = guacamole_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
