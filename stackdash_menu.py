@@ -7,6 +7,14 @@ import shutil
 import os
 import string
 
+# Helper functions to reduce duplication
+def write_env_file(path, variables):
+    with open(path, "w") as env_file:
+        for key, value in variables.items():
+            env_file.write(f"{key}={value}\n")
+
+def deploy_compose(compose_path):
+    subprocess.run(["sudo", "docker-compose", "-f", compose_path, "up", "-d"], check=True)
 
 def main():
     choice = input("""                           
@@ -354,7 +362,7 @@ def devops_env_write1():
     
     puid = devops_env_file.write('PUID=1000\n')
     pgid = devops_env_file.write('PGID=1000\n')
-    userdir = devops_env_file.write('USERDIR=/opt/stack_dash\n')
+    userdir = devops_env_file.write('USERDIR=/opt/stackdash\n')
     
     print ("\n\n\n[Cloudflare: 1/3]\nPlease enter your Cloudflare Email Address, [Email address for Cloudflare account, located at https://dash.cloudflare.com, e.g., mail@example.com]\n")
     user_c_email = devops_env_file.write("CF_API_EMAIL=" + input('Your Cloudflare Email: ') + "\n")
@@ -392,27 +400,25 @@ def devops_env_migration():
     stack_dash_dir_copy = shutil.copytree('./stacks/', '/opt/stackdash/', dirs_exist_ok=True)
     print ("*** Copied ./stacks/ from Git Clone to /opt/stackdash/ ***\n")
       
-    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stack_dash/", shell=True)
+    stack_dash_permissions = subprocess.run("sudo chmod 777 -R /opt/stackdash/", shell=True)
     print ("*** Corrected stackdash directory permissions. ***\n")
    
 ###CONTAINERS
 #duplicati
 def duplicati_env_write():
-    duplicati_env_file = open("./containers/duplicati/.env", "w+")
-    duplicati_env_file_data = duplicati_env_file.read()
-    
-    puid = duplicati_env_file.write('PUID=1000\n')
-    pgid = duplicati_env_file.write('PGID=1000\n')
-    userdir = duplicati_env_file.write('USERDIR=/opt/stackdash\n')
-    
-    print ("\nPlease enter the subdomain you would like to use for Duplicati [e.g., duplicati-example.com]\n")
-    user_domainname = duplicati_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
+    env_vars = {
+        "PUID": "1000",
+        "PGID": "1000",
+        "USERDIR": "/opt/stackdash",
+    }
 
-    print ("\nPlease enter the directory you would like to use for Duplicatis appdata\n")
-    user_client_id = duplicati_env_file.write("DUPLICATI_DATA=" + input('Path for appdata: ') + "\n")
+    print("\nPlease enter the subdomain you would like to use for Duplicati [e.g., duplicati-example.com]\n")
+    env_vars["DOMAINNAME"] = input('Your Domain Name: ')
 
-    duplicati_env_file.write(duplicati_env_file_data)
-    duplicati_env_file.close()
+    print("\nPlease enter the directory you would like to use for Duplicati's appdata\n")
+    env_vars["DUPLICATI_DATA"] = input('Path for appdata: ')
+
+    write_env_file("./containers/duplicati/.env", env_vars)
 
     duplicati_env_migration()
 
@@ -430,8 +436,8 @@ def duplicati_env_migration():
     print ("*** Corrected Duplicati directory permissions. ***\n")
     
 def duplicati_compose():
-    duplicati_compose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/duplicati/docker-compose.yml up -d', shell=True)
-    print ("*** Duplicati is deployed! ***")
+    deploy_compose('/opt/stackdash/docker-appdata/duplicati/docker-compose.yml')
+    print("*** Duplicati is deployed! ***")
     
 #airsonic
 
@@ -481,7 +487,7 @@ def guacamole_env_write():
     
     puid = guacamole_env_file.write('PUID=1000\n')
     pgid = guacamole_env_file.write('PGID=1000\n')
-    userdir = guacamole_env_file.write('USERDIR=/opt/stack_dash\n')
+    userdir = guacamole_env_file.write('USERDIR=/opt/stackdash\n')
     
     print ("\nPlease enter the subdomain you would like to use for Apache Guacamole [e.g., remote-example.com]\n")
     user_domainname = guacamole_env_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
@@ -1289,16 +1295,16 @@ def oauthenv_write():
     user_domainname = oauthenv_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
 
     print ("\n[Google OAuth 2.0: 1/4]\nPlease enter your Google APIs Client-ID [e.g., MaCcXoD05h7EmkGXqN07G6TJjcTKJYMmpp8tXsdIsILYSp1IqrX.apps.googleusercontent.com]\n")
-    user_client_id = devops_env_file.write("OAUTH_CLIENT_ID=" + input('Your Google API Client ID: ') + "\n")
+    user_client_id = oauthenv_file.write("OAUTH_CLIENT_ID=" + input('Your Google API Client ID: ') + "\n")
 
     print ("\n[Google OAuth 2.0: 2/4]\nPlease enter your Google APIs Client-Secret [E.g., XB6RDMRDrcGAwi3hwdPIPKSr]\n")
-    user_client_secret = devops_env_file.write("OAUTH_CLIENT_SECRET=" + input('Your Google API Client Secret: ') + "\n")
+    user_client_secret = oauthenv_file.write("OAUTH_CLIENT_SECRET=" + input('Your Google API Client Secret: ') + "\n")
 
     print ("\n[Google OAuth 2.0: 3/4]\nPlease enter your Google APIs Secret [E.g., rKyKKgVl9IlzxUfg1CJmjZwj5zk5LMzo]\n")
-    user_secret = devops_env_file.write("OAUTH_SECRET=" + input('Your Google API Secret: ') + "\n")
+    user_secret = oauthenv_file.write("OAUTH_SECRET=" + input('Your Google API Secret: ') + "\n")
     
     print ("\n[Google OAuth 2.0: 4/4]\nPlease enter the Gmail address you used to sign-up with Google APIs, aka: the Whitelist Email Address [e.g., example@gmail.com]\n")
-    user_whitelist = devops_env_file.write("OAUTH_WHITELIST=" + input('Your Google API Gmail Address: ') + "\n")
+    user_whitelist = oauthenv_file.write("OAUTH_WHITELIST=" + input('Your Google API Gmail Address: ') + "\n")
 
     oauthenv_file.write(oauthenv_file_data)
     oauthenv_file.close()
@@ -1321,7 +1327,9 @@ def oauthenv_migration():
     oauthcompose()
 
 def oauthcompose():
-    oauthcompose = subprocess.run('sudo docker-compose -f /opt/stackdash/docker-appdata/traefik/docker-compose.yml up -d', shell=True)
-    print ("*** Traefik is deployed! ***")
+    deploy_compose('/opt/stackdash/docker-appdata/traefik/docker-compose.yml')
+    print("*** Traefik is deployed! ***")
                                                                      
-main()
+if __name__ == "__main__":
+    main()
+
