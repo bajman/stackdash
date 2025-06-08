@@ -1289,16 +1289,16 @@ def oauthenv_write():
     user_domainname = oauthenv_file.write("DOMAINNAME=" + input('Your Domain Name: ') + "\n")
 
     print ("\n[Google OAuth 2.0: 1/4]\nPlease enter your Google APIs Client-ID [e.g., MaCcXoD05h7EmkGXqN07G6TJjcTKJYMmpp8tXsdIsILYSp1IqrX.apps.googleusercontent.com]\n")
-    user_client_id = devops_env_file.write("OAUTH_CLIENT_ID=" + input('Your Google API Client ID: ') + "\n")
+    user_client_id = oauthenv_file.write("OAUTH_CLIENT_ID=" + input('Your Google API Client ID: ') + "\n")
 
     print ("\n[Google OAuth 2.0: 2/4]\nPlease enter your Google APIs Client-Secret [E.g., XB6RDMRDrcGAwi3hwdPIPKSr]\n")
-    user_client_secret = devops_env_file.write("OAUTH_CLIENT_SECRET=" + input('Your Google API Client Secret: ') + "\n")
+    user_client_secret = oauthenv_file.write("OAUTH_CLIENT_SECRET=" + input('Your Google API Client Secret: ') + "\n")
 
     print ("\n[Google OAuth 2.0: 3/4]\nPlease enter your Google APIs Secret [E.g., rKyKKgVl9IlzxUfg1CJmjZwj5zk5LMzo]\n")
-    user_secret = devops_env_file.write("OAUTH_SECRET=" + input('Your Google API Secret: ') + "\n")
+    user_secret = oauthenv_file.write("OAUTH_SECRET=" + input('Your Google API Secret: ') + "\n")
     
     print ("\n[Google OAuth 2.0: 4/4]\nPlease enter the Gmail address you used to sign-up with Google APIs, aka: the Whitelist Email Address [e.g., example@gmail.com]\n")
-    user_whitelist = devops_env_file.write("OAUTH_WHITELIST=" + input('Your Google API Gmail Address: ') + "\n")
+    user_whitelist = oauthenv_file.write("OAUTH_WHITELIST=" + input('Your Google API Gmail Address: ') + "\n")
 
     oauthenv_file.write(oauthenv_file_data)
     oauthenv_file.close()
