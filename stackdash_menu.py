@@ -256,26 +256,47 @@ def container_deploy():
         print("Please try again")
     
 def docker_install():
-    remove_old_docker = subprocess.check_call("sudo apt-get remove docker docker-engine docker.io containerd runc", shell=True)
+    # Remove any older versions of Docker
+    subprocess.check_call(
+        "sudo apt-get remove docker docker-engine docker.io containerd runc",
+        shell=True,
+    )
     print("\n\n\n\n\n\n\n\n*** Removed older versions of Docker. *** \n")
 
-    update = subprocess.check_call("sudo apt-get update", shell=True)
-    print ("*** Downloaded package information from all configured resources. *** \n")
-    
-    https_repo = subprocess.check_call("sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y", shell=True)
-    print ("*** Updated the apt index and install packages to allow apt to use a repository over HTTPS. ***\n")
+    subprocess.check_call("sudo apt-get update", shell=True)
+    print("*** Downloaded package information from all configured resources. *** \n")
 
-    gpg_key = subprocess.check_call("curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -", shell=True)
-    print ("*** Added Docker's official GPG key. *** \n")
+    # Install prerequisites for the Docker repository
+    subprocess.check_call(
+        "sudo apt-get install ca-certificates curl gnupg -y",
+        shell=True,
+    )
+    print("*** Installed prerequisites for Docker repository. ***\n")
 
-    docker_repo = subprocess.check_call("sudo add-apt-repository 'deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable'", shell=True)
-    print ("*** Set up Docker's stable repository. *** \n")
+    # Add Docker's official GPG key and set up the repository
+    subprocess.check_call("sudo install -m 0755 -d /etc/apt/keyrings", shell=True)
+    subprocess.check_call(
+        "sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc",
+        shell=True,
+    )
+    subprocess.check_call("sudo chmod a+r /etc/apt/keyrings/docker.asc", shell=True)
+    print("*** Added Docker's official GPG key. *** \n")
 
-    install = subprocess.check_call("sudo apt-get install docker-ce docker-ce-cli containerd.io", shell=True)
-    print ("*** Installed the latest version of Docker Engine. *** \n")
+    subprocess.check_call(
+        '''bash -c 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null' ''',
+        shell=True,
+    )
+    print("*** Set up Docker's stable repository. *** \n")
 
-    docker_status = subprocess.check_call("sudo systemctl status docker", shell=True)
-    print ("*** Docker installation completed! *** \n")
+    subprocess.check_call("sudo apt-get update", shell=True)
+    subprocess.check_call(
+        "sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y",
+        shell=True,
+    )
+    print("*** Installed the latest version of Docker Engine. *** \n")
+
+    subprocess.check_call("sudo systemctl status docker", shell=True)
+    print("*** Docker installation completed! *** \n")
     main()
 
 def stacks_main():
